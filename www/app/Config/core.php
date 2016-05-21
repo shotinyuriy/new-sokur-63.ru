@@ -219,7 +219,10 @@
  * the cake shell command: cake schema create Sessions
  */
 	Configure::write('Session', array(
-		'defaults' => 'php'
+		'defaults' => 'cake',
+	    'ini' => array(
+	        'session.cookie_secure' => false
+	    )
 	));
 
 /**

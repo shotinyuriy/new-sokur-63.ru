@@ -1,0 +1,1 @@
+<?= round( $total, 2 ) ?> p.

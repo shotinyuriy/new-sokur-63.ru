@@ -56,14 +56,14 @@ function addToCartListener() {
 function showCartTotalSum() {
 
 	$.ajax({
-		url: window.home_href+"core/c-cart.php",
+		url: "/cart/total",
 		data: {},
 		success: function( data ) {
 			$( "#cart_total" ).html( data );
 		}
 	})
 		.fail( function( data ) {
-			$( "#cart_totaln" ).html( "0 руб." );
+			$( "#cart_total" ).html( "0 руб." );
 		});
 };
 
@@ -94,15 +94,72 @@ function addSearchListener() {
 	} );
 };
 
+
+function ajaxForm(form, callback) {
+	var formData = new FormData(form[0]);
+	var url = form[0].action;
+	console.log("URL = ", url);  
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			if(xhr.status == 200) {
+				data = xhr.responseText;
+				
+				if(data) {
+					if(typeof callback === 'function') callback(data);
+				} else {
+					console.log(" ERROR! ");
+				}
+			}
+		}
+	};
+	
+	xhr.send(formData);	
+}
+
+function addAjaxLinkListener() {
+	$("a.ajax").click(function(event){
+		event.preventDefault();
+		var url = $(this)[0].href;
+		var dataTarget = "#"+$(this).attr("datatarget");
+		console.log("dataTarget ", dataTarget);
+		$.ajax({
+			url: url,
+			success: function( data ) {
+			
+				$( dataTarget ).html( data );
+				addAjaxFormListener(); 
+			},
+			fail: function( data ) {
+			
+				$( dataTarget ).html( data );
+				addAjaxFormListener(); 
+			}
+		});
+	});
+}
+
+function addAjaxFormListener() {
+	$("form.ajax").submit(function(event){
+		event.preventDefault();
+		var dataTarget = "#"+$(this).attr("datatarget");
+		console.log("dataTarget ", dataTarget);
+		ajaxForm($(this), function(data) {
+			$(dataTarget).html(data);
+		});
+	});
+}
+
+
 $( document ).ready( function() {
 	
-	window.home_href = "http://tasty-cake.ru/";
-	
 	counter();
-	
 	showCartTotalSum();
-	
 	loadNews();
-	
 	addSearchListener();
+	addAjaxLinkListener();
+	addAjaxFormListener();
 } );
