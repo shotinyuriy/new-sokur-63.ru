@@ -22,7 +22,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<head>
 		<?php echo $this -> Html -> charset(); ?>
 		<title> <?php echo $cakeDescription ?>:
-			<?php echo $this -> fetch('title'); ?> </title>
+			<?php echo $this -> fetch('title'); ?>
+		</title>
 		<?php
 		echo $this -> Html -> meta('icon');
 
@@ -37,7 +38,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this -> fetch('meta');
 		echo $this -> fetch('css');
 		echo $this -> fetch('script');
-	?>
+		?>
 	</head>
 	<body>
 		<div id="header">
@@ -62,8 +63,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 										<td><i class="glyphicon glyphicon-earphone nav-icon"></i></td>
 										<td nowrap>
 										<div class="nav-info">
-											<p class="nav-text">+7-(8452) 34-94-04</p>
-											<p class="nav-details">+7-(8452) 34-71-41</p>
+											<p class="nav-text">
+												+7-(8452) 34-94-04
+											</p>
+											<p class="nav-details">
+												+7-(8452) 34-71-41
+											</p>
 										</div></td>
 									</tr>
 								</table> </a>
@@ -74,15 +79,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 									<tr>
 										<td><i class="glyphicon glyphicon-time nav-icon"></i></td>
 										<td nowrap>
-											<div class="nav-info">
-										<p class="nav-text">
-											Прием заказов
-										</p>
-										<p class="nav-details">
-											с 11:00 до 23:00
-										</p>
-										</div>
-										</td>
+										<div class="nav-info">
+											<p class="nav-text">
+												Прием заказов
+											</p>
+											<p class="nav-details">
+												с 11:00 до 23:00
+											</p>
+										</div></td>
 									</tr>
 								</table> </a>
 							</li>
@@ -145,30 +149,23 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					</div><!--/.nav-collapse -->
 				</div>
 			</nav>
-
-			<div id="content" class="container">
-
-				<?php echo $this -> Flash -> render(); ?>
-
-				<?php echo $this -> fetch('content'); ?>
-			</div>
-			<div id="footer" class="footer container">
-				<div class="row">
-					<div class="col-lg-12 text-centered">
-						<span>&copy;Tasty Cake&nbsp;Саратов 2016</span>
-					</div>
-				</div>
-				<!-- <?php echo $this->Html->link(
-				$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-				'http://www.cakephp.org/',
-				array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-				?>
-				<p>
-				<?php echo $cakeVersion; ?>
-				</p> -->
-			</div>
 		</div>
+
+		<div id="content" class="container">
+
+			<?php echo $this -> Flash -> render(); ?>
+
+			<?php echo $this -> fetch('content'); ?>
+		</div>
+
+		<div id="footer" class="footer container">
+			<div class="row">
+				<div class="col-lg-12 text-centered">
+					<span>&copy;Tasty Cake&nbsp;Саратов 2016</span>
+				</div>
+			</div>			
+		</div>
+
 		<?php echo $this -> element('sql_dump'); ?>
 	</body>
 </html>

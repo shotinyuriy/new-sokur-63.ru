@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 19 2016 г., 12:06
+-- Время создания: Май 22 2016 г., 16:20
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -29,25 +29,39 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `parent_category_id` varchar(255) DEFAULT NULL,
+  `category_id` varchar(255) DEFAULT NULL,
   `sort_index` int(11) NOT NULL DEFAULT '1',
   `menu_visible` int(11) NOT NULL DEFAULT '1',
   `image_url` varchar(511) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `category_parent_category_fk` (`parent_category_id`)
+  KEY `category_parent_category_fk` (`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `parent_category_id`, `sort_index`, `menu_visible`, `image_url`) VALUES
+INSERT INTO `categories` (`id`, `name`, `category_id`, `sort_index`, `menu_visible`, `image_url`) VALUES
 ('podarki', 'Подарки', NULL, 1, 0, NULL),
 ('torty', 'Торты', NULL, 16, 1, 'torty.jpg'),
 ('pirozhnye', 'Пирожные', NULL, 17, 1, 'pirozhnye.jpg'),
 ('makaroni', 'Макарони', 'pirozhnye', 18, 1, 'makaroni.jpg'),
 ('vypechnye-izdeliya', 'Выпечные изделия', NULL, 19, 1, 'vypechnye-izdeliya.jpg'),
 ('tvorozhnoe-kol-co', 'Творожное кольцо', 'vypechnye-izdeliya', 20, 1, 'tvorozhnoe-kol-co.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `employees`
+--
+
+CREATE TABLE IF NOT EXISTS `employees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post` varchar(63) NOT NULL,
+  `fullname` varchar(63) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -222,6 +236,20 @@ INSERT INTO `order_details` (`id`, `order_id`, `portion_id`, `amount`, `cost`) V
 (41, 13, 148, 7, '1939.000000'),
 (42, 13, 151, 7, '2625.000000'),
 (43, 14, 156, 14, '2030.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pages`
+--
+
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_id` int(11) DEFAULT NULL,
+  `title` varchar(64) NOT NULL,
+  `code` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -505,29 +533,45 @@ INSERT INTO `stats` (`id`, `session_start`, `login`, `role`, `session_id`, `buy_
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `usesr`
+-- Структура таблицы `stores`
 --
 
-CREATE TABLE IF NOT EXISTS `usesr` (
+CREATE TABLE IF NOT EXISTS `stores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(63) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `login` varchar(63) NOT NULL,
-  `password` varchar(63) NOT NULL,
+  `login` varchar(64) NOT NULL,
+  `email` varchar(63) NOT NULL,
+  `password` varchar(256) DEFAULT NULL,
   `role` varchar(63) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `login` (`login`),
-  UNIQUE KEY `password` (`password`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  UNIQUE KEY `login` (`login`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
--- Дамп данных таблицы `usesr`
+-- Дамп данных таблицы `users`
 --
 
-INSERT INTO `usesr` (`id`, `login`, `password`, `role`) VALUES
-(1, 'admin', 'admin', 'admin'),
-(2, 'operator', '!!654321q', 'operator'),
-(4, 'oper1', 'oper1', 'operator'),
-(5, 'oper2', 'oper2', 'operator'),
-(6, 'oper3', 'oper3', 'operator');
+INSERT INTO `users` (`id`, `login`, `email`, `password`, `role`) VALUES
+(1, 'admin', '', NULL, 'admin'),
+(2, 'operator', '', NULL, 'operator'),
+(4, 'oper1', '', NULL, 'operator'),
+(5, 'oper2', '', NULL, 'operator'),
+(6, 'oper3', '', NULL, 'operator'),
+(8, 'super', '', 'f59cdcfe137ffc74da8768124ecd5c98c8cac28ff8e38e5bc543aa2294dd331d', 'admin'),
+(9, 'super2', '', 'f59cdcfe137ffc74da8768124ecd5c98c8cac28ff8e38e5bc543aa2294dd331d', 'admin');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

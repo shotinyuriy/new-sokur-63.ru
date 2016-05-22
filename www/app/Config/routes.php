@@ -32,8 +32,12 @@
  * ...and connect the rest of 'Pages' controller's URLs.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	Router::connect('/about', array('controller' => 'pages', 'action' => 'index'));
+	Router::connect('/cms', array('controller' => 'pages', 'action' => 'cms'));
 	
-	Router::connect('/categories/:categoryId/goods', array('controller' => 'goods', 'action' => 'viewByCategory'));
+	Router::connect('/categories/:categoryId/goods', 
+		array('controller' => 'goods', 'action' => 'viewByCategory')
+	);
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

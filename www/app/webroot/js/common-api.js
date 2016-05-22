@@ -121,45 +121,155 @@ function ajaxForm(form, callback) {
 }
 
 function addAjaxLinkListener() {
+	$("a.ajax").unbind('click');
 	$("a.ajax").click(function(event){
 		event.preventDefault();
+		var ajaxLink = $(this);
 		var url = $(this)[0].href;
 		var dataTarget = "#"+$(this).attr("datatarget");
+		var enable = $(this).attr("enable");
 		console.log("dataTarget ", dataTarget);
 		$.ajax({
 			url: url,
 			success: function( data ) {
-			
 				$( dataTarget ).html( data );
-				addAjaxFormListener(); 
+				ajaxLink.addClass("disabled");
+				if(enable) {
+					$(enable).removeClass("disabled");
+				}
+				addAllListeners();
 			},
-			fail: function( data ) {
+			failure: function( data ) {
 			
 				$( dataTarget ).html( data );
-				addAjaxFormListener(); 
+				addAllListeners(); 
 			}
 		});
 	});
 }
 
+
+function addFileChangeListener() {
+	$( "input[name='image_url']" ).unbind('change');
+	$( "input[name='image_url']" ).change( function( e ) {
+		console.log("IMAGE_URL ", $( this ));
+		var image_url = $( this ).val();
+		console.log( $( ".image_url" ) );
+		$( ".image_url" ).attr("src", "" );
+		$( ".image_url" ).attr("height", "100px" );
+		$( ".image_url" ).attr("alt", "Новое изображение "+image_url );
+	} );
+};
+
+
 function addAjaxFormListener() {
+	$("form.ajax").unbind('submit');
 	$("form.ajax").submit(function(event){
 		event.preventDefault();
 		var dataTarget = "#"+$(this).attr("datatarget");
 		console.log("dataTarget ", dataTarget);
 		ajaxForm($(this), function(data) {
 			$(dataTarget).html(data);
+			addAllListeners();
 		});
 	});
 }
 
+function addSubmitValidationListener() {
+	$( ".edit-form" ).unbind('submit');
+	$( ".edit-form" ).submit( function( e ) {
+		e.preventDefault();
+		
+		var $form = $( this );
+		
+		if( $form.length == 1 ) {
+			ajaxForm($form, function() {
+				window.refreshFunction(window.currentRefreshUrl);
+				$( "#editorForm").modal('hide'); 
+			});
+		}
+	} );
+};
+
+function addEditListeners() {
+		$( ".edit" ).unbind('click');			
+		$( ".edit" ).click( function( e ) {
+			e.preventDefault();
+			$( "#editorForm").modal('show');
+			
+			var url = $( this )[ 0 ].href;
+			
+			$.ajax( {
+				url: url,
+				success: function( data ) {
+						
+					$( "#editor" ).html( data );
+					if(/goods/.test(url)) {
+						window.currentRefreshUrl = window.currentGoodUrl;
+						window.refreshFunction = loadGoodByCategory; 
+					} else {
+						window.currentRefreshUrl = window.currentCmsUrl;
+						window.refreshFunction = reloadContent;
+					}
+					
+					addAllListeners();
+					addPortionEditListener();
+				}
+			} );
+			
+		} );
+};
+
+function loadGoodByCategory( url ) {
+	var data = {};
+	
+	data.cms = true;
+	
+	if( !url ) {
+		url = '/goods/viewByCategory';
+	}
+	
+	$.ajax( {
+		url: url,
+		data: data,
+		success: function( data ) {
+			$( "#menu" ).html( data );
+			
+			addAllListeners();
+			
+			window.currentGoodUrl = url;
+		}
+	} );
+};
+
+function reloadContent(url) {
+	$.ajax({
+			url: url,
+			success: function( data ) {
+			
+				$( "#cms_content" ).html( data ); 
+				$( ".sub-category" ).slideUp();
+				
+				addOnclickListener();
+				addEditListeners();
+				window.currentCmsUrl = url;
+			}
+		});
+};
+
+
+function addAllListeners() {
+	addAjaxLinkListener();
+	addAjaxFormListener();
+	addEditListeners();
+	addSubmitValidationListener();
+	addFileChangeListener();
+}
 
 $( document ).ready( function() {
 	
-	counter();
+	//counter();
 	showCartTotalSum();
-	loadNews();
-	addSearchListener();
-	addAjaxLinkListener();
-	addAjaxFormListener();
+	addAllListeners();
+	//loadNews();
 } );

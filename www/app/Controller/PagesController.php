@@ -35,7 +35,14 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = array();
+	public $uses = array('Page');
+
+	public function index() {
+		$pages = $this->Page->find('all', array(
+			'conditions' => array('Page.page_id' => null) 
+		));
+		$this->set(compact('pages'));
+	}
 
 /**
  * Displays a view
@@ -71,6 +78,33 @@ class PagesController extends AppController {
 				throw $e;
 			}
 			throw new NotFoundException();
+		}
+	}
+	
+	public function cms() {
+		$this->layout = 'cms';
+		$pages = $this->Page->find('all', array(
+			'conditions' => array('Page.page_id' => null) 
+		));
+		
+		
+		$role = $this->Auth->user('role');
+		if($role == null) {
+			$role = $this->Session->read('role');
+		}
+		if($role == null) {
+			$role = 'admin';
+			$role = $this->Session->write('role', $role);
+		}
+		$login = $this->Auth->user('login');
+		$this->set(compact('role','login','pages'));
+	}
+	
+	public function add() {
+		if($this->request->is('post')) {
+			if($this->Page->save($this->request->data)) {
+				$this->Session->setFlash('Страница добавлена');
+			}
 		}
 	}
 }

@@ -222,7 +222,9 @@
 		'defaults' => 'cake',
 	    'ini' => array(
 	        'session.cookie_secure' => false
-	    )
+	    ),
+	    'timeout' => 4320,
+	    'autoRegenerate' => true
 	));
 
 /**

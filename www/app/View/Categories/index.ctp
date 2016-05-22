@@ -1,6 +1,6 @@
 <?php //debug($categories); ?>
 <?php
-function subcategories_view($subcategories) { ?>
+function subcategories_view($subcategories, $current_category_id) { ?>
 <ul>
 
 <?php for($i = 0; $i < count($subcategories); $i++) {
@@ -11,7 +11,7 @@ function subcategories_view($subcategories) { ?>
 		$category = $subcategories[$i];
 	}
 	
-	$category_is_active = false; //$category['Category']['id'] == $_SESSION["current_category_id"];
+	$category_is_active = $category['id'] == $current_category_id;
 	if ($category_is_active) {
 		$classes = "ajax menu-category-selected";
 	} else {
@@ -26,7 +26,7 @@ function subcategories_view($subcategories) { ?>
 
 		 <?
 		if (isset($category[0]) && count($category)>0) {
-			subcategories_view($category);
+			subcategories_view($category, $current_category_id);
 		}
 		?>
 
@@ -38,7 +38,7 @@ function subcategories_view($subcategories) { ?>
 
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-<?php subcategories_view($categories); ?>
+<?php subcategories_view($categories, $current_category_id); ?>
 	</div>
 	<div id="goods_by_category" class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
 		

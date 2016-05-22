@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 /**
  * Application level Controller
  *
@@ -32,6 +32,34 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $components = array('Session','Cookie');
-	public $helpers = array('Html','Form','Session','Js' => 'Jquery', 'Paginator');
+	public $components = array(
+		'Auth' => array(
+			'loginAction' => array(
+	        	'controller' => 'users',
+	        	'action' => 'login'
+	    	),
+	    	'authError' => 'Did you really think you are allowed to see that?',
+	    	'authenticate' => array(
+	        	'Form' => array(
+	        		'passwordHasher' => array(
+	                    'className' => 'Simple',
+	                    'hashType' => 'sha256'
+	                ),
+	            	'fields' => array(
+	                	'username' => 'login',
+	                	'password' => 'password'
+	                )
+	        	)
+	   		),
+	   		'allowedActions' => array(
+	   			'add', 'edit', 'cms', 'view', 'index', 'buy', 'popular', 'viewByCategory', 'menu', 'menushort', 'total'
+			)
+		), 'Flash', 'Session','Cookie');
+	public $helpers = array('Html','Form','Session','Js' => 'Jquery', 'Paginator','Time');
+	
+	public function beforeFilter() {
+		if($this->request->is('ajax')) {
+			$this->layout = 'ajax';
+		}
+	}
 }

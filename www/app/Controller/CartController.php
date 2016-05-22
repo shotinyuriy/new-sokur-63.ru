@@ -14,13 +14,13 @@ class CartController extends AppController {
 	public $uses='Portion';
 	
 	public function total() {
-		if(isset($_SESSION)) {
+		if(isset($this->Session)) {
 			if($this->request->is('ajax')) {
 				$this->layout = 'ajax';
 			}
 			
-			if(isset($_SESSION['cart'])) {
-				$cart = $_SESSION['cart'];
+			if($this->Session->read('cart') != null) {
+				$cart = $this->Session->read('cart');
 				$total = calculateCartTotal($cart);
 			} else {
 				$total = 0;
@@ -30,14 +30,14 @@ class CartController extends AppController {
 	}
 	
 	public function buy() {
-		if(isset($_SESSION)) {
+		if(isset($this->Session)) {
 			if($this->request->is('post')) {
 				if($this->request->is('ajax')) {
 					$this->layout = 'ajax';
 				}
 				
-				if(isset($_SESSION['cart'])) {
-					$cart = $_SESSION['cart'];
+				if($this->Session->read('cart') != null) {
+					$cart = $this->Session->read('cart');
 				} else {
 					$cart = array();
 					$cart['orderDetails'] = array();
@@ -64,7 +64,7 @@ class CartController extends AppController {
 				
 				$cart['orderDetails'][$portionId] = $orderDetails;
 				
-				$_SESSION['cart'] = $cart;
+				$this->Session->write('cart', $cart);
 				
 				$total = calculateCartTotal($cart);
 				$this->set(compact('total'));
