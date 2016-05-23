@@ -38,10 +38,15 @@ class PagesController extends AppController {
 	public $uses = array('Page');
 
 	public function index() {
+		
+		$info = $this->request->query('info');
+		if($info == null) {
+			$info ='about';
+		} 
 		$pages = $this->Page->find('all', array(
 			'conditions' => array('Page.page_id' => null) 
 		));
-		$this->set(compact('pages'));
+		$this->set(compact('info', 'pages'));
 	}
 
 /**

@@ -128,14 +128,20 @@ function addAjaxLinkListener() {
 		var url = $(this)[0].href;
 		var dataTarget = "#"+$(this).attr("datatarget");
 		var enable = $(this).attr("enable");
+		var deactivate = $(this).attr("deactivate");
 		console.log("dataTarget ", dataTarget);
+		console.log("deactivate ", deactivate);
 		$.ajax({
 			url: url,
 			success: function( data ) {
-				$( dataTarget ).html( data );
-				ajaxLink.addClass("disabled");
+				$( dataTarget ).html( data );			
 				if(enable) {
+					ajaxLink.addClass("disabled");
 					$(enable).removeClass("disabled");
+				}
+				if(deactivate) {
+					$(deactivate).removeClass("active");
+					ajaxLink.addClass("active");
 				}
 				addAllListeners();
 			},

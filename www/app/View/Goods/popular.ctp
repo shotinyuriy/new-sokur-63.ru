@@ -53,7 +53,7 @@
                             <div class="col-lg-8">
                                 <form method='post' id='<?= $good['id'] ?>"_tocart' class='ajax tocart' action='/cart/buy' datatarget='cart_total'>
                                         <?php if (isset($portion)) { ?>
-                                            <input type='hidden' name='portionId' value='<?= $portion['id'] ?>'>
+                                            <input type='hidden' name='portion_id' value='<?= $portion['id'] ?>'>
                                             <input type='hidden' name='amount' value='1'>
                                             <button type='submit' class="btn btn-buy">Купить</button>
                                         <? } ?>

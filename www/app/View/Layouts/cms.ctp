@@ -29,7 +29,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 	//echo $this -> Html -> css('cake.generic');
 	echo $this -> Html -> css('bootstrap.min');
-	echo $this -> Html -> css('bootstrap-theme.min');
+	echo $this -> Html -> css('bootstrap-theme');
 	echo $this -> Html -> css('main');
 	echo $this -> Html -> script('jquery.min');
 	echo $this -> Html -> script('bootstrap.min');
@@ -132,7 +132,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <div id="footer" class="footer container">
 	<div class="row">
 		<div class="col-lg-12 text-centered">
-			<span>&copy;Tasty Cake&nbsp;Саратов 2016</span>
+			<span>&copy;Сокур-63&nbsp;Саратов 2016</span>
 		</div>
 	</div>
 </div>

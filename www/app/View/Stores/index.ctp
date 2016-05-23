@@ -1,0 +1,1 @@
+<p class='page-name'>Магазины</p>

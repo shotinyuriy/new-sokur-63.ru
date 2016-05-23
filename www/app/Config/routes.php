@@ -31,8 +31,7 @@
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-	Router::connect('/about', array('controller' => 'pages', 'action' => 'index'));
+	Router::connect('/info/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/cms', array('controller' => 'pages', 'action' => 'cms'));
 	
 	Router::connect('/categories/:categoryId/goods', 

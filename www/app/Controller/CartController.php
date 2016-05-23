@@ -2,7 +2,7 @@
 	
 function calculateCartTotal($cart) {
 	$total = 0;
-	foreach($cart['orderDetails'] as $orderDetail) {
+	foreach($cart['OrderDetail'] as $orderDetail) {
 		if(isset($orderDetail['cost'])) {
 			$total += $orderDetail['cost'];
 		}
@@ -40,10 +40,10 @@ class CartController extends AppController {
 					$cart = $this->Session->read('cart');
 				} else {
 					$cart = array();
-					$cart['orderDetails'] = array();
+					$cart['OrderDetail'] = array();
 				}
 				$newOrderDetails = $this->request->data;
-				$portionId = $newOrderDetails['portionId'];
+				$portionId = $newOrderDetails['portion_id'];
 				$amount = $newOrderDetails['amount'];
 	
 				$portion = $this->Portion->find('first', array(
@@ -52,8 +52,8 @@ class CartController extends AppController {
 	
 				debug($portion);
 				if($portion != null) {
-					if(isset($cart['orderDetails'][$portionId])) {			
-						$orderDetails = $cart['orderDetails'][$portionId];
+					if(isset($cart['OrderDetail'][$portionId])) {			
+						$orderDetails = $cart['OrderDetail'][$portionId];
 						$orderDetails['amount'] += $newOrderDetails['amount'];
 					} else {
 						$orderDetails = $newOrderDetails;
@@ -62,7 +62,7 @@ class CartController extends AppController {
 					$orderDetails['cost'] = $orderDetails['price'] * $orderDetails['amount'];
 				}
 				
-				$cart['orderDetails'][$portionId] = $orderDetails;
+				$cart['OrderDetail'][$portionId] = $orderDetails;
 				
 				$this->Session->write('cart', $cart);
 				

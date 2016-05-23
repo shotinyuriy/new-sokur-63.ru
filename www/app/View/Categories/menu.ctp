@@ -1,4 +1,4 @@
-<p class="page-name">КАТЕГОРИИ</p>
+<p class="page-name">Продукция</p>
 
 <div id="command-bar">
     <div class="row">
