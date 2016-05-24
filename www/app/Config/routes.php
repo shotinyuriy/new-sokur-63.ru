@@ -37,6 +37,14 @@
 	Router::connect('/categories/:categoryId/goods', 
 		array('controller' => 'goods', 'action' => 'viewByCategory')
 	);
+	
+	Router::connect('/cart/decrease/:portionId', 
+		array('controller' => 'cart', 'action' => 'decrease')
+	);
+	
+		Router::connect('/cart/increase/:portionId', 
+		array('controller' => 'cart', 'action' => 'increase')
+	);
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

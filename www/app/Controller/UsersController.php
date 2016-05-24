@@ -12,9 +12,19 @@ class UsersController extends AppController {
 		}
 	}
 	
+	public function logout() {
+		$this->redirect($this->Auth->logout());
+	}
+	
 	public function index() {
 		$users = $this->User->find('all');
 		$this->set(compact('users'));
+	}
+	
+	public function cms_index() {
+		$users = $this->User->find('all');
+		$this->set(compact('users'));
+		$this->render('index');
 	}
 	
 	public function add() {
@@ -22,6 +32,21 @@ class UsersController extends AppController {
 			if($this->User->save($this->request->data)) {
 				$this->Session->setFlash('Пользователь добавлен');
 			}
+		}
+	}
+	
+	public function edit($id) {
+		if($this->request->is('post')) {		
+			if($this->User->save($this->request->data)) {
+				$this->Session->setFlash('Пользователь добавлен');
+			}
+		} else {
+			$role = $this->Auth->user('role');
+			$userItem = $this->User->find('first', array(
+				'conditions' => array('User.id' => $id)
+			));
+			$user = $userItem['User'];
+			$this->set(compact('role', 'user'));
 		}
 	}
 }

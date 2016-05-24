@@ -21,9 +21,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <html>
 <head>
 	<?php echo $this -> Html -> charset(); ?>
-	<title> <?php echo $cakeDescription ?>:
-		<?php echo $this -> fetch('title'); ?>
+	<title> СОКУР-63
 	</title>
+	<!-- <?php echo $this -> fetch('title'); ?> -->
 	<?php
 	echo $this -> Html -> meta('icon');
 
@@ -164,7 +164,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<div id="footer" class="footer container">
 		<div class="row">
 			<div class="col-lg-12 text-centered">
-				<span>&copy;Сокур-63&nbsp;Саратов 2016</span>
+				<h3>ЗАО "Сокур-63"</Сокур-63></h3><span>&copy;&nbsp;Все права защищены.&nbsp;2016</span>
 			</div>
 		</div>
 	</div>

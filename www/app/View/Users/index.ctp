@@ -1,7 +1,12 @@
+<p class='page-name'>Пользователи</p>
+<? if ($role == 'admin') { ?>
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<a href='/users/add' class='edit btn btn-success'>Добавить пользователя</a>
 	</div>
+</div>	
+<? } ?>
+<div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<table class='table'>
 			<tr>

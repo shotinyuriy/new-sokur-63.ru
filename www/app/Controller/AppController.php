@@ -52,7 +52,7 @@ class AppController extends Controller {
 	        	)
 	   		),
 	   		'allowedActions' => array(
-	   			'display', 'add', 'edit', 'cms', 'view', 'index', 'buy', 'popular', 'viewByCategory', 'menu', 'menushort', 'total'
+	   			'decrease', 'increase', 'display', 'add', 'edit', 'cms', 'view', 'index', 'buy', 'popular', 'viewByCategory', 'menu', 'menushort', 'total'
 			)
 		), 'Flash', 'Session','Cookie');
 	public $helpers = array('Html','Form','Session','Js' => 'Jquery', 'Paginator','Time');
@@ -61,5 +61,26 @@ class AppController extends Controller {
 		if($this->request->is('ajax')) {
 			$this->layout = 'ajax';
 		}
+		$role = null;
+		$cms = false;
+		if($this->request->query('cms')) {
+			$role = $this->Auth->user('role');
+			if($role == null) {
+				$role = $this->Session->read('role');
+			}
+			if($role == null) {
+				$role = 'admin';
+				$role = $this->Session->write('role', $role);
+			}
+			$login = $this->Auth->user('login');
+			$id = $this->Auth->user('id');
+			if($id == null) {
+				$id = 1;
+			}
+			if($role != null) {
+				$cms = true;
+			}			
+		}
+		$this->set(compact('cms', 'role'));
 	}
 }

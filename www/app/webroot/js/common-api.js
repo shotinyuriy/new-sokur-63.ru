@@ -143,6 +143,9 @@ function addAjaxLinkListener() {
 					$(deactivate).removeClass("active");
 					ajaxLink.addClass("active");
 				}
+				if(ajaxLink.hasClass("show-cart")) {
+					showCartTotalSum();
+				}
 				addAllListeners();
 			},
 			failure: function( data ) {

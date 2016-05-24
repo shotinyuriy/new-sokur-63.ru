@@ -102,7 +102,11 @@ class PagesController extends AppController {
 			$role = $this->Session->write('role', $role);
 		}
 		$login = $this->Auth->user('login');
-		$this->set(compact('role','login','pages'));
+		$id = $this->Auth->user('id');
+		if($id == null) {
+			$id = 1;
+		}
+		$this->set(compact('id','role','login','pages'));
 	}
 	
 	public function add() {

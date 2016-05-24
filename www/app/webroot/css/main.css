@@ -473,3 +473,8 @@ ul.sub-category > .menu-category > a {
 .width-100 {
 	width: 100%;
 }
+
+.cart-price {
+	display: inline-block;
+	text-align: right;
+}

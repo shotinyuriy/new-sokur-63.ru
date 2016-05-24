@@ -21,8 +21,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <html>
 <head>
 	<?php echo $this -> Html -> charset(); ?>
-	<title> <?php echo $cakeDescription ?>:
-		<?php echo $this -> fetch('title'); ?>
+	<title>
+		СОКУР-63. Система админимтрирования сайта. 
+		<?php //echo $this -> fetch('title'); ?>
 	</title>
 	<?php
 	echo $this -> Html -> meta('icon');
@@ -64,29 +65,32 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 </li>
                 <? if ($role == 'admin') { ?>
                     <li class="activatable">
-                    	<a class='ajax' href='/categories' datatarget='cms_content'>
+                    	<a class='ajax' href='/categories?cms=true' datatarget='cms_content'>
                     		Категории
                     	</a>
                     </li>
                 <? } ?>
                 <li class="activatable">
-                	<a class='ajax' href='/orders' datatarget='cms_content'>Заказы</a>
+                	<a class='ajax' href='/orders?cms=true' datatarget='cms_content'>Заказы</a>
                 </li>
                 <? if ($role == 'admin') { ?>
                 <li class="activatable">
-                	<a class='ajax' href='/news' datatarget='cms_content'>Новости</a>
+                	<a class='ajax' href='/news?cms=true' datatarget='cms_content'>Новости</a>
                 </li>
                 <li class="activatable">
-                	<a class='ajax' href='/users' datatarget='cms_content'>Пользователи</a>
+                	<a class='ajax' href='/users?cms=true' datatarget='cms_content'>Пользователи</a>
                 </li>
                 <li class="activatable">
-                	<a class='ajax' href='/employees' datatarget='cms_content'>Сотрудники</a>
+                	<a class='ajax' href='/employees?cms=true' datatarget='cms_content'>Сотрудники</a>
+                </li>
+                <li class="activatable">
+                	<a class='ajax' href='/stores/?cms=true' datatarget='cms_content'>Магазины</a>
                 </li>
                 <? } ?>
 			</ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a class='edit' id="userinfo" href="../core/c-user.php?method=edit&login=<?= $login ?>">
+                    <a class='edit' id="userinfo" href="/users/edit/<?= $id ?>">
                         <table>
                             <tr>
                                 <td>
@@ -103,7 +107,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     </a>
                 </li>
                 <li>
-                    <a class='exit' href='../core/c-exit.php'>
+                    <a class='exit' href='/users/logout'>
                         <table>
                             <tr>
                                 <td>
