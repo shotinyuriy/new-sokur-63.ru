@@ -14,15 +14,14 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
-$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
+//$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+//$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<?php echo $this -> Html -> charset(); ?>
-	<title> СОКУР-63
-	</title>
+	<title> СОКУР-63 </title>
 	<!-- <?php echo $this -> fetch('title'); ?> -->
 	<?php
 	echo $this -> Html -> meta('icon');
@@ -134,7 +133,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 							</a>
 						</li>
 						<li>
-							<a href="/cart" class="ajax" datatarget="content">
+							<a href="/cart">
 							<table id="top_cart">
 								<tr>
 									<td><i class="glyphicon glyphicon-shopping-cart nav-icon"></i></td>
@@ -155,9 +154,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			</div>
 		</nav>
 	</div>
+	
+	<?php if(isset($showNews) && $showNews) { ?>
+	<div class="container">
+	    <div id="news" class="carousel slide news" data-ride="carousel">
+	    </div>
+	</div>
+	<?php } ?>
 
 	<div id="content" class="container">
-		<?php echo $this -> Flash -> render(); ?>
+		<?php //echo $this -> Flash -> render(); ?>
 		<?php echo $this -> fetch('content'); ?>
 	</div>
 

@@ -1,4 +1,10 @@
-<?php //debug($cart) ?>
+<p class="page-name">Номер заказа <?= $order['id'] ?></p>
+<label>Дата и время заказа: </label><span><?= $order['date_time'] ?></span>
+<label>Номер телефона: </label><span>+7<?= $order['phone_number'] ?></span>
+<label>Заказчик: </label><span><?= $order['customer_name'] ?></span>
+<?php if($order['self_take'] == 0) { ?>
+<label>Доставка по адресу: </label><span><?= $order['address'] ?></span>
+<?php } ?>
 <div class="row">
 <div class="table-caption">
 		<div class="row">
@@ -10,7 +16,7 @@
 		</div>
 	</div>
 </div>
-<?php foreach ($cart['OrderDetail'] as $detail) {
+<?php foreach ($orderDetails as $detail) {
 $portion = $detail['Good'];
 $good = $detail['Good'];
 $id = $good['id'];
@@ -38,31 +44,32 @@ $id = $good['id'];
     </div>
 
     <div class='col-md-2 col-lg-2'>
+
             <div class="input-group">
                 <span class="input-group-btn">
                 	<?php if($detail['amount'] > 1) { ?>
                 	<a href='cart/decrease/<?= $id ?>' 
                 		class='ajax show-cart btn btn-squared' datatarget='content'>
-                         <i class='glyphicon glyphicon-minus-sign'></i>
+                         <i class='glyphicon glyphicon-minus-sign'/>
                     </a>
                     <?php } else { ?>
                     	<a href='#' 
                 			class='disabled btn btn-squared'>
-                        	<i class='glyphicon glyphicon-minus-sign'></i>
+                        	<i class='glyphicon glyphicon-minus-sign'/>
                     	</a>
                     <?php } ?> 
                 </span>
                 <span id='amt_<?= $id ?>' class='form-static-control amount'><?= $detail['amount'] ?></span>
                 <span class="input-group-btn">
-                	<?php if($detail['amount'] < 14) { ?>
+                	<?php if($detail['amount'] <= 14) { ?>
                   	<a href='cart/increase/<?= $id ?>' 
                 		class='ajax show-cart btn btn-squared' datatarget='content'>
-                         <i class='glyphicon glyphicon-plus-sign'></i>
+                         <i class='glyphicon glyphicon-plus-sign'/>
                     </a>
                     <?php } else { ?>
                     	<a href='#' 
-                			class='disabled btn btn-squared'>
-                        	<i class='glyphicon glyphicon-plus-sign'></i>
+                			class='increase btn btn-squared'>
+                        	<i class='glyphicon glyphicon-plus-sign'/>
                     	</a>
                     <?php } ?>
                 </span>
@@ -84,8 +91,4 @@ $id = $good['id'];
 	<div class='col-md-3 col-md-offset-9'>
 		<label>Итого:</label><span class='cart-price'><?= round($total, 2) . " руб." ?></span>
 	</div>
-</div>
-<div>
-    <a href="/cart/cancel" class="ajax btn btn-danger"> Отменить заказ </a>
-    <a href="/orders/add" class="ajax btn btn-success" datatarget="content"> Подтвердить </a>
 </div>

@@ -1,6 +1,5 @@
 <?php 
-App::uses('Component', 'Controller');
-class TranslitComponent extends Component {
+class TranslitComponent {
     	
     public function rus2translit( $string ) {
 

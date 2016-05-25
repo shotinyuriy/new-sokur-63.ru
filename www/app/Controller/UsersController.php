@@ -17,6 +17,7 @@ class UsersController extends AppController {
 	}
 	
 	public function index() {
+		$this->layout = 'ajax';
 		$users = $this->User->find('all');
 		$this->set(compact('users'));
 	}
@@ -30,7 +31,8 @@ class UsersController extends AppController {
 	public function add() {
 		if($this->request->is('post')) {		
 			if($this->User->save($this->request->data)) {
-				$this->Session->setFlash('Пользователь добавлен');
+				$this->layout = 'ajax';
+				$this->redirect('/users?cms=true');
 			}
 		}
 	}
@@ -38,13 +40,29 @@ class UsersController extends AppController {
 	public function edit($id) {
 		if($this->request->is('post')) {		
 			if($this->User->save($this->request->data)) {
-				$this->Session->setFlash('Пользователь добавлен');
+				$this->layout = 'ajax';
+				$this->redirect('/users?cms=true');
 			}
 		} else {
 			$role = $this->Auth->user('role');
 			$userItem = $this->User->find('first', array(
 				'conditions' => array('User.id' => $id)
 			));
+			$user = $userItem['User'];
+			$this->set(compact('role', 'user'));
+		}
+	}
+	
+	public function delete($id) {
+		
+		if($this->request->is('post')) {		
+			if($this->User->delete($id)) {
+				$this->layout = 'ajax';
+				$this->redirect('/users?cms=true');
+			}
+		} else {
+			$role = $this->Auth->user('role');
+			$userItem = $this->User->findById($id);
 			$user = $userItem['User'];
 			$this->set(compact('role', 'user'));
 		}

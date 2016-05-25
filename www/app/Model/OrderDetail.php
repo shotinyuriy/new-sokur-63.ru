@@ -1,4 +1,4 @@
 <?php
 class OrderDetail extends AppModel {
-	public $belongsTo = 'Portion';
+	public $belongsTo = 'Good';
 }

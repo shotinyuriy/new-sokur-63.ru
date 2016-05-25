@@ -12,7 +12,7 @@ function calculateCartTotal($cart) {
 
 class CartController extends AppController {
 
-	public $uses = 'Portion';
+	public $uses = 'Good';
 
 	public function initializeCart() {
 		if ($this -> Session -> read('cart') != null) {
@@ -39,10 +39,10 @@ class CartController extends AppController {
 			if ($this -> request -> is('post')) {
 				$cart = $this -> initializeCart();
 				$newOrderDetails = $this -> request -> data;
-				$portionId = $newOrderDetails['portion_id'];
+				$portionId = $newOrderDetails['good_id'];
 				$amount = $newOrderDetails['amount'];
 
-				$portion = $this -> Portion -> find('first', array('conditions' => array('Portion.id' => $portionId)));
+				$portion = $this -> Good -> find('first', array('conditions' => array('Good.id' => $portionId)));
 				if ($portion != null) {
 					if (isset($cart['OrderDetail'][$portionId])) {
 						$orderDetails = $cart['OrderDetail'][$portionId];
@@ -50,10 +50,9 @@ class CartController extends AppController {
 					} else {
 						$orderDetails = $newOrderDetails;
 					}
-					$orderDetails['price'] = $portion['Portion']['price'];
+					$orderDetails['price'] = $portion['Good']['price'];
 					$orderDetails['cost'] = $orderDetails['price'] * $orderDetails['amount'];
 				}
-				$orderDetails['Portion'] = $portion['Portion'];
 				$orderDetails['Good'] = $portion['Good'];
 
 				$cart['OrderDetail'][$portionId] = $orderDetails;
@@ -86,15 +85,15 @@ class CartController extends AppController {
 	}
 	
 	public function addAmount($cart, $portionId, $amount) {
-		$portion = $this -> Portion -> find('first', 
-			array('conditions' => array('Portion.id' => $portionId)));
+		$portion = $this -> Good -> find('first', 
+			array('conditions' => array('Good.id' => $portionId)));
 		
 		if ($portion != null) {
 			if (isset($cart['OrderDetail'][$portionId])) {
 				
 				$orderDetails = $cart['OrderDetail'][$portionId];
 				$orderDetails['amount'] += $amount;
-				$orderDetails['price'] = $portion['Portion']['price'];
+				$orderDetails['price'] = $portion['Good']['price'];
 				$orderDetails['cost'] = $orderDetails['price'] * $orderDetails['amount'];
 				$cart['OrderDetail'][$portionId] = $orderDetails;
 				$this -> Session -> write('cart', $cart);
@@ -106,9 +105,12 @@ class CartController extends AppController {
 
 	public function index() {
 		$cart = $this -> initializeCart();
-		$total = calculateCartTotal($cart);
-
-		$this -> set(compact('cart', 'total'));
+		if(count($cart['OrderDetail']) > 0) {
+			$total = calculateCartTotal($cart);
+			$this -> set(compact('cart', 'total'));
+		} else {
+			$this->render('empty');
+		}
 	}
 
 }

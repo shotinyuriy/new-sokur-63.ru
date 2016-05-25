@@ -70,13 +70,11 @@ function showCartTotalSum() {
 function loadNews() {
 	
 	$.ajax( {
-		url: window.home_href+"core/c-news.php",
+		url: "/news/display",
 		success: function( data ) {
 		
 			if( data ) data = data.trim();
 			$( "#news" ).html( data );
-			
-	 		//addNewsScrollListener();
 		}
 	} );
 };
@@ -134,7 +132,8 @@ function addAjaxLinkListener() {
 		$.ajax({
 			url: url,
 			success: function( data ) {
-				$( dataTarget ).html( data );			
+				$( dataTarget ).html( data );
+				$( "#news" ).addClass("display-none");
 				if(enable) {
 					ajaxLink.addClass("disabled");
 					$(enable).removeClass("disabled");
@@ -142,6 +141,7 @@ function addAjaxLinkListener() {
 				if(deactivate) {
 					$(deactivate).removeClass("active");
 					ajaxLink.addClass("active");
+					ajaxLink.closest('li').addClass("active");
 				}
 				if(ajaxLink.hasClass("show-cart")) {
 					showCartTotalSum();
@@ -190,11 +190,15 @@ function addSubmitValidationListener() {
 		e.preventDefault();
 		
 		var $form = $( this );
-		
+		var dataTarget = $(this).attr("datatarget") || 'cms_content';
 		if( $form.length == 1 ) {
 			ajaxForm($form, function() {
-				window.refreshFunction(window.currentRefreshUrl);
-				$( "#editorForm").modal('hide'); 
+				//window.refreshFunction(window.currentRefreshUrl);
+				$( "#editorForm").modal('hide');
+				if(dataTarget) {
+					$('#'+dataTarget).html(data);
+				}
+				addAllListeners(); 
 			});
 		}
 	} );
@@ -204,8 +208,6 @@ function addEditListeners() {
 		$( ".edit" ).unbind('click');			
 		$( ".edit" ).click( function( e ) {
 			e.preventDefault();
-			$( "#editorForm").modal('show');
-			
 			var url = $( this )[ 0 ].href;
 			
 			$.ajax( {
@@ -213,6 +215,7 @@ function addEditListeners() {
 				success: function( data ) {
 						
 					$( "#editor" ).html( data );
+					$( "#editorForm").modal('show');
 					if(/goods/.test(url)) {
 						window.currentRefreshUrl = window.currentGoodUrl;
 						window.refreshFunction = loadGoodByCategory; 
@@ -259,8 +262,7 @@ function reloadContent(url) {
 				$( "#cms_content" ).html( data ); 
 				$( ".sub-category" ).slideUp();
 				
-				addOnclickListener();
-				addEditListeners();
+				addAllListeners();
 				window.currentCmsUrl = url;
 			}
 		});
@@ -280,5 +282,5 @@ $( document ).ready( function() {
 	//counter();
 	showCartTotalSum();
 	addAllListeners();
-	//loadNews();
+	loadNews();
 } );

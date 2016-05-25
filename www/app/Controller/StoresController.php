@@ -10,7 +10,7 @@ class StoresController extends AppController {
 	public function add() {
 		if($this->request->is('post')) {
 			if($this->Store->save($this->request->data)) {
-				$this->Session->setFlash('Магазин добавлен!');
+				$this->redirect('/stores?cms=true&ajax=true');
 			}	
 		}
 	}
@@ -18,7 +18,7 @@ class StoresController extends AppController {
 	public function edit($id) {
 		if($this->request->is('post')) {
 			if($this->Store->save($this->request->data)) {
-				$this->Session->setFlash('Магазин изменен!');
+				$this->redirect('/stores?cms=true&ajax=true');
 			}	
 		} else {
 			$storeItem = $this->Store->findById($id);
@@ -30,7 +30,7 @@ class StoresController extends AppController {
 	public function delete($id) {
 		if($this->request->is('post')) {
 			if($this->Store->delete($id)) {
-				$this->Session->setFlash('Магазин удален!');
+				$this->redirect('/stores?cms=true&ajax=true');
 			}
 		}
 	}

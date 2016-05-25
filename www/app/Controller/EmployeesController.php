@@ -9,7 +9,7 @@ class EmployeesController extends AppController {
 	public function add() {
 		if($this->request->is('post')) {
 			if($this->Employee->save($this->request->data)) {
-				$this->Session->setFlash('Сотрудник добавлен');
+				$this->redirect('/employees?cms=true&ajax=true');
 			}
 		}
 	}
@@ -17,7 +17,7 @@ class EmployeesController extends AppController {
 	public function edit($id) {
 		if($this->request->is('post')) {
 			if($this->Employee->save($this->request->data)) {
-				$this->Session->setFlash('Сотрудник добавлен');
+				$this->redirect('/employees?cms=true&ajax=true');
 			}
 		} else {
 			$employeeItem = $this->Employee->findById($id);
@@ -28,7 +28,9 @@ class EmployeesController extends AppController {
 	
 	public function delete($id) {
 		if($this->request->is('post')) {
-			$this->Employee->delete($id);
+			if($this->Employee->delete($id)) {
+				$this->redirect('/employees?cms=true&ajax=true');
+			}
 		}
 	}
 }

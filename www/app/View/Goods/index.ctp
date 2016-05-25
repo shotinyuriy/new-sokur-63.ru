@@ -1,11 +1,11 @@
 <?php if($cms && $role=='admin') { ?>
-	<div class="row">
-		<div class="col-xs-12">
-			<a href="/stores/add" class="edit btn btn-success">
-				Добавить продукт
-			</a>
-		</div>
+<div class="row">
+	<div class="col-xs-12">
+		<a href="/goods/add" class="edit btn btn-success">
+			Добавить продукт
+		</a>
 	</div>
+</div>
 <?php } ?>
 <div class="row">
 <table class="table">
@@ -27,8 +27,8 @@
 		<td><?= $store['phone'] ?></td>
 		<?php if($cms && $role=='admin') { ?>
 			<td>
-				<a href="/stores/edit/<?= $store['id']?>" class="edit btn btn-warning">Изменить</a>
-				<a href="/stores/delete/<?= $store['id']?>" class="edit btn btn-danger">Удалить</a>
+				<a href="/goods/edit/<?= $store['id']?>" class="edit btn btn-warning">Изменить</a>
+				<a href="/goods/delete/<?= $store['id']?>" class="edit btn btn-danger">Удалить</a>
 			</td>
 		<?php } ?>
 		</tr>
