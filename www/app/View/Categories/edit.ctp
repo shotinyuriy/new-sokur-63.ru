@@ -21,7 +21,7 @@
 <div class="form-group">
 	<label class='little'>Изображение</label>
 	<div>
-		<img class='image_url' src='../menu=img/<?= $category['image_url'] ?>' alt='Нет изображения' width='197'>
+		<img class='image_url' src='../menu-img/<?= $category['image_url'] ?>' alt='Нет изображения' width='197'>
 		<input type='file' name='image_url' value='Выбрать'>
 	</div>
 </div>

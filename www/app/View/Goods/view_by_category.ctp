@@ -21,9 +21,11 @@
         <div class="<?= $good_item_classes ?>" <?= $is_not_mv ?>>
             <div class="good-item">
                 <div class="category-icon">
+                	<a href='/goods/view/<?= $good['id'] ?>' class='ajax' data-toggle='modal' data-target='#view-modal' datatarget='viewer'>
                     <? if ($image_url) { ?>
                         <div class='menuimg'><img src='../menu-img/<?= $image_url."?time=".time() ?>'/></div>
                     <? } ?>
+                    </a>
                 </div>
                 <div class="good-info">
                     <div class="good-name">
@@ -72,4 +74,12 @@
             </div>
         </div>
 	<? } ?>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content" id="viewer">
+		</div>
+	</div>
 </div>

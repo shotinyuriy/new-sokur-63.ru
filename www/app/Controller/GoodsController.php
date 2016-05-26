@@ -129,4 +129,10 @@ LIMIT 0, 12";
 			$this->set(compact('good'));
 		}
 	}
+	
+	public function view($id) {
+		$goodItem = $this->Good->findById($id);
+		$good = $goodItem['Good'];
+		$this->set(compact('good'));
+	}
 }

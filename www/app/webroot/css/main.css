@@ -494,3 +494,8 @@ ul.sub-category > .menu-category > a {
 .form input[type=radio] {
 	margin-left: 0px !important;
 }
+
+.modal-title {
+	color: #d03d24;
+	text-align: center;
+}

@@ -1,5 +1,5 @@
 <div id='add_good_div'>
-    <form id='add_good_form' class='edit-form' method='post' enctype='multipart/form-data' action='/goods/add' accept-charset="utf-8" datatarget="goods_by_category">
+    <form id='add_good_form' class='edit-form form-horizontal' method='post' enctype='multipart/form-data' action='/goods/add' accept-charset="utf-8" datatarget="goods_by_category">
 
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span

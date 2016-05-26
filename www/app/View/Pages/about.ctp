@@ -29,11 +29,11 @@
 
     function init() {
         myMap = new ymaps.Map("map", {
-            center: [51.535041, 46.030547],
+            center: [51.614886, 45.956845],
             zoom: 17
         });
 
-        myPlacemark = new ymaps.Placemark([51.535041, 46.030547], {
+        myPlacemark = new ymaps.Placemark([51.614886, 45.956845], {
             hintContent: '"Сокур-63"!',
             balloonContent: 'ЗАО "Сокур-63"'
         });
