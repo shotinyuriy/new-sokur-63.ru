@@ -43,6 +43,7 @@
                     </a>
                 </div>
                 <div class="good-info">
+                	<div class='good-description'>
                     <div class="good-name">
                         <p><?= $good['name'] ?></p>
                     </div>
@@ -55,6 +56,9 @@
                         <? } ?>
                     </div>
                     <div>
+                    	<p class="cart-good-description"><?= round($good['price'], 2) . "р." ?></p>
+					</div>
+                    <div>
                         <p class="cart-good-description"><?= $good['amount'] . "шт." ?>
                         	<?= $good['gramms'] >= 100 ? round($good['gramms'] / 1000.0, 2) . "кг." : $good['gramms'] . "г." ?>
                         </p>
@@ -64,11 +68,9 @@
                             </p>
                         <? } ?>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <p class="amount"><?= round($good['price'], 2) . "р." ?></p>
-                        </div>
-                        <div class="col-lg-8">
+                    </div>
+                    <!-- <div class="row"> -->
+                        <div class="good-control">
                         	<?php if($cms && $role == 'admin') { ?>
                         		<a href='/goods/edit/<?= $good['id'] ?>'
                         			class='edit btn btn-warning'>Изменить</a>
@@ -84,7 +86,7 @@
                             </form>
                             <?php } ?>
                         </div>
-                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>

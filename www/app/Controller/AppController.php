@@ -52,7 +52,7 @@ class AppController extends Controller {
 	        	)
 	   		),
 	   		'allowedActions' => array(
-	   			'delete', 'decrease', 'increase', 'display', 'add', 'edit', 'cms', 'view', 'index', 'buy', 'popular', 'viewByCategory', 'menu', 'menushort', 'total'
+	   			'history', 'delete', 'decrease', 'increase', 'display', 'add', 'edit', 'cms', 'view', 'index', 'buy', 'popular', 'viewByCategory', 'menu', 'menushort', 'total'
 			)
 		), 'Flash', 'Session','Cookie', 'Paginator', 'RequestHandler');
 	public $helpers = array('Conversion', 'Html','Form','Session','Js' => 'Jquery', 'Paginator','Time');

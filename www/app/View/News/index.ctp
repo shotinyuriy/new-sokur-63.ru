@@ -1,4 +1,8 @@
-<p class='page-name'>Новости</p>
+<div class='row'>
+	<div class="col-xs-12">
+		<p class='page-name'>Новости</p>
+	</div>
+</div>
 <?php if($cms && $role=='admin') { ?>
 <div class="row">
 	<div class="col-xs-12">
@@ -10,23 +14,26 @@
 <?php } ?>
 <div class="row">
     <? $i =0; 
-    	foreach ($news as $newsItem) {
+    	foreach ($newsList as $newsItem) {
     	$news = $newsItem['News']; 
     	?>
 
-        <div class='news-item col-lg-4 col-xs-12'>
+        <div class='news-item col-md-4 cols-sm-3 col-xs-6'>
             <div class="row">
                 <div class="col-lg-6 col-xs-12">
-                    <div class="category-icon">
+                    <div class="news-icon">
                         <? if ($news['image_url']) { ?>
-                            <img class="news-img" src='/news-img/<?= $news['image_url'] ?>'
+                            <img class="news-img image-responsive" src='/news-img/<?= $news['image_url'] ?>'
                                  alt=<?= $i ?>"-slide">
                         <? } ?>
                     </div>
                 </div>
 
                 <div class="col-lg-6 col-xs-12">
-                    <div class="good-info">
+                    <div class="category-info">
+                    	<div class="good-name">
+                            <p><?= $news['created_on'] ?></p>
+                        </div>
                         <div class="good-name">
                             <p><?= $news['title'] ?></p>
                         </div>

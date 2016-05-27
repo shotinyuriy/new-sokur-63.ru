@@ -4,8 +4,8 @@ require 'util.php';
 class NewsController extends AppController {
 	
 	public function index() {
-		$news = $this->News->find('all');
-		$this->set(compact('news'));
+		$newsList = $this->News->find('all');
+		$this->set(compact('newsList'));
 	}
 	
 	public function display() {
@@ -16,6 +16,10 @@ class NewsController extends AppController {
 		$this->set(compact('newsList'));
 	}
 	
+	public function history() {
+		$newsList = $this->News->find('all');
+		$this->set(compact('newsList'));
+	}
 	
 	public function add() {
 		if($this->request->is('post')) {
@@ -26,6 +30,7 @@ class NewsController extends AppController {
 				$image_url = FileUtils::saveFile($id, 'app/webroot/news-img');
 				$this->request->data['News']['image_url'] = $image_url;
 				$this->request->data['News']['new_id'] = $id;
+				$this->request->data['News']['created_on'] = date('Y-m-d');
 			}
 			if($this->News->save($this->request->data)) {
 				$this->layout = 'ajax';

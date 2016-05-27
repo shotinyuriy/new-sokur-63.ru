@@ -118,17 +118,21 @@ body {
 	border-radius: 50%;
 	background: rgba(255, 100, 100, 0.5);
 	overflow: visible;
+	
 }
 
 .fill > img {
-	height: 95%; 
+	height: 95%;
+	transition: 0.3s 0s ease-out; 
+}
+
+.fill > img:hover {
+	transform: scale(1.05);
 }
 
 .nav-icon {
 	color: #fff;
 	font-size: 32px;
-	/*padding-top: 17px;
-	padding-bottom: 17px;*/
 	padding-right: 5px;
 }
 
@@ -165,6 +169,16 @@ body {
 .img-holder {
 	position: relative;
 	height: 375px;
+	background: rgba(255, 255,255 ,0) linear-gradient(to left, rgba(255, 255,255 ,0) 70% , #fff 100%);
+}
+
+.carousel-news-img {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	transform: translate(20px, -50%);
+	max-height: 375px;
+	z-index: -1;
 }
 
 .news-img {
@@ -172,7 +186,8 @@ body {
 	position: absolute;
 	top: 50%;
 	transform: translate(0, -50%);
-	max-height: 375px;
+	max-height: 200px;
+	max-width: 200px;
 }
 
 .carousel-caption h1 {
@@ -191,19 +206,37 @@ body {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	margin: 0 -15px;
+	margin-bottom: 15px;
+}
+
+.sokur-pagination {
+	margin: 0 auto;
+	text-align: center;
 }
 
 .sokur-pagination > li {
 	display: inline-block;
 	list-style-type: none;
-	min-width: 24px;
-	text-align: center;
 	border: 1px solid #ccc;
+	background-color: rgba(240, 240, 200, 0.5);
+	min-width: 36px;
+}
+
+.sokur-pagination > li > a {
+	display: inline-block;
+	min-width: inherit;
+	padding: 6px 3px;
+	text-align: center;
+	transition: 1s;
+	color: #ff4b4b;
+	text-decoration: none;
 }
 
 .sokur-pagination > li.active {
 	background: #A00D04;
 	color: #fff;
+	border: 1px solid #A00D04;
+	padding: 6px 3px;
 }
 
 #search [type='text'] {
@@ -215,14 +248,13 @@ body {
 	color: #fff;
 }
 
-#command-bar,
 #categories_menu {
 	margin-left: 20px;
 	margin-right: 20px;
 }
 
 #command-bar {
-	padding-top: 15px;
+	/*padding-top: 15px;*/
 	padding-bottom: 15px;
 	border-bottom: 1px solid #979797;
 }
@@ -242,16 +274,27 @@ div.good-item {
 	margin-top: 6px;
 	margin-bottom: 6px;
 	height: 350px;
+	position: relative;
+	overflow: hidden;
 }
 
 div.good-item,
-div.category-item {
-	border: 2px solid #979797;
+div.category-item,
+div.news-item {
+	/*border: 2px solid #979797;*/
+	box-shadow: 0px 0px 6px #979797;
+	transition: 0.3s;
 }
 
-div.good-item:hover,
-div.category-item:hover {
-	border: 2px solid #ff4b4b;
+div.good-item:hover, div.good-item:focus,
+div.category-item:hover, div.category-item:focus,
+div.news-item:hover, div.news-item:focus {
+	/*border: 2px solid #ff4b4b;*/
+	box-shadow: 0px 0px 12px #ff4b4b;
+}
+
+div.good-item:hover .good-info, div.good-item:focus .good-info {
+	bottom: 0px;
 }
 
 div.category-item:hover {
@@ -259,15 +302,16 @@ div.category-item:hover {
 }
 
 .cart-good-icon,
-.category-icon {
+.category-icon,
+.news-icon {
 	image-rendering: optimize-contrast;
 	width: auto;
-	height: 150px;
+	height: 200px;
 	overflow: hidden;
 }
 
-.category-icon {
-	border-bottom: 1px solid #979797;
+.good-info, .category-name {
+	border-top: 1px solid #979797;
 }
 
 .cart-good-icon {
@@ -275,11 +319,20 @@ div.category-item:hover {
 }
 
 .cart-good-icon img,
-.category-icon img {
-	max-height: 150px;
+.category-icon img,
+.news-icon img {
+	max-height: 200px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.category-info {
+	min-height: 40px;
+}
+
+.category-info:hover {
+	min-height: 40px;
 }
 
 .cart-good,
@@ -287,15 +340,47 @@ div.category-item:hover {
 .category-name {
 	font-size: 18pt;
 	color: #ff4b4b;
+	text-align: center;
+	padding-top: 6px;
+}
+
+.cart-good > p,
+.good-name > p,
+.category-name > p {
+	font-family: Roboto-Bold;
 }
 
 .good-info {
 	padding: 0 12px 6px 12px;
+	position: absolute;
+	bottom: -50px;
+	background: #fff;
+	transition: 0.5s;
+	width: 100%;
+	height: 200px;
 }
 
-div.category-item:hover .category-name,
-div.category-item:hover .good-info {
+.good-description {
+	height: 160px;
+	overflow: hidden;
+}
+
+.good-description:hover {
+	max-height: none;
+	overflow: visible;
+	background: #fff;
+	z-index: 10;
+}
+
+.good-control {
+	bottom: 0px;
+}
+
+div.category-item:hover .category-name {
 	color: #fff;
+}
+
+div.category-item:hover .category-info {
 	background: #ff4b4b;
 }
 
@@ -427,8 +512,8 @@ li.menu-category > .cms-controlls {
 
 a.menu-category.active,
 a.menu-category.active:hover,
-a.menu-category.active:focus: {
-	background-image: linear-gradient(to bottom, #a20000 0%, #ce0f00 50%, #a20000 100%) !important;
+a.menu-category.active:focus {
+	background: linear-gradient(to bottom, #a20000 0%, #ce0f00 50%, #a20000 100%) !important;
 	border-right: none;
 	z-index: 2;
 	color: #cecf5f;
@@ -437,10 +522,10 @@ a.menu-category.active:focus: {
 	-webkit-border-top-right-radius: 0px;
 	-moz-border-top-right-radius: 0px;
 	box-shadow: 0px 0px 10px #AAA;
+	text-align: right;
 }
 
-a.menu-category,
-a.menu-category:hover {
+a.menu-category /*, a.menu-category:hover*/ {
 	position: relative;
 	width: 100%;
 	display: block;
@@ -448,7 +533,7 @@ a.menu-category:hover {
 	cursor: pointer;
 	color: #fff;
 	text-decoration: none;
-	padding: 3px;
+	padding: 0 6px;
 	margin: 1px;
 }
 
@@ -457,14 +542,17 @@ a.menu-category {
   	background-image:      -o-linear-gradient(top, #a00d04 0%, #d03d24 100%);
   	background-image: -webkit-gradient(linear, left top, left bottom, from(#a03d24), to(#d03d24));
   	background-image:         linear-gradient(to bottom, #a00d04 0%, #d03d24 100%);
+  	transition: 1s 0.5s;
 }
 
 a.menu-category:hover {
-	background: #d24a43;
+	background-image: -webkit-linear-gradient(top, #f04d44 0%, #d03d24 100%);
+  	background-image:      -o-linear-gradient(top, #f04d44 0%, #d03d24 100%);
+  	background-image: -webkit-gradient(linear, left top, left bottom, from(#f04d44), to(#d03d24));
+  	background-image:         linear-gradient(to bottom, #f04d44 0%, #d03d24 100%);
 	box-shadow: 0px 0px 7px #AAA;
+	text-align: right;
 }
-
-
 
 ul.sub-category {
 	margin-left: 7px;
@@ -472,11 +560,6 @@ ul.sub-category {
 
 ul.sub-category > .menu-category > a {
 	border-top: none;
-}
-
-.news-item {
-	height: 200px;
-	border: 2px solid #979797;
 }
 
 .text-centered {
@@ -511,4 +594,14 @@ ul.sub-category > .menu-category > a {
 .modal-title {
 	color: #d03d24;
 	text-align: center;
+}
+
+a.no-under,
+a.no-under:hover,
+a.no-under:active {
+	text-decoration: none;
+}
+
+.info {
+	text-align: justify;
 }

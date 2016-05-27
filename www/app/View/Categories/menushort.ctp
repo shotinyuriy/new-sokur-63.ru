@@ -1,13 +1,13 @@
 <div class='row'>
 <? foreach ($categories as $category) { ?>
 	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-lr-20">
-		<a href='/categories?id=<?= $category['Category']['id']?>'>
+		<a href='/categories?id=<?= $category['Category']['id']?>' class='no-under'>
 		<div class="category-item menu-category" id="<?= $category['Category']['id'] ?>">
 			<div class="category-icon">
 				<img src='menu-img/<?= $category['Category']['image_url'] ?>'
-					 alt='<?= $category['Category']['name'] ?>' class='img-responsive'>
+					 alt='<?= $category['Category']['name'] ?>'>
 			</div>
-			<div class="good-info">
+			<div class="category-info">
 				<div class="category-name">
 					<p><?= $category['Category']['name'] ?></p>
 				</div>

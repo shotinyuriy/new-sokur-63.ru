@@ -133,7 +133,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php echo $this -> fetch('content'); ?>
 </div>
 
-<div id="footer" class="footer container">
+<div id="footer" class="footer container-fluid">
 	<div class="row">
 		<div class="col-lg-12 text-centered">
 			<span>&copy;Сокур-63&nbsp;Саратов 2016</span>

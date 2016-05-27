@@ -157,7 +157,9 @@
 	
 	<?php if(isset($showNews) && $showNews) { ?>
 	<div class="container">
+		<div class='row'>
 	    <div id="news" class="carousel slide news" data-ride="carousel">
+	    </div>
 	    </div>
 	</div>
 	<?php } ?>
@@ -176,5 +178,6 @@
 	</div>
 
 	<?php echo $this -> element('sql_dump'); ?>
+	<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
 </body>
 </html>

@@ -24,6 +24,10 @@
 				<a href='/stores' class='ajax menu-category' 
 					datatarget='page_content' deactivate='.menu-category'>Магазины</a>
 			</li>
+			<li class='menu-category'>
+				<a href='/news/history' class='ajax menu-category' 
+					datatarget='page_content' deactivate='.menu-category'>Новости</a>
+			</li>
 		<?php foreach ($pages as $pageItem) { 
 			$page = $pageItem['Page'] ?>
 			<li class='menu-category'>
