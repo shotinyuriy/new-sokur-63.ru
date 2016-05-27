@@ -54,8 +54,8 @@ class AppController extends Controller {
 	   		'allowedActions' => array(
 	   			'delete', 'decrease', 'increase', 'display', 'add', 'edit', 'cms', 'view', 'index', 'buy', 'popular', 'viewByCategory', 'menu', 'menushort', 'total'
 			)
-		), 'Flash', 'Session','Cookie');
-	public $helpers = array('Html','Form','Session','Js' => 'Jquery', 'Paginator','Time');
+		), 'Flash', 'Session','Cookie', 'Paginator', 'RequestHandler');
+	public $helpers = array('Conversion', 'Html','Form','Session','Js' => 'Jquery', 'Paginator','Time');
 	
 	public function beforeFilter() {
 		if($this->request->is('ajax') || $this->request->query('ajax')) {

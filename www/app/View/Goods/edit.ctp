@@ -1,3 +1,7 @@
+<?php 
+	$shelfLifePack = $this->Conversion->parseShelfLife($good['shelf_life_pack']);
+	$shelfLifeUnpack = $this->Conversion->parseShelfLife($good['shelf_life_unpack']);
+?>
 <div id='add_good_div'>
     <form id='add_good_form' class='edit-form form-horizontal' method='post' enctype='multipart/form-data' action='/goods/edit/<?= $good['id'] ?>' accept-charset="utf-8" datatarget="goods_by_category">
 
@@ -75,17 +79,37 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class='col-md-6'>Срок хранения (В упаковке), ч</label>
-                <div class='col-md-6'>
-                    <input type='text' name='data[Good][shelf_life_pack]' value='<?= $good['shelf_life_pack'] ?>'
-                           class="form-control">
+                <label class='col-md-6'>Срок хранения (в упаковке): </label>
+                <div class='col-md-3'>
+                	<div class='input-group'>
+	                    <input type='text' name='data[Good][shelf_life_pack_days]' value='<?= $shelfLifePack['days'] ?>'
+	                           class="form-control">
+						<div class="input-group-addon">дн.</div>
+					</div>
+                </div>
+                <div class='col-md-3'>
+                	<div class='input-group'>
+	                    <input type='text' name='data[Good][shelf_life_pack_hours]' value='<?= $shelfLifePack['hours'] ?>'
+	                           class="form-control">
+						<div class="input-group-addon">ч.</div>
+					</div>
                 </div>
             </div>
             <div class="form-group">
-                <label class='col-md-6'>Срок хранения (без упаковки), ч</label>
-                <div class='col-md-6'>
-                    <input type='text' name='data[Good][shelf_life_unpack]' value='<?= $good['shelf_life_unpack'] ?>'
-                           class="form-control">
+                <label class='col-md-6'>Срок хранения (без упаковки): </label>
+                <div class='col-md-3'>
+                	<div class='input-group'>
+	                    <input type='text' name='data[Good][shelf_life_unpack_days]' value='<?= $shelfLifeUnpack['days'] ?>'
+	                           class="form-control">
+						<div class="input-group-addon">дн.</div>
+					</div>
+                </div>
+                <div class='col-md-3'>
+                	<div class='input-group'>
+	                    <input type='text' name='data[Good][shelf_life_unpack_hours]' value='<?= $shelfLifeUnpack['hours'] ?>'
+	                           class="form-control">
+						<div class="input-group-addon">ч.</div>
+					</div>
                 </div>
             </div>
             <div class="form-group">
@@ -98,7 +122,7 @@
             <div class="form-group">
                 <label class='col-md-6'>Цена, руб</label>
                 <div class='col-md-6'>
-                    <input type='text' name='data[Good][price]' value='<?= $good['price'] ?>'
+                    <input type='text' name='data[Good][price]' value='<?= round($good['price'], 2) ?>'
                            class="form-control">
                 </div>
             </div>

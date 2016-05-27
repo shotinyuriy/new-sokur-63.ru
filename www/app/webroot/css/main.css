@@ -193,6 +193,19 @@ body {
 	margin: 0 -15px;
 }
 
+.sokur-pagination > li {
+	display: inline-block;
+	list-style-type: none;
+	min-width: 24px;
+	text-align: center;
+	border: 1px solid #ccc;
+}
+
+.sokur-pagination > li.active {
+	background: #A00D04;
+	color: #fff;
+}
+
 #search [type='text'] {
 	border: 2px solid #0f0f0f;
 }

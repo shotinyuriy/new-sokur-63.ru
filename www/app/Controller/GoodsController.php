@@ -6,6 +6,22 @@ class GoodsController extends AppController {
 	
 	public $uses = array('Good');
 	
+	public function calculateHours($data) {
+		$hoursPack = $data['Good']['shelf_life_pack_days'] * 24;
+		$hoursPack += $data['Good']['shelf_life_pack_hours'] * 1;
+		$hoursUnpack = $data['Good']['shelf_life_unpack_days'] * 24;
+		$hoursUnpack += $data['Good']['shelf_life_unpack_hours'] * 1;
+		$data['Good']['shelf_life_pack'] = $hoursPack;
+		$data['Good']['shelf_life_unpack'] = $hoursUnpack;
+		
+		$data['Good']['shelf_life_pack_days'] = null;
+		$data['Good']['shelf_life_pack_hours'] = null;
+		$data['Good']['shelf_life_unpack_days'] = null;
+		$data['Good']['shelf_life_unpack_hours'] = null;
+		
+		return $data;
+	}
+	
 	public function index() {
 		
 	}
@@ -18,10 +34,13 @@ class GoodsController extends AppController {
 		if($categoryId == null) {
 			$categoryId = $this->Session->read('current_category_id');
 		}
-		$goods = $this->Good->find('all', array(
+		$this->Paginator->settings = array(
 			'conditions' => array('Good.category_id' => $categoryId),
+			'limit'=> 2,
+			'order' => 'Good.sort_index',
 			'recursive' => 1
-		));
+		);
+		$goods = $this->Paginator->paginate('Good');
 		$this->Session->write('current_category_id', $categoryId);
 		if($this->request->query('cms')) {
 			$good_item_classes = "col-lg-3 col-md-4 col-sm-6 col-xs-12";
@@ -75,15 +94,15 @@ LIMIT 0, 12";
 	public function add() {
 		$categoryId = $this->Session->read('current_category_id');
 		if($this->request->is('post')) {
-			//debug($this->request->data);
-			//debug($_FILES);
+			$data = $this->request->data;
 			if(FileUtils::isUploadedFile($_FILES)) {
 				$translit = new TranslitComponent();
-				$id = $translit->str2id($this->request->data['Good']['name']);
+				$id = $translit->str2id($data['Good']['name']);
 				$image_url = FileUtils::saveFile($id, 'app/webroot/menu-img');
-				$this->request->data['Good']['image_url'] = $image_url;
+				$data['Good']['image_url'] = $image_url;
 			}
-			if($this->Good->save($this->request->data)) {
+			$data = $this->calculateHours($data);
+			if($this->Good->save($data)) {
 				$this->layout='ajax';
 				$this->redirect("/categories/$categoryId/goods?cms=true&ajax=true");
 			}
@@ -93,17 +112,17 @@ LIMIT 0, 12";
 	}
 
 	public function edit($id) {
+		$categoryId = $this->Session->read('current_category_id');
 		if($this->request->is('post')) {
-			$categoryId = $this->Session->read('current_category_id');
-			//debug($this->request->data);
-			//debug($_FILES);
+			$data = $this->request->data;
 			if(FileUtils::isUploadedFile($_FILES)) {
 				$translit = new TranslitComponent();				
-				$id = $translit->str2id($this->request->data['Good']['name']);
+				$id = $translit->str2id($data['Good']['name']);
 				$image_url = FileUtils::saveFile($id, 'app/webroot/menu-img');
-				$this->request->data['Good']['image_url'] = $image_url;
+				$data['Good']['image_url'] = $image_url;
 			}
-			if($this->Good->save($this->request->data)) {
+			$data = $this->calculateHours($data);
+			if($this->Good->save($data)) {
 				$this->layout='ajax';
 				$this->redirect("/categories/$categoryId/goods?cms=true&ajax=true");
 			}

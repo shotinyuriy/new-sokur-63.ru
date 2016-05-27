@@ -27,32 +27,32 @@
             <?php } ?>
             <?php if($good['gramms']) { ?>
             <div class="row">
-            	<label class='col-xs-6'>Масса, грамм</label>
-				<div class='col-xs-6'><?= $good['gramms']?></div>
+            	<label class='col-xs-6'>Масса</label>
+				<div class='col-xs-6'><?= $this->Conversion->mass( $good['gramms'] ) ?></div>
             </div>
             <?php } ?>
             <?php if($good['shelf_life_pack']) { ?>
             <div class="row">
             	<label class='col-xs-6'>Срок хранения (в упаковке)</label>
-				<div class='col-xs-6'><?= $good['shelf_life_pack']?></div>
+				<div class='col-xs-6'><?= $this->Conversion->shelfLife( $good['shelf_life_pack'] ) ?></div>
             </div>
             <?php } ?>
             <?php if($good['shelf_life_unpack']) { ?>
             <div class="row">
             	<label class='col-xs-6'>Срок хранения (без упаковки)</label>
-				<div class='col-xs-6'><?= $good['shelf_life_unpack']?></div>
+				<div class='col-xs-6'><?= $this->Conversion->shelfLife( $good['shelf_life_unpack'] ) ?></div>
             </div>
             <?php } ?>
 			<?php if($good['standard']) { ?>
             <div class="row">
             	<label class='col-xs-6'>ГОСТ:</label>
-				<div class='col-xs-6'><?= $good['standard']?></div>
+				<div class='col-xs-6'><?= $good['standard'] ?></div>
             </div>
             <?php } ?>
 			<?php if($good['price']) { ?>
             <div class="row">
             	<label class='col-xs-6'>Цена:</label>
-				<div class='col-xs-6'><?= round($good['price'], 2) ?> руб.</div>
+				<div class='col-xs-6'><?= $this->Conversion->money($good['price']) ?></div>
             </div>
             <?php } ?>
         </div>

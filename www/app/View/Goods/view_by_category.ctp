@@ -1,4 +1,9 @@
-<?php //debug($goods); ?>
+<?php
+	$this->Paginator->options(array(
+		'update' => '#goods_by_category',
+		'evalScripts' => true
+	));
+?>
 <?php if($cms && $role=='admin') { ?>
 <div class="row">
 	<div class="col-xs-12">
@@ -11,13 +16,23 @@
 	</div>
 </div>
 <?php } ?>
+<div class='row'>
+	<div class='col-xs-12'>
+		<ul class='sokur-pagination'>
+			<?php echo $this->Paginator->numbers(array(
+				'tag' => 'li',
+				'separator' => '',
+				'currentClass' => 'active' 
+			)); ?>
+		</ul>
+	</div>
+</div>
 <div class="row">
     <? foreach ($goods as $goodItem) {
     	$good = $goodItem['Good'];
     	$category = $goodItem['Category'];
         $image_url = ($good['image_url'] ? $good['image_url'] : ($category ? $category['image_url'] : ""));
 		$is_not_mv = ""; ?>
-
         <div class="<?= $good_item_classes ?>" <?= $is_not_mv ?>>
             <div class="good-item">
                 <div class="category-icon">
@@ -82,4 +97,12 @@
 		<div class="modal-content" id="viewer">
 		</div>
 	</div>
+	
+<?php echo $this->Js->writeBuffer(); ?>
 </div>
+
+<script>
+	$( document ).ready(function() {
+		addAllListeners();
+	});
+</script>

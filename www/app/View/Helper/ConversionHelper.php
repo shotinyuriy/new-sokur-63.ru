@@ -2,33 +2,45 @@
 App::uses('AppHelper', 'View/Helper');
 
 class ConversionHelper extends AppHelper {
-    public function self_life($hours) {
-    	$result = '';
-        if($hours > 24) {
-        	$days = round($hours / 24, 0);
-			$result = $days.' дн.';
+    public function shelfLife($hours) {
+    	$parsed = $this->parseShelfLife($hours);
+		$result = '';
+    	if($parsed['days'] > 0) {
+    		$result .= $parsed['days'].' дн. ';
+    	}
+        if($parsed['hours'] > 0) {
+        	$result .= $parsed['hours'].' ч.';
         }
-		$hours_left = $hours % 24;
-		if($hours_left > 0) {
-			if(strlen($result) > 0) {
-				$result .= ' ';
-			}
-			$result .= $days.' дн.';
-		}
+		return $result;
+    }
+	
+	public function parseShelfLife($value) {
+		return $this->parse($value, 24, array('days', 'hours'));
+	}
+		
+	public function parse($value, $threshold, $keys) {
+    	$result = array();
+        $result[$keys[0]] = floor($value / $threshold);
+		$result[$keys[1]] = round($value % $threshold, 0);
+		return $result;
     }
 	
 	public function mass($gramms) {
 		$result = '';
         if($gramms > 100) {
-        	$days = round($gramms / 24, 0);
-			$result = $days.' дн.';
+        	$days = round($gramms / 1000, 0);
+			$result = $days.' кг.';
         }
-		$gramms_left = $gramms % 24;
-		if($hours_left > 0) {
+		$gramms_left = $gramms % 1000;
+		if($gramms_left > 0) {
 			if(strlen($result) > 0) {
 				$result .= ' ';
 			}
-			$result .= $days.' дн.';
+			$result .= $gramms_left.' гр.';
 		}
+	}
+	
+	public function money($value) {
+        return round($value, 2).' руб.';
 	}
 }

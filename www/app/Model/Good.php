@@ -5,7 +5,7 @@ class Good extends AppModel {
 	public $belongsTo = 'Category';
 	
 	public function beforeSave($options = array()) {
-		//debug($this->data[$this->alias]);
+		debug($this->data[$this->alias]);
         if (!empty($this->data[$this->alias]['name'])) {
             $translate = new TranslitComponent();
             $this->data[$this->alias]['id'] = $translate->str2id($this->data[$this->alias]['name']);

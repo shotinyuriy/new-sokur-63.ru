@@ -72,17 +72,37 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class='little'>Срок хранения (упаковынный), ч</label>
-                <div class='little'>
-                    <input type='text' name='data[Good][shelf_life_pack]' value='1'
-                           class="form-control">
+                <label class='col-md-6'>Срок хранения (в упаковке): </label>
+                <div class='col-md-3'>
+                	<div class='input-group'>
+	                    <input type='text' name='data[Good][shelf_life_pack_days]' value='0'
+	                           class="form-control">
+						<div class="input-group-addon">дн.</div>
+					</div>
+                </div>
+                <div class='col-md-3'>
+                	<div class='input-group'>
+	                    <input type='text' name='data[Good][shelf_life_pack_hours]' value='0'
+	                           class="form-control">
+						<div class="input-group-addon">ч.</div>
+					</div>
                 </div>
             </div>
             <div class="form-group">
-                <label class='little'>Срок хранения (без упаковки), ч</label>
-                <div class='little'>
-                    <input type='text' name='data[Good][shelf_life_unpack]' value='1'
-                           class="form-control">
+                <label class='col-md-6'>Срок хранения (без упаковки): </label>
+                <div class='col-md-3'>
+                	<div class='input-group'>
+	                    <input type='text' name='data[Good][shelf_life_unpack_days]' value='0'
+	                           class="form-control">
+						<div class="input-group-addon">дн.</div>
+					</div>
+                </div>
+                <div class='col-md-3'>
+                	<div class='input-group'>
+	                    <input type='text' name='data[Good][shelf_life_unpack_hours]' value='0'
+	                           class="form-control">
+						<div class="input-group-addon">ч.</div>
+					</div>
                 </div>
             </div>
             <div class="form-group">
