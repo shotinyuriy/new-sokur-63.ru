@@ -13,6 +13,12 @@
 		<a href="/categories/add" class="edit btn btn-success">
 			Добавить подкатегорию
 		</a>
+		<a href="/categories/edit/<?= $categoryId ?>" class="edit btn btn-warning">
+			Изменить
+		</a>
+		<a href="/categories/delete/<?= $categoryId ?>" class="edit btn btn-danger">
+			Удалить
+		</a>
 	</div>
 </div>
 <?php } ?>

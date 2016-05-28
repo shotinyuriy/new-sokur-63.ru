@@ -8,28 +8,15 @@
 
         <div class="modal-body">
             <input type='hidden' name='method' value='save'>
-            <? if (isset($user->id) && $user->id != null) { ?>
-                <input type='hidden' name='id' value='<?= $user->id ?>'>
-            <? } ?>
             <div class="form-group">
                 <label class='little' for="name">Логин:</label>
                 <div class='little'>
-                    <? if (isset($user->login) && $user->login != null) { ?>
-                        <input type='hidden' name='login' value='<?= $user->login ?>'>
-                        <p class="form-control-static"><?= $user->login ?></p>
-                    <? } else { ?>
-                        <input type='text' name='login' class='form-control' value=''>
-                    <?
-                    } ?>
+                	<input type='text' name='username' class='form-control' value=''>
                 </div>
             </div>
             <div class="form-group">
                 <label class='little' for="name">Роль:</label>
                 <div class='little'>
-                    <? if (isset($user->role) && $user->role != null) { ?>
-                        <input type='hidden' name='login' value='<?= $user->role ?>'>
-                        <p class="form-control-static"><?= $user->role ?></p>
-                    <? } else { ?>
                         <div class="radio">
                             <label>
                                 <input type='radio' name='role' value='operator' checked>
@@ -42,18 +29,8 @@
                                 admin
                             </label>
                         </div>
-                    <?
-                    } ?>
                 </div>
             </div>
-            <? if (isset($user->id) && $user->id != null) { ?>
-                <div class="form-group">
-                    <label class='little' for="name">Старый пароль:</label>
-                    <div class='little'>
-                        <input type='password' name='old_password' value='' class="form-control">
-                    </div>
-                </div>
-            <? } ?>
             <div class="form-group">
                 <label class='little' for="name">Новый пароль:</label>
                 <div class='little'>

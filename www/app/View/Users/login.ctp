@@ -1,26 +1,31 @@
 <div class="row">
-	<div class="col-lg-4 col-lg-offset-4">
-	    <form id='auth' method='post' action=<?= $_SERVER['REQUEST_URI'] ?>>
-	        <? if (isset($error_message)) { ?>
-	            <div class="form-group has-error">
-	                <div class="">
-	                    <p class="form-control-static"><?= $error_message ?></p>
-	                </div>
-	            </div>
-	        <? } ?>
-	
-	        <div class="form-group">
-	            <label>Логин:</label>
-	            <div><input type='text' name='login' class="form-control"></div>
-	        </div>
-	        <div class="form-group">
-	            <label>Пароль:</label>
-	            <div><input type='password' name='password' class="form-control"></div>
-	        </div>
-	        <div class="form-group">
-	
-	            <td colspan=2><input type='submit' value='Войти' class="btn btn-primary"></td>
-	        </div>
-	    </form>
+	<?php if( isset($errorMessage) ) { ?>
+		<div class="col-xs-12">
+			<div class="well has-error">
+				<?= $errorMessage ?>
+			</div>
+		</div>
+	<?php }?>
+	<div class="col-md-4 col-md-offset-4">
+	    <?php
+	    	echo $this->Form->create();
+			echo $this->Form->input('username', array(
+				'label' => 'Логин',
+				'class' => 'form-control',
+				'div' => array('class' => 'form-group')
+			));
+			echo $this->Form->input('password', array(
+				'label' => 'Пароль',
+				'class' => 'form-control',
+				'div' => array('class' => 'form-group')
+			));
+			echo $this->Form->input('Войти', array(
+				'type' => 'submit',
+				'label' => '',
+				'class' => 'btn btn-success',
+				'div' => array('class' => 'form-group')
+			));
+			echo $this->Form->end();
+	    ?>
 	</div>
 </div>

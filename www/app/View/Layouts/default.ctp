@@ -52,7 +52,7 @@
 						<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href=".">
-						<div class="fill"><img src="img/logo-01.png" alt="Tasty Cake"/></div>
+						<div class="fill"><img src="/img/logo-01.png" alt="Tasty Cake"/></div>
 					</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">

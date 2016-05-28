@@ -74,9 +74,10 @@ $id = $good['id'];
     <div class='col-md-2 col-lg-2'
          id='cost_<?= $id ?>'><?= round($detail['cost'], 2) . " руб." ?></div>
     <div class="col-md-1 col-lg-1">
-        <button id='del_<?= $id ?>' class='delete btn btn-squared'>
-            <i class="glyphicon glyphicon-trash"></i>
-        </button>
+    	<a href='cart/delete/<?= $id ?>' 
+    		class='ajax show-cart btn btn-squared' datatarget='content'>
+             <i class="glyphicon glyphicon-trash"></i>
+        </a>
     </div>
 </div>
 <? } ?>

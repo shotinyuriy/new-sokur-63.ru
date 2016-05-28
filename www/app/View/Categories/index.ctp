@@ -1,5 +1,5 @@
 <?php
-function subcategories_view($cms, $role, $subcategories, $current_category_id) { ?>
+function subcategories_view($cms, $role, $subcategories, $currentCategory, $level = 1) { ?>
 <ul>
 
 <?php for($i = 0; $i < count($subcategories); $i++) {
@@ -10,13 +10,13 @@ function subcategories_view($cms, $role, $subcategories, $current_category_id) {
 		$category = $subcategories[$i];
 	}
 	
-	$category_is_active = $category['id'] == $current_category_id;
+	$category_is_active = $category['id'] == $currentCategory['id'] || $category['id'] == $currentCategory['category_id'];
+	$classes = "level-$level ";
 	if ($category_is_active) {
-		$classes = "active";
+		$classes .= "active";
 		$expanded = "true";
 		$collapse = "";
 	} else {
-		$classes = "";
 		$expanded = "false";
 		$collapse = "collapse";
 	} ?>
@@ -26,22 +26,12 @@ function subcategories_view($cms, $role, $subcategories, $current_category_id) {
 		   href='/categories/<?= $category['id'] ?>/goods?<?= $cms ? 'cms=true' : ''?>' 
 		   datatarget='goods_by_category' deactivate='.menu-category'
 		   data-toggle="collapse" data-target="#collapsed_<?= $category['id'] ?>" aria-expanded='<?= $expanded ?>'  aria-controls="collapsed_<?= $category['id'] ?>">
-			<h6><?= $category['name'] ?></h6>
+			<?= $category['name'] ?>
 		</a>
-		<?php if($cms && $role=='admin') { ?>
-		<div class='cms-controlls'>
-			<a href="/categories/edit/<?= $category['id'] ?>" class="edit btn btn-warning">
-				Изменить
-			</a>
-			<a href="/categories/delete/<?= $category['id'] ?>" class="edit btn btn-danger">
-				Удалить
-			</a>
-		</div>
-		<?php } ?>		
 		<div id="collapsed_<?= $category['id'] ?>" class='<?= $collapse ?>'>
 			 <?
 			if (isset($category[0]) && count($category)>0) {
-				subcategories_view($cms, $role, $category, $current_category_id);
+				subcategories_view($cms, $role, $category, $currentCategory, $level+1);
 			}
 			?>
 		</div>
@@ -58,7 +48,7 @@ function subcategories_view($cms, $role, $subcategories, $current_category_id) {
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-<?php subcategories_view($cms, $role, $categories, $current_category_id); ?>
+<?php subcategories_view($cms, $role, $categories, $currentCategory); ?>
 <?php if($cms && $role=='admin') { ?>
 		<a href="/categories/add" class="edit btn btn-success">
 			Добавить категорию
@@ -70,7 +60,7 @@ function subcategories_view($cms, $role, $subcategories, $current_category_id) {
 	<script>
 		$( document ).ready( function() {
 			$.ajax({
-				url: '/categories/<?= $current_category_id ?>/goods',
+				url: '/categories/<?= $currentCategory['id'] ?>/goods',
 				data: {
 					cms: '<?= $cms ?>'
 				},

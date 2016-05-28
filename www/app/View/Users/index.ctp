@@ -20,7 +20,7 @@
 			<?php foreach($users as $userItem) { 
 				$user = $userItem['User']; ?>
 			<tr>
-				<td><?= $user['login'] ?></td>
+				<td><?= $user['username'] ?></td>
 				<td><?= $user['email'] ?></td>
 				<td><?= $user['role'] ?></td>
 				<?php if($cms && $role=='admin') { ?>

@@ -39,20 +39,19 @@ class AppController extends Controller {
 	        	'action' => 'login'
 	    	),
 	    	'authError' => 'Did you really think you are allowed to see that?',
+	    	'loginRedirect' => array('controller' => 'cms', 'action' => 'index'),
 	    	'authenticate' => array(
 	        	'Form' => array(
 	        		'passwordHasher' => array(
 	                    'className' => 'Simple',
 	                    'hashType' => 'sha256'
-	                ),
-	            	'fields' => array(
-	                	'username' => 'login',
-	                	'password' => 'password'
 	                )
 	        	)
 	   		),
 	   		'allowedActions' => array(
-	   			'history', 'delete', 'decrease', 'increase', 'display', 'add', 'edit', 'cms', 'view', 'index', 'buy', 'popular', 'viewByCategory', 'menu', 'menushort', 'total'
+	   			'login',
+	   			'history', 'decrease', 'increase', 'display', 'view', 'index', 
+	   			'buy', 'popular', 'viewByCategory', 'menu', 'menushort', 'total'
 			)
 		), 'Flash', 'Session','Cookie', 'Paginator', 'RequestHandler');
 	public $helpers = array('Conversion', 'Html','Form','Session','Js' => 'Jquery', 'Paginator','Time');
@@ -61,26 +60,30 @@ class AppController extends Controller {
 		if($this->request->is('ajax') || $this->request->query('ajax')) {
 			$this->layout = 'ajax';
 		}
-		$role = null;
 		$cms = false;
+		$userId = 0;
+		
+		$role = $this->Auth->user('role');
+		$login = $this->Auth->user('username');
+		$userId = $this->Auth->user('id');
+		
 		if($this->request->query('cms')) {
-			$role = $this->Auth->user('role');
-			if($role == null) {
+			
+			/*if($role == null) {
 				$role = $this->Session->read('role');
 			}
 			if($role == null) {
 				$role = 'admin';
 				$role = $this->Session->write('role', $role);
-			}
-			$login = $this->Auth->user('login');
-			$id = $this->Auth->user('id');
-			if($id == null) {
-				$id = 1;
+			}*/
+			
+			if($userId == null) {
+				$userId = 1;
 			}
 			if($role != null) {
 				$cms = true;
 			}			
 		}
-		$this->set(compact('cms', 'role'));
+		$this->set(compact('cms', 'role', 'login', 'userId'));
 	}
 }

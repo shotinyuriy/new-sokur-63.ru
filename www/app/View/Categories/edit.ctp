@@ -5,7 +5,7 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="editorFormLabel">Добавить категорию</h4>
+    <h4 class="modal-title" id="editorFormLabel">Изменить категорию</h4>
 </div>
 <?php echo $this->Form->input('id', array('type' => 'hidden', 'default' => $category['id'])); ?>
 <?php echo $this->Form->input('category_id', array('type' => 'hidden', 'default' => $category['category_id'])); ?>
@@ -15,8 +15,9 @@
 	)); ?>
 <?php echo $this->Form->input('menu_visible', array(
 	'legend' => 'Отображать в меню', 'class' => 'radio-inline', 'type' => 'radio', 'default' => $category['menu_visible'],
+	'separator' => '&nbsp;&nbsp;&nbsp;',
 	'options' => array('1' => 'Да', '0' => 'Нет'), 
-	'div' => array('class' => 'radio')
+	'div' => array('class' => 'form-group')
 	)); ?>
 <div class="form-group">
 	<label class='little'>Изображение</label>

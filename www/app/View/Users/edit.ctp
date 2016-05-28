@@ -12,11 +12,11 @@
                     <div class="form-group">
                         <label class='little' for="name">Логин:</label>
                         <div class='little'>
-                            <? if ( isset($user['login']) && $user['login'] != null) { ?>
-                                <input type='hidden' name='login' value='<?= $user['login'] ?>'>
-                                <p class="form-control-static"><?= $user['login'] ?></p>
+                            <? if ( isset($user['username']) && $user['username'] != null) { ?>
+                                <input type='hidden' name='username' value='<?= $user['username'] ?>'>
+                                <p class="form-control-static"><?= $user['username'] ?></p>
                             <? } else { ?>
-                                <input type='text' name='login' class='form-control' value=''>
+                                <input type='text' name='username' class='form-control' value=''>
                             <?
                             } ?>
                         </div>
@@ -35,7 +35,7 @@
                                 <div class="radio">
                                     <label>
                                         <input type='radio' name='role' value='admin'
-                                        	<?= ($user['role'] == 'aadmin') ? 'checked' : '' ?>>
+                                        	<?= ($user['role'] == 'admin') ? 'checked' : '' ?>>
                                         admin
                                     </label>
                                 </div>

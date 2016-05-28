@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 27 2016 г., 05:14
+-- Время создания: Май 28 2016 г., 07:32
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -120,8 +120,8 @@ INSERT INTO `goods` (`id`, `name`, `category_id`, `description`, `sort_index`, `
 ('pirozhnye_profitroli-shokoladnye', 'Профитроли шоколадные', 'pirozhnye', 'Профитроли с шоколадным вкусом.', 139, 1, 'pirozhnye_profitroli-shokoladnye.jpg', 179, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
 ('makaroni-shokoladnye', 'Макарони шоколадные', 'makaroni', 'Миндально-шоколадное безе с воздушным кремом.', 140, 1, 'makaroni-shokoladnye.jpg', 179, 12, 12, '12', 23, 23, 0, '156.000000'),
 ('makaroni-assorti-mini', '"Макарони ассорти" мини', 'makaroni', 'Пять ярких и необычных сочетаний макарони в одном наборе.', 141, 1, 'makaroni-assorti-mini.jpg', 456, 21, 23, '1234-ffs-3435', 0, 0, 0, '0.000000'),
-('maffin-s-izyumom', 'Маффин с изюмом', 'vypechnye-izdeliya', 'Воздушный маффин с добавлением изюма.', 142, 1, 'vypechnye-izdeliya_maffin-s-izyumom.jpg', 234, NULL, NULL, '', 0, 0, 0, '123.000000'),
-('shtrudel', 'Штрудель', 'vypechnye-izdeliya', 'Тонкое пресное тесто с начинкой из миндальной муки, яблок, изюма и корицы. Штрудель покрыт сахарной пудрой.', 143, 1, 'vypechnye-izdeliya_shtrudel.jpg', 124, NULL, NULL, '', 0, 0, 0, '356.000000'),
+('maffin-s-izyumom', 'Маффин с изюмом', 'vypechnye-izdeliya', 'Воздушный маффин с добавлением изюма.', 142, 1, 'vypechnye-izdeliya_maffin-s-izyumom.jpg', 234, 24, 72, 'РОС 123-0214-21', 0, 0, 0, '123.000000'),
+('shtrudel', 'Штрудель', 'vypechnye-izdeliya', 'Тонкое пресное тесто с начинкой из миндальной муки, яблок, изюма и корицы. Штрудель покрыт сахарной пудрой.', 143, 1, 'vypechnye-izdeliya_shtrudel.jpg', 124, 24, 72, '', 1, 125, 0, '356.000000'),
 ('tvorozhnoe-kol-co_tvorozhno-malinovoe-kol-co', 'Творожно-малиновое кольцо', 'tvorozhnoe-kol-co', 'Заварное тесто с творогом и малиной.', 144, 1, 'tvorozhnoe-kol-co_tvorozhno-malinovoe-kol-co.jpg', 234, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
 ('tvorozhnoe-kol-co_tvorozhno-abrikosovoe-kol-co', 'Творожно-абрикосовое кольцо', 'tvorozhnoe-kol-co', 'Сочетание абрикоса, творога и заварного теста.', 145, 1, 'tvorozhnoe-kol-co_tvorozhno-abrikosovoe-kol-co.jpg', 134, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
 ('23214', '23214', 'tvorozhnoe-kol-co', '2421412', 1, 1, '23214.jpg', 12, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `title` varchar(50) NOT NULL,
   `description` varchar(256) DEFAULT NULL,
   `image_url` varchar(256) DEFAULT NULL,
-  `menu_visible` tinyint(4) DEFAULT NULL,
+  `created_on` date NOT NULL,
   `expires_on` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -152,11 +152,12 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- Дамп данных таблицы `news`
 --
 
-INSERT INTO `news` (`id`, `title`, `description`, `image_url`, `menu_visible`, `expires_on`) VALUES
-(1, 'Новость 2', 'Описание новости №2', '1.jpg', 1, '2036-01-01'),
-(2, '421412', 'gsdgsdgsdg 3 233fwef2', '2.jpg', 1, '2016-05-25'),
-(3, 'ggsd', 'agasgasf', '3.jpg', NULL, '2016-05-26'),
-(4, 'jjyjy', 'yjy', '4.jpg', NULL, '2016-05-25');
+INSERT INTO `news` (`id`, `title`, `description`, `image_url`, `created_on`, `expires_on`) VALUES
+(1, 'Новость 2', 'Описание новости №2', '1.jpg', '2016-05-01', '2036-01-01'),
+(2, '421412', 'gsdgsdgsdg 3 233fwef2', '2.jpg', '2016-05-02', '2016-05-25'),
+(3, 'ggsd', 'agasgasf', '3.jpg', '2016-05-03', '2016-05-26'),
+(4, 'jjyjy', 'yjy', '4.jpg', '2016-05-27', '2016-05-25'),
+(5, 'День конституции', 'Мы приняли конституцию - ураа', '5.jpg', '2016-05-27', '2016-06-11');
 
 -- --------------------------------------------------------
 
@@ -310,190 +311,6 @@ CREATE TABLE IF NOT EXISTS `pages` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `portions`
---
-
-CREATE TABLE IF NOT EXISTS `portions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `good_id` varchar(255) NOT NULL,
-  `amount` int(11) NOT NULL DEFAULT '0',
-  `gramms` int(11) NOT NULL DEFAULT '0',
-  `milliliters` int(11) NOT NULL DEFAULT '0',
-  `price` decimal(18,6) NOT NULL DEFAULT '0.000000',
-  `menu_visible` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `good_id` (`good_id`,`amount`,`gramms`,`milliliters`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=165 ;
-
---
--- Дамп данных таблицы `portions`
---
-
-INSERT INTO `portions` (`id`, `good_id`, `amount`, `gramms`, `milliliters`, `price`, `menu_visible`) VALUES
-(1, 'duykan-kani', 1, 100, 0, '147.000000', 1),
-(2, 'duykan-kuro', 1, 100, 0, '119.000000', 1),
-(3, 'roll-syake', 6, 105, 0, '135.000000', 1),
-(4, 'roll-unagi', 6, 110, 0, '180.000000', 1),
-(5, 'susi-ebi', 1, 35, 0, '60.000000', 1),
-(6, 'susi-syake', 1, 35, 0, '45.000000', 1),
-(7, 'susi_unagi', 1, 35, 0, '60.000000', 1),
-(9, 'podarki_teyshoku', 5, 210, 0, '0.000000', 1),
-(10, 'podarki_sok-1l', 1, 0, 1000, '0.000000', 1),
-(11, 'podarki_diskontnaya-karta-10', 1, 0, 0, '0.000000', 1),
-(12, 'podarki_shampanskoe', 1, 0, 0, '0.000000', 1),
-(13, 'duykans_ikura', 1, 30, 0, '65.000000', 1),
-(14, 'duykans_susi-filadel-fiya', 1, 30, 0, '65.000000', 1),
-(15, 'salaty_kayso-sarado', 1, 150, 0, '150.000000', 1),
-(16, 'salaty_kadi-cha', 1, 150, 0, '95.000000', 1),
-(17, 'salaty_glamur', 1, 150, 0, '160.000000', 1),
-(18, 'zakuski_myasnoe-assorti', 1, 150, 0, '180.000000', 1),
-(19, 'zakuski_kol-ca-kal-marov', 7, 100, 0, '120.000000', 1),
-(20, 'zakuski_krevetki-k-pivu', 1, 160, 0, '190.000000', 1),
-(21, 'pervye-blyuda_solyanka-myasnaya', 1, 400, 0, '150.000000', 1),
-(22, 'pervye-blyuda_domashnyaya-lapsha', 1, 400, 0, '110.000000', 1),
-(23, 'pervye-blyuda_bangkok', 1, 400, 0, '135.000000', 1),
-(24, 'goryachie-blyuda_yaki-soba', 1, 200, 0, '140.000000', 1),
-(25, 'goryachie-blyuda_esenabi', 1, 200, 0, '140.000000', 1),
-(26, 'goryachie-blyuda_karbonaro', 1, 200, 0, '170.000000', 1),
-(27, 'uzbekskaya-kuznya_lagman', 1, 300, 0, '120.000000', 1),
-(28, 'uzbekskaya-kuznya_shurpa-uzbekskaya', 1, 300, 0, '150.000000', 1),
-(29, 'uzbekskaya-kuznya_plov', 1, 300, 0, '120.000000', 1),
-(30, 'picca_s-govyadinoy-ostraya', 1, 600, 0, '320.000000', 1),
-(31, 'picca_s-moreproduktami', 1, 600, 0, '300.000000', 1),
-(32, 'zharenye-rolly_boston-roll', 8, 170, 0, '170.000000', 1),
-(33, 'zharenye-rolly_goryachiy-roll', 8, 215, 0, '180.000000', 1),
-(34, 'mangal_vyrezka-govyazh-ya', 1, 0, 0, '180.000000', 1),
-(35, 'susi_hotate', 1, 35, 0, '80.000000', 1),
-(36, 'susi_tay', 1, 30, 0, '40.000000', 1),
-(37, 'duykans_chuka', 1, 30, 0, '55.000000', 1),
-(38, 'duykans_spaysi-kani', 1, 30, 0, '75.000000', 1),
-(39, 'duykans_spaysi-unagi', 1, 30, 0, '75.000000', 1),
-(40, 'duykans_spaysi-syake', 1, 30, 0, '70.000000', 1),
-(41, 'duykans_spaysi-maguro', 1, 30, 0, '75.000000', 1),
-(42, 'duykans_tobiko', 1, 1, 0, '55.000000', 1),
-(43, 'duykans_vasabiko', 1, 30, 0, '55.000000', 1),
-(44, 'rolls_yasay-roll', 8, 125, 0, '150.000000', 1),
-(45, 'rolls_kappa-maki', 6, 105, 0, '90.000000', 1),
-(46, 'rolls_tekka-roll', 6, 105, 0, '160.000000', 1),
-(47, 'rolls_ebi-roll', 6, 105, 0, '160.000000', 1),
-(48, 'rolls_teyshoku', 6, 120, 0, '165.000000', 1),
-(49, 'rolls_piramida-roll', 6, 190, 0, '160.000000', 1),
-(50, 'rolls_ika-ebi-maki', 8, 175, 0, '195.000000', 1),
-(51, 'rolls_vulkan', 8, 255, 0, '190.000000', 1),
-(52, 'rolls_tori-spays', 8, 220, 0, '145.000000', 1),
-(53, 'rolls_lava-maki', 8, 230, 0, '190.000000', 1),
-(54, 'rolls_futo-maki', 8, 165, 0, '155.000000', 1),
-(55, 'rolls_evraziya-roll', 10, 240, 0, '500.000000', 1),
-(56, 'rolls_tokado', 8, 195, 0, '185.000000', 1),
-(57, 'rolls_yodzhi', 8, 250, 0, '295.000000', 1),
-(58, 'rolls_acuy-maki', 8, 160, 0, '165.000000', 1),
-(59, 'rolls_bimi-roll', 6, 210, 0, '205.000000', 1),
-(60, 'rolls_segun-maki', 8, 220, 0, '295.000000', 1),
-(61, 'rolls_okinava-maki', 8, 240, 0, '255.000000', 1),
-(62, 'rolls_kurimu-unagi', 8, 160, 0, '145.000000', 1),
-(63, 'rolls_hokkaydo-maki', 8, 220, 0, '245.000000', 1),
-(64, 'rolls_kaliforniya-maki', 8, 200, 0, '275.000000', 1),
-(65, 'rolls_tay-spaysi', 6, 170, 0, '140.000000', 1),
-(66, 'rolls_syake-spaysi', 6, 170, 0, '160.000000', 1),
-(67, 'rolls_maguro-spaysi', 6, 170, 0, '180.000000', 1),
-(68, 'rolls_drakon-maki', 8, 200, 0, '195.000000', 1),
-(69, 'rolls_royal-filadel-fiya', 8, 250, 0, '285.000000', 1),
-(70, 'rolls_kado-maki', 6, 200, 0, '185.000000', 1),
-(71, 'rolls_aysberg', 8, 200, 0, '280.000000', 1),
-(72, 'rolls_himavari-maki', 6, 260, 0, '305.000000', 1),
-(73, 'rolls_kaydzhi-maki', 8, 220, 0, '170.000000', 1),
-(74, 'rolls_akay-maki', 1, 310, 0, '395.000000', 1),
-(75, 'rolls_fusion', 1, 370, 0, '500.000000', 1),
-(76, 'rolls_iskushenie', 8, 195, 0, '140.000000', 1),
-(77, 'rolls_nezhnyy', 8, 130, 0, '175.000000', 1),
-(78, 'rolls_veneciya', 8, 0, 0, '195.000000', 1),
-(79, 'rolls_hitoshi', 6, 175, 0, '175.000000', 1),
-(80, 'rolls_totigi', 6, 195, 0, '145.000000', 1),
-(81, 'rolls_ikura-maki', 6, 215, 0, '170.000000', 1),
-(82, 'rolls_grin-roll', 6, 210, 0, '140.000000', 1),
-(83, 'rolls_domashniy', 6, 205, 0, '240.000000', 1),
-(84, 'rolls_tokio-maki', 8, 200, 0, '165.000000', 1),
-(85, 'zharenye-rolly_roll-evropa', 8, 160, 0, '170.000000', 1),
-(86, 'zharenye-rolly_unagi-tempura', 10, 300, 0, '170.000000', 1),
-(87, 'zharenye-rolly_higari-roru', 6, 260, 0, '170.000000', 1),
-(88, 'zharenye-rolly_makedoniya', 10, 270, 0, '170.000000', 1),
-(89, 'zharenye-rolly_ital-yanskiy', 8, 195, 0, '170.000000', 1),
-(90, 'zharenye-rolly_francuzskiy', 8, 270, 0, '170.000000', 1),
-(91, 'zharenye-rolly_umino-roll', 8, 220, 0, '190.000000', 1),
-(92, 'zharenye-rolly_sakura', 8, 162, 0, '170.000000', 1),
-(93, 'zharenye-rolly_geysha', 10, 10, 0, '170.000000', 1),
-(94, 'zharenye-rolly_inari', 10, 255, 0, '170.000000', 1),
-(95, 'mangal_shashlyk-iz-baraniny', 1, 0, 0, '120.000000', 1),
-(96, 'mangal_shashlyk-iz-svininy', 1, 0, 0, '80.000000', 1),
-(97, 'mangal_semga', 1, 0, 0, '150.000000', 1),
-(98, 'mangal_kefal-chernomorskaya', 1, 0, 0, '90.000000', 1),
-(99, 'mangal_cyplenok', 1, 0, 0, '60.000000', 1),
-(100, 'mangal_kryl-ya-kurinye', 1, 0, 0, '50.000000', 1),
-(101, 'mangal_rebryshki-baran-i', 1, 0, 0, '120.000000', 1),
-(102, 'mangal_rebryshki-svinnye', 1, 0, 0, '70.000000', 1),
-(103, 'mangal_pomidor', 1, 0, 0, '50.000000', 1),
-(104, 'mangal_baklazhan', 1, 0, 0, '50.000000', 1),
-(105, 'mangal_perec-bolgarskiy', 1, 0, 0, '50.000000', 1),
-(106, 'mangal_shampin-ony', 1, 0, 0, '50.000000', 1),
-(107, 'mangal_kartofel', 1, 0, 0, '40.000000', 1),
-(108, 'picca_cezar', 1, 600, 0, '270.000000', 1),
-(109, 'picca_s-vetchinoy-i-gribami', 1, 600, 0, '270.000000', 1),
-(110, 'picca_s-kurichec-i-baklazhanami', 1, 600, 0, '270.000000', 1),
-(111, 'picca_s-salyami-i-gribami', 1, 600, 0, '270.000000', 1),
-(112, 'picca_assorti-myasnaya', 1, 600, 0, '270.000000', 1),
-(113, 'picca_4-sezona', 1, 600, 0, '270.000000', 1),
-(114, 'picca_4-syra', 1, 600, 0, '270.000000', 1),
-(115, 'picca_margarita', 1, 600, 0, '270.000000', 1),
-(116, 'ris-lapsha_lapsha-ruchnoy-raboty', 1, 0, 0, '120.000000', 1),
-(117, 'ris-lapsha_lapsha-grechnevaya', 1, 0, 0, '120.000000', 1),
-(118, 'ris-lapsha_yaichnaya', 1, 0, 0, '120.000000', 1),
-(119, 'ris-lapsha_lapsha-steklyannaya', 1, 0, 0, '120.000000', 1),
-(120, 'ris-lapsha_lapsha-pshenichnaya', 1, 0, 0, '120.000000', 1),
-(121, 'ris-lapsha_ris', 1, 300, 0, '120.000000', 1),
-(122, 'sousy_kislo-sladkiy', 1, 0, 0, '20.000000', 1),
-(123, 'sousy_slivochnyy', 1, 0, 0, '20.000000', 1),
-(124, 'sousy_ustrichnyy', 1, 0, 0, '20.000000', 1),
-(125, 'sousy_teriyaki', 1, 0, 0, '20.000000', 1),
-(126, 'sousy_kimchi', 1, 0, 0, '20.000000', 1),
-(127, 'dopolnitel-no_govyadina', 1, 0, 0, '85.000000', 1),
-(128, 'dopolnitel-no_svinina', 1, 0, 0, '65.000000', 1),
-(129, 'dopolnitel-no_kurica', 1, 0, 0, '45.000000', 1),
-(130, 'dopolnitel-no_bekon', 1, 0, 0, '70.000000', 1),
-(131, 'dopolnitel-no_semga', 1, 0, 0, '80.000000', 1),
-(132, 'dopolnitel-no_kal-mar', 1, 0, 0, '55.000000', 1),
-(133, 'dopolnitel-no_krevetki', 1, 0, 0, '85.000000', 1),
-(134, 'dopolnitel-no_midii', 1, 0, 0, '70.000000', 1),
-(135, 'dopolnitel-no_moreprodukty', 1, 0, 0, '85.000000', 1),
-(136, 'dopolnitel-no_ugor', 1, 0, 0, '90.000000', 1),
-(137, 'zapechennye_banzay', 6, 170, 0, '170.000000', 1),
-(138, 'zapechennye_s-bekonom', 6, 180, 0, '200.000000', 1),
-(139, 'zapechennye_kanzas', 6, 240, 0, '250.000000', 1),
-(140, 'zapechennye_s-semgoy', 6, 250, 0, '240.000000', 1),
-(141, 'zapechennye_mayami', 6, 235, 0, '220.000000', 1),
-(142, 'zapechennye_siciliya', 8, 290, 0, '280.000000', 1),
-(143, 'torty_tryufel', 1, 420, 0, '250.000000', 1),
-(144, 'torty_chiz-keyk-quot-mango-marakuyya-quot', 1, 310, 0, '399.000000', 1),
-(145, 'torty_ksav-er', 1, 450, 0, '560.000000', 1),
-(146, 'pirozhnye_assorti', 4, 367, 0, '437.000000', 1),
-(147, 'pirozhnye_estrelli', 1, 345, 0, '365.000000', 1),
-(148, 'pirozhnye_opera', 1, 386, 0, '277.000000', 1),
-(149, 'pirozhnye_keksy', 10, 500, 0, '3000.000000', 1),
-(150, 'pirozhnye_profitroli-shokoladnye', 1, 100, 0, '56.000000', 1),
-(151, 'pirozhnye_keksy', 1, 100, 0, '375.000000', 1),
-(152, 'makaroni_makaroni-shokoladnye', 5, 358, 0, '245.000000', 1),
-(153, 'makaroni_quot-makaroni-assorti-quot-mini', 12, 890, 0, '1450.000000', 1),
-(154, 'vypechnye-izdeliya_maffin-s-izyumom', 5, 456, 0, '560.000000', 1),
-(155, 'vypechnye-izdeliya_shtrudel', 1, 345, 0, '150.000000', 1),
-(156, 'tvorozhnoe-kol-co_tvorozhno-malinovoe-kol-co', 1, 134, 0, '145.000000', 1),
-(157, 'tvorozhnoe-kol-co_tvorozhno-abrikosovoe-kol-co', 1, 310, 0, '155.000000', 1),
-(158, 'eklery_elite', 1, 135, 0, '160.000000', 1),
-(159, 'eklery_eklery', 5, 456, 0, '345.000000', 1),
-(160, 'novaya-podkategoriya_novyy-tovar', 2, 400, 0, '200.000000', 1),
-(162, 'asdasfsa_fsdfsf', 1, 234, 0, '123.000000', 1);
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `stats`
 --
 
@@ -618,21 +435,21 @@ INSERT INTO `stores` (`id`, `name`, `address`, `fullname`, `phone`) VALUES
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `login` varchar(64) NOT NULL,
+  `username` varchar(64) NOT NULL,
   `email` varchar(63) NOT NULL,
   `password` varchar(256) DEFAULT NULL,
   `role` varchar(63) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `login` (`login`)
+  UNIQUE KEY `login` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `email`, `password`, `role`) VALUES
-(1, 'admin', '', 'f59cdcfe137ffc74da8768124ecd5c98c8cac28ff8e38e5bc543aa2294dd331d', 'admin'),
-(2, 'operator', '', NULL, 'operator'),
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`) VALUES
+(1, 'admin', '', '8c3a76f947d5f745b6cb57baab3765a48ab2f0a5c26e77aceacceb5ff138ddf7', 'admin'),
+(2, 'operator', '', '98b0dbcb1648c34538ab711a0a34b2d169748a2986b440cf8c4338550b802364', 'operator'),
 (4, 'oper1', '', NULL, 'operator'),
 (5, 'oper2', '', NULL, 'operator'),
 (6, 'oper3', '', NULL, 'operator'),

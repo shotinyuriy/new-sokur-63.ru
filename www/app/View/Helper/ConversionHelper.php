@@ -20,8 +20,13 @@ class ConversionHelper extends AppHelper {
 		
 	public function parse($value, $threshold, $keys) {
     	$result = array();
-        $result[$keys[0]] = floor($value / $threshold);
-		$result[$keys[1]] = round($value % $threshold, 0);
+		if($value > $threshold) {
+	        $result[$keys[0]] = floor($value / $threshold);
+			$result[$keys[1]] = round($value % $threshold, 0);
+		} else {
+			$result[$keys[0]] = 0;
+			$result[$keys[1]] = $value;
+		}
 		return $result;
     }
 	

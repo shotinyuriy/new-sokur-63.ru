@@ -13,6 +13,11 @@ function calculateCartTotal($cart) {
 class CartController extends AppController {
 
 	public $uses = 'Good';
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('delete', 'cancel');
+	}
 
 	public function initializeCart() {
 		if ($this -> Session -> read('cart') != null) {
@@ -72,6 +77,17 @@ class CartController extends AppController {
 	
 	public function increase() {
 		$this->getCartAndAddAmount(+1);
+	}
+	
+	public function delete($id) {
+		$cart = $this->initializeCart();
+		if(isset($cart['OrderDetail'][$id])) {
+			unset($cart['OrderDetail'][$id]);
+			$this->Session->write('cart', $cart);
+		}
+		$total = calculateCartTotal($cart);
+		$this -> set(compact('cart', 'total'));
+		$this -> render('index');
 	}
 	
 	public function getCartAndAddAmount($amount) {

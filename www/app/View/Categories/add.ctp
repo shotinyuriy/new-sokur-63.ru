@@ -14,8 +14,9 @@
 	)); ?>
 <?php echo $this->Form->input('menu_visible', array(
 	'legend' => 'Отображать в меню', 'class' => 'radio-inline', 'type' => 'radio',
+	'separator' => '&nbsp;&nbsp;&nbsp;',
 	'options' => array('1' => 'Да', '0' => 'Нет'), 
-	'div' => array('class' => 'radio')
+	'div' => array('class' => 'form-group')
 	)); ?>
 <div class="form-group">
 	<label class='little'>Изображение</label>

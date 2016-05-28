@@ -47,7 +47,7 @@ class GoodsController extends AppController {
 		} else {
 			$good_item_classes = "col-lg-4 col-md-6 col-sm-12 col-xs-12";
 		}
-		$this->set(compact('goods', 'good_item_classes'));
+		$this->set(compact('goods', 'good_item_classes', 'categoryId'));
 	}
 	
 		

@@ -3,6 +3,11 @@
 class OrdersController extends AppController {
 	public $status_names = array( "Принят", "Отменен", "Готов", "Выполнен" );
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('add');
+	}
+
 	public function initializeCart() {
 		if ($this -> Session -> read('cart') != null) {
 			$cart = $this -> Session -> read('cart');

@@ -52,45 +52,45 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="..">
-                <img src="../img/logo-01.png" alt="Tasty Cake" class="fill"/>
-            </a>
+    		<a class="navbar-brand" href=".">
+				<div class="fill"><img src="/img/logo-01.png" alt="Tasty Cake"/></div>
+			</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         	<ul id="cms-nav" class="nav navbar-nav navbar-left">
-        		<li class="activatable">
+        		<li class="activatable nav-text">
                 	<a class='ajax' href='/pages' datatarget='cms_content'>
-                		Страницы
+                		<span class='nav-text'>Страницы</span>
                 	</a>
                 </li>
                 <? if ($role == 'admin') { ?>
                     <li class="activatable">
                     	<a class='ajax' href='/categories?cms=true' datatarget='cms_content'>
-                    		Категории
+                    		<span class='nav-text'>Продукция</span>
                     	</a>
                     </li>
                 <? } ?>
                 <li class="activatable">
-                	<a class='ajax' href='/orders?cms=true' datatarget='cms_content'>Заказы</a>
+                	<a class='ajax' href='/orders?cms=true' datatarget='cms_content'><span class='nav-text'>Заказы</span></a>
                 </li>
                 <? if ($role == 'admin') { ?>
                 <li class="activatable">
-                	<a class='ajax' href='/news?cms=true' datatarget='cms_content'>Новости</a>
+                	<a class='ajax nav-text' href='/news?cms=true' datatarget='cms_content'><span class='nav-text'>Новости</span></a>
                 </li>
                 <li class="activatable">
-                	<a class='ajax' href='/users?cms=true' datatarget='cms_content'>Пользователи</a>
+                	<a class='ajax nav-text' href='/users?cms=true' datatarget='cms_content'><span class='nav-text'>Пользователи</span></a>
                 </li>
                 <li class="activatable">
-                	<a class='ajax' href='/employees?cms=true' datatarget='cms_content'>Сотрудники</a>
+                	<a class='ajax nav-text' href='/employees?cms=true' datatarget='cms_content'><span class='nav-text'>Сотрудники</span></a>
                 </li>
                 <li class="activatable">
-                	<a class='ajax' href='/stores/?cms=true' datatarget='cms_content'>Магазины</a>
+                	<a class='ajax nav-text' href='/stores/?cms=true' datatarget='cms_content'><span class='nav-text'>Магазины</span></a>
                 </li>
                 <? } ?>
 			</ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a class='edit' id="userinfo" href="/users/edit/<?= $id ?>">
+                    <a class='edit' id="userinfo" href="/users/edit/<?= $userId ?>">
                         <table>
                             <tr>
                                 <td>
