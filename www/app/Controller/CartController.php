@@ -85,9 +85,8 @@ class CartController extends AppController {
 			unset($cart['OrderDetail'][$id]);
 			$this->Session->write('cart', $cart);
 		}
-		$total = calculateCartTotal($cart);
-		$this -> set(compact('cart', 'total'));
-		$this -> render('index');
+		$this->layout = 'ajax';
+		$this->redirect('/cart');
 	}
 	
 	public function getCartAndAddAmount($amount) {
@@ -95,9 +94,8 @@ class CartController extends AppController {
 		$cart = $this -> initializeCart();
 		$portionId = $this -> request -> params['portionId'];
 		$cart = $this->addAmount($cart, $portionId, $amount);
-		$total = calculateCartTotal($cart);
-		$this -> set(compact('cart', 'total'));
-		$this -> render('index');
+		$this->layout = 'ajax';
+		$this->redirect('/cart');
 	}
 	
 	public function addAmount($cart, $portionId, $amount) {

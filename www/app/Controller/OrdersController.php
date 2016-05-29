@@ -2,7 +2,12 @@
 
 class OrdersController extends AppController {
 	public $uses = array('Order', 'Good');
-	public $status_names = array( "Принят", "Отменен", "Готов", "Выполнен" );
+	public $status_names = array( 
+		array('id' => 1, 'name' => "Принят", 'class' => 'btn-primary'), 
+		array('id' => 2,'name' => "Отменен", 'class' => 'btn-danger'),
+		array('id' => 3,'name' => "Готов", 'class' => 'btn-primary'),
+		array('id' => 4,'name' => "Выполнен(Доставлен)", 'class' => 'btn-success')
+		);
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -30,7 +35,7 @@ class OrdersController extends AppController {
 	}
 	
 	function status_name($status) {
-		return $this->status_names[ $status ];
+		return $this->status_names[ $status ]['name'];
 	}
 	
 	function available_statuses($status) {
@@ -38,7 +43,7 @@ class OrdersController extends AppController {
 		if( $status != 1 && $status != 3 ) {
 			for( $i = 1; $i < count( $this->status_names ); $i++ ) {
 				if( $status != $i ) {		
-					$statuses[] = array('id'=>$i, 'name' => $this->status_names[$i]);
+					$statuses[] = $this->status_names[$i];
 				}
 			}
 		}
@@ -117,9 +122,9 @@ class OrdersController extends AppController {
 		$orderId = $this -> request -> params['orderId'];
 		$statusId = $this -> request -> params['statusId'];
 		$orderItem = $this->Order->findById($orderId);
-		$orderItem['Good']['status'] = $statusId;
+		$orderItem['Order']['status'] = $statusId;
 		$this->Order->save($orderItem);
 		$this->layout = 'ajax';
-		$this->redirect('/orders/view/'.$orderId);
+		$this->redirect("/orders/view/$orderId?cms=true");
 	}
 }

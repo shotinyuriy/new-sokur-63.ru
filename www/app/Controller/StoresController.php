@@ -2,9 +2,12 @@
 class StoresController extends AppController {
 	
 	public function index() {
-		$count = $this->Store->find('count');
-		$stores = $this->Store->find('all');
-		$this->set(compact('count', 'stores'));
+		$this->Paginator->settings = array(
+			'limit'=> 10,
+			'order' => 'Store.name'
+		);
+		$stores = $this->Paginator->paginate('Store');
+		$this->set(compact('stores'));
 	}
 	
 	public function add() {

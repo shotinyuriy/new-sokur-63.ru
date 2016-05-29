@@ -5,6 +5,7 @@
     <h4 class="modal-title">Номер заказа <?= $order['id'] ?></h4>
 </div>
 <div class='modal-body'>
+<div class='row'><label>Статус: </label><span><?= $order['status_name'] ?></span></div>
 <div class='row'><label>Дата и время заказа: </label><span><?= $order['date_time'] ?></span></div>
 <div class='row'><label>Номер телефона: </label><span>+7<?= $order['phone_number'] ?></span></div>
 <div class='row'><label>Заказчик: </label><span><?= $order['customer_name'] ?></span></div>
@@ -53,11 +54,8 @@ $id = isset($good['id']) ? $good['id'] : 0;
     </div>
 
     <div class='col-md-2 col-lg-2'>
-
             <div class="input-group">
-                
                 <span id='amt_<?= $id ?>' class='form-static-control amount'><?= $detail['amount'] ?></span>
-                
             </div>
     </div>
     <div class="col-md-2 col-lg-2">
@@ -76,7 +74,7 @@ $id = isset($good['id']) ? $good['id'] : 0;
 </div>
 <div class='row'>
 	<?php foreach($order['available_statuses'] as $status) { ?>
-		<div class='col-xs-3'><a href="/orders/<?= $order['id']?>/move/<?= $status['id'] ?>"><?= $status['name'] ?></a></div>
+		<div class='col-xs-3'><a href="/orders/<?= $order['id']?>/move/<?= $status['id'] ?>" class='edit btn <?= $status['class'] ?>'><?= $status['name'] ?></a></div>
 	<?php } ?>
 </div>
 </div>

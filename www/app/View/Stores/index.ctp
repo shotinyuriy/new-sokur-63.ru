@@ -1,4 +1,23 @@
-<p class='page-name'>Магазины</p>
+<?php
+	if($cms) {
+		$this->Paginator->options(array(
+			'update' => '#cms_content',
+			'evalScripts' => true
+		));
+	} else {
+		$this->Paginator->options(array(
+			'update' => '#page_content',
+			'evalScripts' => true
+		));
+	}
+?>
+<div class='row'>
+	<div class="col-xs-12">
+		<p class='page-name'>Магазины</p>
+	</div>
+</div>
+
+
 <?php if($cms && $role=='admin') { ?>
 	<div class="row">
 		<div class="col-xs-12">
@@ -8,6 +27,33 @@
 		</div>
 	</div>
 <?php } ?>
+
+<div class='row'>
+	<div class='col-xs-12'>
+		<ul class='sokur-pagination'>
+			<?php 
+			echo $this->Paginator->prev(
+			  ' < ',
+			  array('tag' => 'li'),
+			  null,
+			  array('tag' => 'li', 'class' => 'prev disabled')
+			);
+			echo $this->Paginator->numbers(array(
+				'tag' => 'li',
+				'separator' => '',
+				'currentClass' => 'active' 
+			));
+			echo $this->Paginator->next(
+			  ' > ',
+			  array('tag' => 'li'),
+			  null,
+			  array('tag' => 'li', 'class' => 'next disabled')
+			);
+			?>
+		</ul>
+	</div>
+</div>
+
 <div class="row">
 <table class="table">
 	<tr>
@@ -36,3 +82,10 @@
 	<?php } ?>
 </table>
 </div>
+
+<?php echo $this->Js->writeBuffer(); ?>
+<script>
+	$( document ).ready(function() {
+		addAllListeners();
+	});
+</script>

@@ -47,13 +47,13 @@
 * {
 	margin: 0;
 	padding: 0;
-	font-family: Roboto-Bold, Verdana, Arial;
+	font-family: Roboto-Bold, Arial, Verdana;
 	font-size: 12pt;
 	outline: none;
 }
 
 .simple-text {
-	font-family: Roboto-Light;
+	font-family: Roboto-Light, Arial, Verdana;
 }
 
 
@@ -62,7 +62,7 @@
 }
 
 td, p {
-	font-family: Roboto-Light;
+	font-family: Roboto-Light, Arial, Verdana;
 }
 
 body {
@@ -146,9 +146,10 @@ body {
 
 .nav-text,
 .nav-text a {
-	color: #E8A058; /*#cecf5f;*/
+	color: #E8A058;
 	font-size: 14pt;
-	font-family: Roboto-Bold;
+	font-weight: bold;
+	font-family: Roboto-Bold, Arial, Verdana;
 	margin: 0px;
 }
 
@@ -156,7 +157,8 @@ body {
 .nav-details a {
 	color: #fff;
 	font-size: 12pt;
-	font-family: Roboto-Bold;
+	font-weight: bold;
+	font-family: Roboto-Bold, Arial, Verdana;
 	margin: 0px;
 }
 
@@ -365,7 +367,8 @@ div.category-item:hover {
 .cart-good > p,
 .good-name > p,
 .category-name > p {
-	font-family: Roboto-Bold;
+	font-weight: bold;
+	font-family: Roboto-Bold, Arial, Verdana;
 }
 
 .good-info {
@@ -405,7 +408,7 @@ div.category-item:hover .category-info {
 .cart-good-description {
 	font-size: 11pt;
 	color: #000;
-	font-family: Roboto-Light;
+	font-family: Roboto-Light, Arial, Verdana;
 	margin: 0 0 6px;
 }
 
@@ -602,4 +605,10 @@ a.no-under:active {
 
 .info {
 	text-align: justify;
+}
+
+.good-view-img {
+	max-height: 375px;
+	max-width: 375px;
+	width: 100%;
 }
