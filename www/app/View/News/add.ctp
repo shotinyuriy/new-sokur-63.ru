@@ -7,6 +7,7 @@
             aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="editorFormLabel">Добавить новость</h4>
 </div>
+<div class='modal-body'>
 <?php echo $this->Form->input('title', array(
 	'label' => 'Заголовок', 'class' => 'form-control',
 	'div' => array('class' => 'form-group')
@@ -24,6 +25,7 @@
 		<img class='image_url' src='' alt='Нет изображения' width='197'>
 		<input type='file' name='image_url' value='Выбрать'>
 	</div>
+</div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>

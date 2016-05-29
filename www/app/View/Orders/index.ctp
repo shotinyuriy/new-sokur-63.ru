@@ -1,3 +1,36 @@
+<?php
+	$this->Paginator->options(array(
+		'update' => '#cms_content',
+		'evalScripts' => true
+	));
+?>
+
+<div class='row'>
+	<div class='col-xs-12'>
+		<ul class='sokur-pagination'>
+			<?php 
+			echo $this->Paginator->prev(
+			  ' < ',
+			  array('tag' => 'li'),
+			  null,
+			  array('tag' => 'li', 'class' => 'prev disabled')
+			);
+			echo $this->Paginator->numbers(array(
+				'tag' => 'li',
+				'separator' => '',
+				'currentClass' => 'active' 
+			));
+			echo $this->Paginator->next(
+			  ' > ',
+			  array('tag' => 'li'),
+			  null,
+			  array('tag' => 'li', 'class' => 'next disabled')
+			);
+			?>
+		</ul>
+	</div>
+</div>
+
 <table class='orders table'>
     <tr class='orders'>
         <th>Номер заказа</th>
@@ -7,27 +40,28 @@
         <th>Клиент</th>
         <th>Адрес доставки</th>
         <th>Статус</th>
-        <th>Новый статус</th>
     </tr>
 	
     <?php if (isset($orders) && count($orders) > 0) {
         foreach ($orders as $orderItem) { 
         	$order = $orderItem['Order']?>
             <tr class='orders'>
-                <td><a href='../order/view/<?= $order['id'] ?>'
-                       class='ajax edit' datatarget=''><?= $order['id'] ?></a></td>
+                <td><a href='/orders/view/<?= $order['id'] ?>'
+                       class='edit'><?= $order['id'] ?></a></td>
                 <td><?= $this->Time->format("d.m.Y H:i:s", $order['date_time']) ?></td>
                 <td><?= round($order['total'], 2) . " руб" ?></td>
                 <td><?= $order['phone_number'] ?></td>
                 <td><?= $order['customer_name'] ?></td>
                 <td><?= $order['address'] ?></td>
                 <td><?= $order['status_name'] ?></td>
-                <td>
-                	<?php foreach($order['available_statuses'] as $status) { ?>
-                		<a href="/orders/<?= $order['id']?>/move/<?= $status['id'] ?>"><?= $status['name'] ?></a>
-                	<?php } ?>
-                </td>
             </tr>
         <? }
 	} ?>
 </table>
+
+<?php echo $this->Js->writeBuffer(); ?>
+<script>
+	$( document ).ready(function() {
+		addAllListeners();
+	});
+</script>

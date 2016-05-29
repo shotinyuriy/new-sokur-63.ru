@@ -25,11 +25,25 @@
 <div class='row'>
 	<div class='col-xs-12'>
 		<ul class='sokur-pagination'>
-			<?php echo $this->Paginator->numbers(array(
+			<?php 
+			echo $this->Paginator->prev(
+			  ' < ',
+			  array('tag' => 'li'),
+			  null,
+			  array('tag' => 'li', 'class' => 'prev disabled')
+			);
+			echo $this->Paginator->numbers(array(
 				'tag' => 'li',
 				'separator' => '',
 				'currentClass' => 'active' 
-			)); ?>
+			));
+			echo $this->Paginator->next(
+			  ' > ',
+			  array('tag' => 'li'),
+			  null,
+			  array('tag' => 'li', 'class' => 'next disabled')
+			);
+			?>
 		</ul>
 	</div>
 </div>
@@ -105,10 +119,9 @@
 		<div class="modal-content" id="viewer">
 		</div>
 	</div>
-	
-<?php echo $this->Js->writeBuffer(); ?>
 </div>
 
+<?php echo $this->Js->writeBuffer(); ?>
 <script>
 	$( document ).ready(function() {
 		addAllListeners();

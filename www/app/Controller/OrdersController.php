@@ -1,6 +1,7 @@
 <?php
 
 class OrdersController extends AppController {
+	public $uses = array('Order', 'Good');
 	public $status_names = array( "Принят", "Отменен", "Готов", "Выполнен" );
 
 	public function beforeFilter() {
@@ -45,8 +46,12 @@ class OrdersController extends AppController {
 	}
 
 	public function index() {
-		
-		$orders = $this->Order->find('all');
+		$this->Paginator->settings = array(
+			'limit'=> 12,
+			'order' => 'Order.date_time',
+			'recursive' => 2
+		);
+		$orders = $this->Paginator->paginate('Order');
 		$newOrders = array();
 		foreach($orders as $order) {
 			$total = $this->calculateCartTotal($order);
@@ -88,5 +93,33 @@ class OrdersController extends AppController {
 				$this->set(compact('errors'));
 			}
 		}
+	}
+	
+	public function view($id) {
+		$orderItem = $this->Order->find('first', array(
+			'conditions' => array('Order.id' =>$id),
+			'recursive'  => 2
+		));
+		$defaultGoodItem = $this->Good->find('first');
+		$defaultGood = $defaultGoodItem['Good'];
+		foreach($defaultGood as $key => $value)  {
+			$defaultGood[$key] = 'none';
+		}
+		$order = $orderItem['Order'];
+		$orderDetails = $orderItem['OrderDetail'];
+		$total = $this->calculateCartTotal($orderItem);
+		$order['status_name']=$this->status_name($order['status']);
+		$order['available_statuses']=$this->available_statuses($order['status']);
+		$this->set(compact('order', 'orderDetails', 'defaultGood', 'total'));
+	}
+	
+	public function move() {
+		$orderId = $this -> request -> params['orderId'];
+		$statusId = $this -> request -> params['statusId'];
+		$orderItem = $this->Order->findById($orderId);
+		$orderItem['Good']['status'] = $statusId;
+		$this->Order->save($orderItem);
+		$this->layout = 'ajax';
+		$this->redirect('/orders/view/'.$orderId);
 	}
 }

@@ -42,8 +42,12 @@
 		array('controller' => 'cart', 'action' => 'decrease')
 	);
 	
-		Router::connect('/cart/increase/:portionId', 
+	Router::connect('/cart/increase/:portionId', 
 		array('controller' => 'cart', 'action' => 'increase')
+	);
+	
+	Router::connect('/orders/:orderId/move/:statusId', 
+		array('controller' => 'orders', 'action' => 'move')
 	);
 
 /**

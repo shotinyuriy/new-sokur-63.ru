@@ -223,8 +223,7 @@
 	    'ini' => array(
 	        'session.cookie_secure' => false
 	    ),
-	    'timeout' => 4320,
-	    'autoRegenerate' => true
+	    'timeout' => 4320
 	));
 
 /**
