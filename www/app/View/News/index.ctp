@@ -3,56 +3,44 @@
 		<p class='page-name'>Новости</p>
 	</div>
 </div>
-<?php if($cms && $role=='admin') { ?>
-<div class="row">
-	<div class="col-xs-12">
-		<a href="/news/add" class="edit btn btn-success">
-			Добавить новость
-		</a>
-	</div>
-</div>
-<?php } ?>
 <div class="row">
     <? $i =0; 
     	foreach ($newsList as $newsItem) {
     	$news = $newsItem['News']; 
     	?>
 
-        <div class='news-item cms col-md-4 cols-sm-3 col-xs-6'>
+		<a class="ajax" href="/news/view/<?= $news['id'] ?>" modal-target='#view-modal' datatarget='viewer'>
+        <div class='news-item col-lg-3 col-md-4 cols-sm-6 col-xs-12'>
             <div class="row">
-                <div class="col-lg-6 col-xs-12">
+            	<div class="col-xs-12">
+            		<div class="good-name">
+                    	<p><?= $this->Time->format('d/m/Y', $news['created_on']) ?></p>
+                    </div>
+                </div>
+                <div class="col-xs-12">
                     <div class="news-icon">
                         <? if ($news['image_url']) { ?>
-                            <img class="news-img image-responsive" src='/news-img/<?= $news['image_url'] ?>'
+                            <img class="news-img image-thumbnail image-responsive" src='/news-img/<?= $news['image_url'] ?>'
                                  alt=<?= $i ?>"-slide">
                         <? } ?>
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-xs-12">
+                <div class="col-xs-12">
                     <div class="category-info">
-                    	<div class="good-name">
-                            <p><?= $this->Time->format('d/m/Y', $news['created_on'])  ?></p>
-                        </div>
                         <div class="good-name">
                             <p><?= $news['title'] ?></p>
                         </div>
                         <div>
-                            <p class="cart-good-description"><?= $this->Text->truncate( $news['description'], 64 ) ?></p>
-                        </div>
-                        <div>
-                            <p class="cart-good-description">Активна до: <?= $this->Time->format('d/m/Y', $news['expires_on']) ?></p>
-                        </div>
-                        <div>
-                            <a href='/news/edit/<?= $news['id'] ?>'
-                               class='edit btn btn-warning'>Изменить</a>
-                            <a href='/news/delete/<?= $news['id'] ?>'
-                               class='edit btn btn-danger'>Удалить</a>
+                            <p class="cart-good-description">
+                            	<?= $this->Text->truncate( $news['description'], 64 ) ?>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </a>
         <?
         $i++;
     } ?>

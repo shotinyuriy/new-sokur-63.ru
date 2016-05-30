@@ -25,7 +25,7 @@
 					datatarget='page_content' deactivate='.menu-category'>Магазины</a>
 			</li>
 			<li class='menu-category'>
-				<a href='/news/history' class='ajax menu-category' 
+				<a href='/news' class='ajax menu-category' 
 					datatarget='page_content' deactivate='.menu-category'>Новости</a>
 			</li>
 		<?php foreach ($pages as $pageItem) { 
@@ -40,6 +40,17 @@
 		</ul>
 	</div>
 	<script>
+		<?php if(substr($info, 0, 1) == '/') { ?>
+		$( document ).ready( function() {
+			$.ajax({
+				url: '<?= $info ?>',
+				success: function( data ) {
+					$( '#page_content').html( data );
+					$( document ).unbind('ready');
+				}
+			});
+		});
+		<?php } else { ?>
 		$( document ).ready( function() {
 			$.ajax({
 				url: '/info/<?= $info ?>',
@@ -49,5 +60,6 @@
 				}
 			});
 		});
+		<?php } ?>
 	</script>
 </div>

@@ -10,27 +10,36 @@ function subcategories_view($cms, $role, $subcategories, $currentCategory, $leve
 		$category = $subcategories[$i];
 	}
 	
+	$hasSubcategories = isset($category[0]) && count($category)>0;
 	$category_is_active = $category['id'] == $currentCategory['id'] || $category['id'] == $currentCategory['category_id'];
 	$classes = "level-$level ";
 	if ($category_is_active) {
 		$classes .= "active";
 		$expanded = "true";
 		$collapse = "";
+		$icon = "glyphicon-chevron-up";
 	} else {
 		$expanded = "false";
 		$collapse = "collapse";
+		$icon = "glyphicon-chevron-down";
 	} ?>
 
 	<li class='menu-category <?= $classes ?>'>
 		<a class="ajax menu-category <?= $classes ?>"
 		   href='/categories/<?= $category['id'] ?>/goods?<?= $cms ? 'cms=true' : ''?>' 
-		   datatarget='goods_by_category' deactivate='.menu-category'
-		   data-toggle="collapse" data-target="#collapsed_<?= $category['id'] ?>" aria-expanded='<?= $expanded ?>'  aria-controls="collapsed_<?= $category['id'] ?>">
+		   datatarget='goods_by_category' deactivate='.menu-category'>
 			<?= $category['name'] ?>
+			<?php if($hasSubcategories) { ?>
+			<button class='toggle-subcategory' data-toggle="collapse" data-target="#collapsed_<?= $category['id'] ?>" 
+			aria-expanded='<?= $expanded ?>'  aria-controls="collapsed_<?= $category['id'] ?>">
+			<i class='glyphicon <?= $icon ?>'></i>
+			</button>
+			<?php } ?>
 		</a>
-		<div id="collapsed_<?= $category['id'] ?>" class='<?= $collapse ?>'>
+		
+		<div id="collapsed_<?= $category['id'] ?>" class='<?= $collapse ?> subcategories'>
 			 <?
-			if (isset($category[0]) && count($category)>0) {
+			if ($hasSubcategories) {
 				subcategories_view($cms, $role, $category, $currentCategory, $level+1);
 			}
 			?>
@@ -59,6 +68,9 @@ function subcategories_view($cms, $role, $subcategories, $currentCategory, $leve
 	</div>
 	<script>
 		$( document ).ready( function() {
+			function getButtonIconToCollapse( dataTarget ) {
+				return $("button[data-target="+dataTarget+"] > i");
+			}
 			$.ajax({
 				url: '/categories/<?= $currentCategory['id'] ?>/goods',
 				data: {
@@ -70,6 +82,19 @@ function subcategories_view($cms, $role, $subcategories, $currentCategory, $leve
 					addAllListeners();
 				}
 			});
+			
+			$('.subcategories').on('shown.bs.collapse', function() {
+				var dataTarget = '#'+$(this).attr("id");
+				console.log('collapse target =',getButtonIconToCollapse(dataTarget));
+				
+			    getButtonIconToCollapse(dataTarget).addClass('glyphicon-chevron-up').removeClass('glyphicon-chevron-down');
+			});
+		
+			$('.subcategories').on('hidden.bs.collapse', function() {
+				var dataTarget = '#'+$(this).attr("id");
+				console.log('collapse target =',getButtonIconToCollapse(dataTarget));
+		    	getButtonIconToCollapse(dataTarget).addClass('glyphicon-chevron-down').removeClass('glyphicon-chevron-up');
+		  	});
 		});
 	</script>
 </div>

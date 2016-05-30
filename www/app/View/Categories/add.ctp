@@ -7,13 +7,15 @@
             aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="editorFormLabel">Добавить категорию</h4>
 </div>
-<?php echo $this->Form->input('category_id', array('type' => 'hidden', 'default' => $categoryId)); ?>
+<?php if($categoryId) {
+	 echo $this->Form->input('category_id', array('type' => 'hidden', 'default' => $categoryId)); 
+} ?>
 <?php echo $this->Form->input('name', array(
 	'label' => 'Название', 'class' => 'form-control', 
 	'div' => array('class' => 'form-group')
 	)); ?>
 <?php echo $this->Form->input('menu_visible', array(
-	'legend' => 'Отображать в меню', 'class' => 'radio-inline', 'type' => 'radio',
+	'legend' => 'Отображать в меню', 'class' => 'radio-inline', 'type' => 'radio', 'default' => '1',
 	'separator' => '&nbsp;&nbsp;&nbsp;',
 	'options' => array('1' => 'Да', '0' => 'Нет'), 
 	'div' => array('class' => 'form-group')

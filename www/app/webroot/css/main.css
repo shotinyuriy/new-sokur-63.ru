@@ -639,3 +639,9 @@ a.no-under:active {
 	border: 1px solid #d03d24;
 	background-color: #d03d24;
 }
+
+.toggle-subcategory {
+	border: none;
+	background: none;
+	padding: 3px;
+}

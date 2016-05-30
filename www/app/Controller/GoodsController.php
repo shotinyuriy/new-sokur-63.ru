@@ -4,7 +4,7 @@ require_once 'util.php';
 
 class GoodsController extends AppController {
 	
-	public $uses = array('Good');
+	public $uses = array('Good', 'Category');
 	
 	public function calculateHours($data) {
 		$hoursPack = $data['Good']['shelf_life_pack_days'] * 24;
@@ -47,7 +47,9 @@ class GoodsController extends AppController {
 		} else {
 			$good_item_classes = "col-lg-4 col-md-6 col-sm-12 col-xs-12";
 		}
-		$this->set(compact('goods', 'good_item_classes', 'categoryId'));
+		$categoryItem = $this->Category->findById($categoryId);
+		$category = $categoryItem['Category'];
+		$this->set(compact('goods', 'good_item_classes', 'categoryId', 'category'));
 	}
 	
 		

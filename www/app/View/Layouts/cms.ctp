@@ -75,7 +75,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 </li>
                 <? if ($role == 'admin') { ?>
                 <li class="activatable">
-                	<a class='ajax nav-text' href='/news?cms=true' datatarget='cms_content'><span class='nav-text'>Новости</span></a>
+                	<a class='ajax nav-text' href='/news/history?cms=true' datatarget='cms_content'><span class='nav-text'>Новости</span></a>
                 </li>
                 <li class="activatable">
                 	<a class='ajax nav-text' href='/users?cms=true' datatarget='cms_content'><span class='nav-text'>Пользователи</span></a>

@@ -69,7 +69,7 @@ class CategoriesController extends AppController {
 				$this->redirect('/categories?cms=true&ajax=true');
 			}
 		} else {
-			$categoryId = $this->Session->read('current_category_id');
+			$categoryId = $this->request->query('parent_category_id');
 			$this->set(compact('categoryId'));
 		}
 	}

@@ -6,11 +6,19 @@
 ?>
 <?php if($cms && $role=='admin') { ?>
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-xs-12 col-md-6">
+		<span class='good-name'><?= $category['name']?></span>
+		<div class="category-icon">
+            <? if ($category['image_url']) { ?>
+                <div class='menuimg'><img src='../menu-img/<?= $category['image_url']."?time=".time() ?>'/></div>
+            <? } ?>
+        </div>
+	</div>
+	<div class="col-xs-12 col-md-6">
 		<a href="/goods/add" class="edit btn btn-success">
 			Добавить продукт
 		</a>
-		<a href="/categories/add" class="edit btn btn-success">
+		<a href="/categories/add?parent_category_id=<?= $categoryId ?>" class="edit btn btn-success">
 			Добавить подкатегорию
 		</a>
 		<a href="/categories/edit/<?= $categoryId ?>" class="edit btn btn-warning">
@@ -116,6 +124,6 @@
 <?php echo $this->Js->writeBuffer(); ?>
 <script>
 	$( document ).ready(function() {
-		addAllListeners();
+		addAllListeners();		
 	});
 </script>

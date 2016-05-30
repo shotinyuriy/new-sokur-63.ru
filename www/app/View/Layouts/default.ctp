@@ -125,7 +125,7 @@
 											</a>
 										</p>
 										<p class="nav-details">
-											<a href="/pages" class="ajax" datatarget="content">Галерея</a>
+											<a href="/pages?info=/news" class="ajax" datatarget="content">Новости</a>
 										</p>
 									</div></td>
 								</tr>
