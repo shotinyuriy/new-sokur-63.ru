@@ -16,4 +16,15 @@ class Order extends AppModel {
 	        'message' => 'Некорректное значаения для поля "Нужна доставка"'
 	    )
     );
+	
+	public function beforeValidate() {
+		if(isset($this->data[$this->alias]['self_take']) && $this->data[$this->alias]['self_take'] == '0') {
+			$this->validator()->add('address', array(
+			'addressRule' => array(
+		    	'rule' => array('minLength', 6),
+		    	'message' => 'Минимальная длина для адреса 6 символов!'
+		    )
+		));
+		}
+	}
 }
