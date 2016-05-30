@@ -51,10 +51,6 @@ class NewsController extends AppController {
 			}
 			$this->layout = 'ajax';
 			$this->redirect('/news?cms=true&ajax=true');
-			// if($this->News->updateAll($this->request->data, array('News.id' => $id))) {
-				// $this->layout = 'ajax';
-				// $this->redirect('/news?cms=true&ajax=true');
-			// }
 		} else {
 			$newsItem = $this->News->findById($id);
 			$news = $newsItem['News'];
@@ -74,5 +70,12 @@ class NewsController extends AppController {
 			$news = $newsItem['News'];
 			$this->set(compact('news'));
 		}
+	}
+	
+	
+	public function view($id) {
+		$newsItem = $this->News->findById($id);
+		$news = $newsItem['News'];
+		$this->set(compact('news'));
 	}
 }

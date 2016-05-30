@@ -112,8 +112,15 @@ class PagesController extends AppController {
 	public function add() {
 		if($this->request->is('post')) {
 			if($this->Page->save($this->request->data)) {
-				$this->Session->setFlash('Страница добавлена');
+				$this->layout = 'ajax';
+				$this->redirect('/pages?cms-true');
 			}
 		}
+	}
+	
+	public function view($id) {
+		$pageItem = $this->Page->findById($id);
+		$page = $pageItem['Page'];
+		$this->set(compact('page'));
 	}
 }

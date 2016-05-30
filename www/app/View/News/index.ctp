@@ -32,7 +32,7 @@
                 <div class="col-lg-6 col-xs-12">
                     <div class="category-info">
                     	<div class="good-name">
-                            <p><?= $news['created_on'] ?></p>
+                            <p><?= $this->Time->format('d/m/Y', $news['created_on'])  ?></p>
                         </div>
                         <div class="good-name">
                             <p><?= $news['title'] ?></p>

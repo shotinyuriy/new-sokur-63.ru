@@ -518,11 +518,16 @@ li.menu-category > .edit {
 	display: none;
 }
 
+li.menu-category.level-1 {
+	text-transform: uppercase;
+}
+
 li.menu-category.level-2,
 li.menu-category.level-3,
 li.menu-category.level-4 {
 	padding-left: 12px;
 	border-left: 1px solid #979797;
+	text-transform: none;
 }
 
 a.menu-category.active,

@@ -9,11 +9,12 @@
     	$news = $newsItem['News']; 
     	?>
 
+		<a class="ajax" href="/news/view/<?= $news['id'] ?>" modal-target='#view-modal' datatarget='viewer'>
         <div class='news-item col-lg-3 col-md-4 cols-sm-6 col-xs-12'>
             <div class="row">
             	<div class="col-xs-12">
             		<div class="good-name">
-                    	<p><?= $news['created_on'] ?></p>
+                    	<p><?= $this->Time->format('d/m/Y', $news['created_on']) ?></p>
                     </div>
                 </div>
                 <div class="col-xs-12">
@@ -37,6 +38,7 @@
                 </div>
             </div>
         </div>
+        </a>
         <?
         $i++;
     } ?>

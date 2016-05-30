@@ -149,6 +149,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	</div>
 </div>
 
+	
+	<!-- Modal -->
+	<div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" id="viewer">
+			</div>
+		</div>
+	</div>
+
 <?php echo $this -> element('sql_dump'); ?>
 </body>
 </html>

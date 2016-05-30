@@ -22,7 +22,8 @@
                 <div class="row">
                     <div class="col-xs-4 col-xs-offset-8">
                         <h1><?= $news['title'] ?></h1>
-                        <p><?= $news['description'] ?></p>
+                        <a href='/news/view/<?= $news['id'] ?>' class='ajax btn btn-default keep-news' 
+                        	modal-target='#view-modal' datatarget='viewer'>Подробнее... </a>
                     </div>
                 </div>
             </div>
@@ -41,3 +42,9 @@
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
 </a>
+
+<script>
+	$( document ).ready(function() {
+		addAllListeners();
+	});
+</script>

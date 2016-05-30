@@ -51,7 +51,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href=".">
+					<a class="navbar-brand" href="/">
 						<div class="fill"><img src="/img/logo-01.png" alt="Tasty Cake"/></div>
 					</a>
 				</div>
@@ -173,6 +173,14 @@
 		<div class="row">
 			<div class="col-lg-12 text-centered">
 				<h3>ЗАО "Сокур-63"</Сокур-63></h3><span>&copy;&nbsp;Все права защищены.&nbsp;2016</span>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" id="viewer">
 			</div>
 		</div>
 	</div>

@@ -129,6 +129,7 @@ function addAjaxLinkListener() {
 		var ajaxLink = $(this);
 		var url = $(this)[0].href;
 		var dataTarget = "#" + $(this).attr("datatarget");
+		var modalTarget = $(this).attr("modal-target");
 		var enable = $(this).attr("enable");
 		var deactivate = $(this).attr("deactivate");
 		console.log("dataTarget ", dataTarget);
@@ -140,7 +141,12 @@ function addAjaxLinkListener() {
 				if(ajaxLink.hasClass("show-modal")) {
 					$(dataTarget).modal('show');
 				}
-				$("#news").addClass("display-none");
+				if(modalTarget) {
+					$( modalTarget ).modal('show');
+				}
+				if(!ajaxLink.hasClass("keep-news")) {
+					$("#news").addClass("display-none");
+				}
 				if (enable) {
 					ajaxLink.addClass("disabled");
 					$(enable).removeClass("disabled");
