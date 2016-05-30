@@ -31,6 +31,10 @@ class EmployeesController extends AppController {
 			if($this->Employee->delete($id)) {
 				$this->redirect('/employees?cms=true&ajax=true');
 			}
+		} else {
+			$employeeItem = $this->Employee->findById($id);
+			$employee = $employeeItem['Employee'];
+			$this->set(compact('employee'));
 		}
 	}
 }

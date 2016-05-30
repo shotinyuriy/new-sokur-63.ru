@@ -64,19 +64,9 @@ class AppController extends Controller {
 		$userId = 0;
 		
 		$role = $this->Auth->user('role');
-		$login = $this->Auth->user('username');
+		$username = $this->Auth->user('username');
 		$userId = $this->Auth->user('id');
-		
-		if($this->request->query('cms')) {
-			
-			/*if($role == null) {
-				$role = $this->Session->read('role');
-			}
-			if($role == null) {
-				$role = 'admin';
-				$role = $this->Session->write('role', $role);
-			}*/
-			
+		if($this->request->query('cms')) {			
 			if($userId == null) {
 				$userId = 1;
 			}
@@ -84,6 +74,6 @@ class AppController extends Controller {
 				$cms = true;
 			}			
 		}
-		$this->set(compact('cms', 'role', 'login', 'userId'));
+		$this->set(compact('cms', 'role', 'username', 'userId'));
 	}
 }

@@ -10,7 +10,7 @@
 				<input type='hidden' name='id' value='<?= $user['id'] ?>'>
 				<input type='hidden' name='confirm' value='yes'>
 				<div class="form-group">
-					<p class="form-control-static">Удалить пользователя <span class='important'><?= $user['login'] ?></span>?</p>
+					<p class="form-control-static">Удалить пользователя <span class='important'><?= $user['username'] ?></span>?</p>
 				</div>
 			</div>
 			<div class="modal-footer">

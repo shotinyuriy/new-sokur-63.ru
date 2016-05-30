@@ -98,7 +98,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                                 </td>
                                 <td nowrap>
                                     <div class="nav-info">
-                                        <p class="nav-text"><?= $login ?></p>
+                                        <p class="nav-text"><?= $username ?></p>
                                         <p class="nav-details"><?= $role ?></p>
                                     </div>
                                 </td>

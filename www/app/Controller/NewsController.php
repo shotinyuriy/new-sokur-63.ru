@@ -34,7 +34,7 @@ class NewsController extends AppController {
 			}
 			if($this->News->save($this->request->data)) {
 				$this->layout = 'ajax';
-				$this->redirect('/news?cms=true&ajax=true');
+				$this->redirect('/news/history?cms=true&ajax=true');
 			}
 		}
 	}
@@ -50,7 +50,7 @@ class NewsController extends AppController {
 				$this->News->saveField($key, $value);
 			}
 			$this->layout = 'ajax';
-			$this->redirect('/news?cms=true&ajax=true');
+			$this->redirect('/news/history?cms=true&ajax=true');
 		} else {
 			$newsItem = $this->News->findById($id);
 			$news = $newsItem['News'];
@@ -63,7 +63,7 @@ class NewsController extends AppController {
 			if($id >= 0) {
 				$this->News->delete($id);
 				$this->layout = 'ajax';
-				$this->redirect('/news?cms=true&ajax=true');
+				$this->redirect('/news/history?cms=true&ajax=true');
 			}
 		} else {
 			$newsItem = $this->News->findById($id);
