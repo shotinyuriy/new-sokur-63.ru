@@ -1,5 +1,5 @@
 <div id='change_password' class='form'>
-            <form id='add_user_form' class='edit-form' method='post' action='/users/add'>
+            <form id='add_user_form' class='edit-form' method='post' action='/users/edit/<?= $user['id'] ?>'>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
@@ -7,6 +7,15 @@
                 </div>
 
                 <div class="modal-body">
+					<?php if(isset($errors)) { ?>
+						 <div class='row'>
+						 	<?php foreach($errors as $error) { ?>
+						 		<div class="col-xs-12">
+						 			<?= $error[0] ?>
+						 		</div>
+						 	<?php } ?>
+						 </div>
+					<?php } ?>
                     <input type='hidden' name='method' value='save'>
                     <input type='hidden' name='id' value='<?= $user['id'] ?>'>
                     <div class="form-group">
@@ -44,12 +53,14 @@
                             <? } ?>
                         </div>
                     </div>
+                    <?php if($userId == $user['id']) { ?>
                     <div class="form-group">
                         <label class='little' for="name">Старый пароль:</label>
                         <div class='little'>
                             <input type='password' name='old_password' value='' class="form-control">
                         </div>
                     </div>
+                    <?php } ?>
                     <div class="form-group">
                         <label class='little' for="name">Новый пароль:</label>
                         <div class='little'>

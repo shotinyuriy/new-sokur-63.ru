@@ -7,7 +7,15 @@
         </div>
 
         <div class="modal-body">
-            <input type='hidden' name='method' value='save'>
+			<?php if(isset($errors)) { ?>
+				 <div class='row'>
+				 	<?php foreach($errors as $error) { ?>
+				 		<div class="col-xs-12">
+				 			<?= $error[0] ?>
+				 		</div>
+				 	<?php } ?>
+				 </div>
+			<?php } ?>
             <div class="form-group">
                 <label class='little' for="name">Логин:</label>
                 <div class='little'>

@@ -33,24 +33,38 @@ class UsersController extends AppController {
 			if($this->User->save($this->request->data)) {
 				$this->layout = 'ajax';
 				$this->redirect('/users?cms=true');
+			} else {
+				$errors = $this->User->validationErrors;
+				$this->layout = 'ajax';
+				$this->set(compact('errors'));
+				$this->response->statusCode(400);
 			}
 		}
 	}
 	
 	public function edit($id) {
-		if($this->request->is('post')) {		
+		$userId = $this->Auth->user('id');
+		if($this->request->is('post')) {
+			if($userId == $id) {
+				$oldUser = $this->User->findById($id);
+				$this->request->data['old_password_confirm'] = 	$oldUser['User']['password'];
+			}
 			if($this->User->save($this->request->data)) {
 				$this->layout = 'ajax';
 				$this->redirect('/users?cms=true');
+			} else {
+				$errors = $this->User->validationErrors;
+				$this->layout = 'ajax';
+				$this->set(compact('errors'));
+				$this->response->statusCode(400);
 			}
-		} else {
-			$role = $this->Auth->user('role');
-			$userItem = $this->User->find('first', array(
-				'conditions' => array('User.id' => $id)
-			));
-			$user = $userItem['User'];
-			$this->set(compact('role', 'user'));
 		}
+		$role = $this->Auth->user('role');
+		$userItem = $this->User->find('first', array(
+			'conditions' => array('User.id' => $id)
+		));
+		$user = $userItem['User'];
+		$this->set(compact('role', 'user', 'userId'));
 	}
 	
 	public function delete($id) {

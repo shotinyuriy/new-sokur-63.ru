@@ -96,7 +96,7 @@ function addSearchListener() {
 	});
 };
 
-function ajaxForm(form, callback) {
+function ajaxForm(form, callback, failCallback) {
 	var formData = new FormData(form[0]);
 	var url = form[0].action;
 	console.log("URL = ", url);
@@ -113,7 +113,16 @@ function ajaxForm(form, callback) {
 					if ( typeof callback === 'function')
 						callback(data);
 				} else {
-					console.log(" ERROR! ");
+					if(console) console.log(" ERROR! ");
+				}
+			} else if (xhr.status == 400) {
+				data = xhr.responseText;
+
+				if (data) {
+					if ( typeof callback === 'function')
+						failCallback(data);
+				} else {
+					if(console) console.log(" ERROR! ");
 				}
 			}
 		}
@@ -218,13 +227,14 @@ function addSubmitValidationListener() {
 		var $form = $(this);
 		var dataTarget = $(this).attr("datatarget") || 'cms_content';
 		if ($form.length == 1) {
-			ajaxForm($form, function() {
-				//window.refreshFunction(window.currentRefreshUrl);
-				console.log("Modal hide called!");
+			ajaxForm($form, function(data) {
 				$("#editorForm").modal('hide');
 				if (dataTarget) {
 					$('#' + dataTarget).html(data);
 				}
+				addAllListeners();
+			}, function(data) {
+				$("#editor").html(data);
 				addAllListeners();
 			});
 		}
