@@ -60,8 +60,9 @@
     	$good = $goodItem['Good'];
     	$category = $goodItem['Category'];
         $image_url = ($good['image_url'] ? $good['image_url'] : ($category ? $category['image_url'] : ""));
-		$is_not_mv = ""; ?>
-        <div class="<?= $good_item_classes ?>" <?= $is_not_mv ?>>
+		$cmsClass = $cms ? "cms" : "";
+    ?>
+        <div class="<?= $good_item_classes ?>">
             <div class="good-item">
                 <div class="category-icon">
                 	<a href='/goods/view/<?= $good['id'] ?>' class='ajax' data-toggle='modal' data-target='#view-modal' datatarget='viewer'>
@@ -70,40 +71,35 @@
                     <? } ?>
                     </a>
                 </div>
-                <div class="good-info">
+                <div class="good-info <?= $cmsClass ?>">
                 	<div class='good-description'>
                     <div class="good-name">
                         <p><?= $good['name'] ?></p>
                     </div>
                     <div>
-                        <? if (strlen($good['description']) > 128) { ?>
-                            <p class="cart-good-description" data-toggle="tooltip" data-placement="right"
-                               title="<?= $good['description'] ?>">Состав: ...</p>
-                        <? } else { ?>
-                            <p class="cart-good-description"><?= $good['description'] ?></p>
-                        <? } ?>
+						<p class="cart-good-description"><?= $this->Text->truncate($good['description'], 64) ?></p>
                     </div>
                     <div>
+                        <span class="cart-good-description"><?= $good['amount'] . "шт." ?>
+                        	<?= $good['gramms'] >= 100 ? round($good['gramms'] / 1000.0, 2) . "кг." : $good['gramms'] . "г." ?>
+                        </span> 
+                        <? if ($good['kcal_per_100g'] && $good['kcal_per_100g'] > 0) { ?>
+                            <span class="cart-good-description">
+                                <?= $good['kcal_per_100g'] ?> ккал на 100г
+                            </span>
+                        <? } ?>
+                    </div>
+					<div>
                     	<p class="cart-good-description"><?= round($good['price'], 2) . "р." ?></p>
 					</div>
-                    <div>
-                        <p class="cart-good-description"><?= $good['amount'] . "шт." ?>
-                        	<?= $good['gramms'] >= 100 ? round($good['gramms'] / 1000.0, 2) . "кг." : $good['gramms'] . "г." ?>
-                        </p>
-                        <? if ($good['kcal_per_100g'] && $good['kcal_per_100g'] > 0) { ?>
-                            <p class="cart-good-description">
-                                <?= $good['kcal_per_100g'] ?> ккал на 100г
-                            </p>
-                        <? } ?>
-                    </div>
                     </div>
                     <!-- <div class="row"> -->
                         <div class="good-control">
                         	<?php if($cms && $role == 'admin') { ?>
                         		<a href='/goods/edit/<?= $good['id'] ?>'
-                        			class='edit btn btn-warning'>Изменить</a>
+                        			class='edit btn btn-sm btn-warning'>Изменить</a>
                         		<a href='/goods/delete/<?= $good['id'] ?>'
-                        			class='edit btn btn-danger'>Удалить</a>
+                        			class='edit btn btn-sm btn-danger'>Удалить</a>
                         	<?php } else { ?>
                             <form method='post' id='<?= $good['id'] ?>"_tocart' class='ajax tocart' action='/cart/buy' datatarget='cart_total'>
                                     <?php if (isset($good)) { ?>

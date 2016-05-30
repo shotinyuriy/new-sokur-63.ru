@@ -389,6 +389,14 @@ div.category-item:hover {
 	height: 200px;
 }
 
+.good-info.cms {
+	height: auto;
+}
+
+.good-info.cms > .good-description {
+	height: auto;
+}
+
 .good-description {
 	height: 160px;
 	overflow: hidden;
@@ -644,4 +652,8 @@ a.no-under:active {
 	border: none;
 	background: none;
 	padding: 3px;
+}
+
+.menuimg > img {
+	max-width: 100%;
 }
