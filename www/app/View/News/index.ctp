@@ -18,7 +18,7 @@
     	$news = $newsItem['News']; 
     	?>
 
-        <div class='news-item col-md-4 cols-sm-3 col-xs-6'>
+        <div class='news-item cms col-md-4 cols-sm-3 col-xs-6'>
             <div class="row">
                 <div class="col-lg-6 col-xs-12">
                     <div class="news-icon">
@@ -38,10 +38,10 @@
                             <p><?= $news['title'] ?></p>
                         </div>
                         <div>
-                            <p class="cart-good-description"><?= $news['description'] ?></p>
+                            <p class="cart-good-description"><?= $this->Text->truncate( $news['description'], 64 ) ?></p>
                         </div>
                         <div>
-                            <p class="cart-good-description">Активна до: <?= $news['expires_on'] ?></p>
+                            <p class="cart-good-description">Активна до: <?= $this->Time->format('d/m/Y', $news['expires_on']) ?></p>
                         </div>
                         <div>
                             <a href='/news/edit/<?= $news['id'] ?>'

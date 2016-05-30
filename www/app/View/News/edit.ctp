@@ -13,11 +13,11 @@
 	'div' => array('class' => 'form-group')
 	)); ?>
 <?php echo $this->Form->input('description', array(
-	'label' => 'Название', 'class' => 'form-control', 'default' => $news['description'],
+	'label' => 'Описание', 'class' => 'form-control', 'default' => $news['description'],
 	'div' => array('class' => 'form-group')
 	)); ?>
 <?php echo $this->Form->input('expires_on', array(
-	'legend' => 'Актуальна до', 'type' => 'date', 'default' => $news['expires_on'],
+	'label' => 'Актуальна до', 'type' => 'date', 'default' => $news['expires_on'],
 )); ?>
 <div class="form-group">
 	<label class='little'>Изображение</label>

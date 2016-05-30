@@ -13,11 +13,13 @@
 	'div' => array('class' => 'form-group')
 	)); ?>
 <?php echo $this->Form->input('description', array(
-	'label' => 'Описание', 'class' => 'form-control', 
+	'label' => 'Описание', 'class' => 'form-control', 'type' => 'textarea', 
 	'div' => array('class' => 'form-group')
 	)); ?>
 <?php echo $this->Form->input('expires_on', array(
-	'legend' => 'Актуальна до', 'type' => 'date' 
+	'label' => 'Актуальна до', 'type' => 'date' ,
+	'between' => '<br>', 
+	'div' => array('class' => 'form-group')
 )); ?>
 <div class="form-group">
 	<label class='little'>Изображение</label>
@@ -32,5 +34,4 @@
     <button type="submit" class="btn btn-primary">Сохранить</button>
 </div>
 <?php echo $this->Form->end(); ?>
-
 </div>

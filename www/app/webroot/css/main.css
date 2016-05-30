@@ -294,6 +294,14 @@ div.news-item {
 	transition: 0.3s;
 }
 
+div.news-item.cms {
+	max-height: 400px;
+}
+
+div.news-item {
+	max-height: 350px;
+}
+
 div.good-item:hover, div.good-item:focus,
 div.category-item:hover, div.category-item:focus,
 div.news-item:hover, div.news-item:focus {
@@ -616,4 +624,10 @@ a.no-under:active {
 	max-height: 375px;
 	max-width: 375px;
 	width: 100%;
+}
+
+.bg-white {
+	padding: 6px;
+	display: inline-block;
+	background: rgba(255,255,255, 0.5);
 }

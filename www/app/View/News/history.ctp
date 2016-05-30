@@ -32,7 +32,9 @@
                             <p><?= $news['title'] ?></p>
                         </div>
                         <div>
-                            <p class="cart-good-description"><?= $news['description'] ?></p>
+                            <p class="cart-good-description">
+                            	<?= $this->Text->truncate( $news['description'], 64 ) ?>
+                            </p>
                         </div>
                     </div>
                 </div>

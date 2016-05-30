@@ -20,8 +20,8 @@
             </div>
             <div class="carousel-caption">
                 <div class="row">
-                    <div class="col-xs-4 col-xs-offset-8">
-                        <h1><?= $news['title'] ?></h1>
+                    <div class="col-xs-12 col-md-4 col-md-offset-8">
+                        <h1 class='bg-white'><?= $news['title'] ?></h1>
                         <a href='/news/view/<?= $news['id'] ?>' class='ajax btn btn-default keep-news' 
                         	modal-target='#view-modal' datatarget='viewer'>Подробнее... </a>
                     </div>
