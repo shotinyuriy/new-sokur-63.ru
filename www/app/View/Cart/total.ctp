@@ -1,1 +1,1 @@
-<?= round( $total, 2 ) ?> p.
+<?= round( $cart['merchandise_cost'], 2 ) ?> p.

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 28 2016 г., 07:32
+-- Время создания: Май 31 2016 г., 09:19
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -42,13 +42,28 @@ CREATE TABLE IF NOT EXISTS `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `category_id`, `sort_index`, `menu_visible`, `image_url`) VALUES
-('podarki', 'Подарки', NULL, 1, 0, 'podarki.jpg'),
+('pshenichnye-hleba', 'Пшеничные хлеба', 'hlebnye-izdeliya', 1, 1, NULL),
 ('pirozhnye', 'Пирожные', NULL, 17, 1, 'pirozhnye.jpg'),
 ('makaroni', 'Макарони', 'pirozhnye', 18, 1, 'makaroni.jpg'),
 ('vypechnye-izdeliya', 'Выпечные изделия', NULL, 19, 1, 'vypechnye-izdeliya.jpg'),
 ('tvorozhnoe-kol-co', 'Творожное кольцо', 'vypechnye-izdeliya', 20, 1, 'tvorozhnoe-kol-co.jpg'),
-('12321', '12321', NULL, 1, 1, '12321.jpg'),
-('dfetet', 'dfetet', 'ffsafas2323', 1, 1, 'dfetet.jpg');
+('dfetet', 'dfetet', 'ffsafas2323', 1, 1, 'dfetet.jpg'),
+('hlebnye-izdeliya', 'Хлебные изделия', NULL, 1, 1, 'hlebnye-izdeliya.jpg'),
+('bulochnye-izdeliya', 'Булочные изделия', NULL, 1, 1, 'bulochnye-izdeliya.jpg'),
+('sdobnye-sloenye-konditerskie-izdeliya', 'Сдобные слоеные кондитерские изделия', NULL, 1, 1, 'sdobnye-sloenye-konditerskie-izdeliya.jpg'),
+('pryaniki-sushki-pechen-ya', 'Пряники, сушки, печенья', NULL, 1, 1, 'pryaniki-sushki-pechen-ya.jpg'),
+('zdorovye-hleba', 'Здоровые хлеба', 'hlebnye-izdeliya', 1, 1, NULL),
+('rzhano-pshenichnye-hleba', 'Ржано-пшеничные хлеба', 'hlebnye-izdeliya', 1, 1, NULL),
+('bulki', 'Булки', 'bulochnye-izdeliya', 1, 1, NULL),
+('batony', 'Батоны', 'bulochnye-izdeliya', 1, 1, NULL),
+('sdoba', 'Сдоба', 'sdobnye-sloenye-konditerskie-izdeliya', 1, 1, NULL),
+('konditerskie-izdeliya', 'Кондитерские изделия', 'sdobnye-sloenye-konditerskie-izdeliya', 1, 1, NULL),
+('keksy', 'Кексы', 'sdobnye-sloenye-konditerskie-izdeliya', 1, 1, NULL),
+('pryaniki', 'Пряники', 'pryaniki-sushki-pechen-ya', 1, 1, NULL),
+('sushki', 'Сушки', 'pryaniki-sushki-pechen-ya', 1, 1, NULL),
+('pechen-e-saharnoe', 'Печенье сахарное', 'pryaniki-sushki-pechen-ya', 1, 1, NULL),
+('rulety', 'Рулеты', 'pirozhnye', 1, 1, NULL),
+('sdfsdfsafs', 'sdfsdfsafs', 'sdfsdfsd', 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -105,11 +120,9 @@ CREATE TABLE IF NOT EXISTS `goods` (
 --
 
 INSERT INTO `goods` (`id`, `name`, `category_id`, `description`, `sort_index`, `menu_visible`, `image_url`, `kcal_per_100g`, `shelf_life_unpack`, `shelf_life_pack`, `standard`, `amount`, `gramms`, `milliliters`, `price`) VALUES
-('podarki_diskontnaya-karta-10', 'Дисконтная карта 10%', 'podarki', 'Дисконтная карта со скидкой 10%', 1, 0, 'podarki_diskontnaya-karta-10.png', 0, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
-('podarki_teyshoku', 'Эклеры', 'podarki', 'Тесто, шоколад, крем', 1, 0, 'podarki_teyshoku.jpg', 98, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
+('hleb-iz-muki-pshenichnoy-1-sorta-podovoy', 'Хлеб из муки пшеничной 1 сорта подовой', 'pshenichnye-hleba', 'Мука пшеничная хлебопекарная 1 сорта, хлебная закваска, соль, дрожжи.', 1, 1, 'hleb-iz-muki-pshenichnoy-1-sorta-podovoy.jpg', 232, 24, 120, '27842-88', 1, 450, 0, '19.000000'),
+('hleb-iz-muki-pshenichnoy-1-sorta-formovoy', 'Хлеб из муки пшеничной 1 сорта формовой', 'pshenichnye-hleba', 'Мука 1 сорт, хлебная закваска  соль, дрожжи', 1, 1, 'hleb-iz-muki-pshenichnoy-1-sorta-formovoy.jpg', 232, 24, 120, 'ГОСТ 27842-88', 1, 540, 0, '19.000000'),
 ('asdasfsa_fsdfsf', 'fsdfsf', 'asdasfsa', 'sfsdfa', 146, 1, NULL, 123, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
-('podarki_sok-1l', 'Сок 1л', 'podarki', 'любой сок на выбор', 1, 0, 'podarki_sok-1l.jpg', 0, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
-('podarki_shampanskoe', 'Шампанское', 'podarki', '', 1, 0, 'podarki_shampanskoe.jpg', 1, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
 ('torty_tryufel', 'Трюфель', 'torty', 'Шоколадно - сливочный торт с конфетами &quot;Трюфель&quot;.', 132, 1, 'torty_tryufel.jpg', 235, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
 ('torty_chiz-keyk-quot-mango-marakuyya-quot', 'Чиз-кейк &quot;Манго-маракуйя&quot;', 'torty', 'Сырно-творожная масса в сочетании  с пюре манго и пюре маракуйя на тонкой песочной основе с добавлением мёда. Торт покрыт гелем &quot;Маракуйя&quot; с косточками', 133, 1, 'torty_chiz-keyk-quot-mango-marakuyya-quot.jpg', 325, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
 ('torty_ksav-er', 'Ксавьер', 'torty', 'Песочная корзиночка с орехами и карамелью.', 134, 1, 'torty_ksav-er.jpg', 300, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
@@ -119,7 +132,7 @@ INSERT INTO `goods` (`id`, `name`, `category_id`, `description`, `sort_index`, `
 ('pirozhnye_keksy', 'Кексы', 'pirozhnye', 'Миндальный бисквит, кофейный крем и шоколад.', 138, 1, 'pirozhnye_keksy.png', 236, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
 ('pirozhnye_profitroli-shokoladnye', 'Профитроли шоколадные', 'pirozhnye', 'Профитроли с шоколадным вкусом.', 139, 1, 'pirozhnye_profitroli-shokoladnye.jpg', 179, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
 ('makaroni-shokoladnye', 'Макарони шоколадные', 'makaroni', 'Миндально-шоколадное безе с воздушным кремом.', 140, 1, 'makaroni-shokoladnye.jpg', 179, 12, 12, '12', 23, 23, 0, '156.000000'),
-('makaroni-assorti-mini', '"Макарони ассорти" мини', 'makaroni', 'Пять ярких и необычных сочетаний макарони в одном наборе.', 141, 1, 'makaroni-assorti-mini.jpg', 456, 21, 23, '1234-ffs-3435', 0, 0, 0, '0.000000'),
+('makaroni-assorti-mini', '"Макарони ассорти" мини', 'makaroni', 'Пять ярких и необычных сочетаний макарони в одном наборе.', 141, 1, 'makaroni-assorti-mini.jpg', 456, 21, 23, 'РСТ-098-45-2000', 0, 0, 0, '120.000000'),
 ('maffin-s-izyumom', 'Маффин с изюмом', 'vypechnye-izdeliya', 'Воздушный маффин с добавлением изюма.', 142, 1, 'vypechnye-izdeliya_maffin-s-izyumom.jpg', 234, 24, 72, 'РОС 123-0214-21', 0, 0, 0, '123.000000'),
 ('shtrudel', 'Штрудель', 'vypechnye-izdeliya', 'Тонкое пресное тесто с начинкой из миндальной муки, яблок, изюма и корицы. Штрудель покрыт сахарной пудрой.', 143, 1, 'vypechnye-izdeliya_shtrudel.jpg', 124, 24, 72, '', 1, 125, 0, '356.000000'),
 ('tvorozhnoe-kol-co_tvorozhno-malinovoe-kol-co', 'Творожно-малиновое кольцо', 'tvorozhnoe-kol-co', 'Заварное тесто с творогом и малиной.', 144, 1, 'tvorozhnoe-kol-co_tvorozhno-malinovoe-kol-co.jpg', 234, NULL, NULL, NULL, 0, 0, 0, '0.000000'),
@@ -130,7 +143,9 @@ INSERT INTO `goods` (`id`, `name`, `category_id`, `description`, `sort_index`, `
 ('12321', '12321', NULL, '213123', 1, 1, NULL, 12, 12, 12, '12', 0, 12, 0, '0.000000'),
 ('asdasda', 'asdasda', 'sfasfasf', 'sdsaffsafsafdsf dsf', 1, 1, 'asdasda.jpg', 123, 134, 12, '12', 112, 12, 0, '112.000000'),
 ('sfsdf', 'sfsdf', 'dfetet', 'sdfsaf', 1, 1, 'sfsdf.jpg', 1, 1, 1, '1', 1, 1, 0, '1.000000'),
-('kerti', 'Керти', 'pirozhnye', 'аепкпк', 1, 1, 'kerti.jpg', 123, 12, 288, '13-ыавфыа', 143, 1123, 0, '134.000000');
+('kerti', 'Керти', 'pirozhnye', 'аепкпк', 1, 1, 'kerti.jpg', 123, 12, 288, '13-ыавфыа', 143, 1123, 0, '134.000000'),
+('hleb-ryabinushka-vitaminizirovannyy-i-yodirovannyy', 'Хлеб рябинушка витаминизированный и йодированный', 'zdorovye-hleba', 'Мука пшенич. в/с, дрожжи, сахар, маргарин, соль, витаминно-минеральная смесь АМТ', 1, 1, 'hleb-ryabinushka-vitaminizirovannyy-i-yodirovannyy.gif', 261, 24, 72, 'ТУ 9110 – 004-498725', 1, 400, 0, '25.000000'),
+('hleb-severnyy-zavarnoy-podovyy', 'Хлеб Северный заварной подовый', 'rzhano-pshenichnye-hleba', 'Мука пшенич. в/с, мука ржаная обдирная, закваска хлебная, солод ржаной, сахар, соль, дрожжи, кориандр', 1, 1, 'hleb-severnyy-zavarnoy-podovyy.jpg', 237, 36, 120, 'СТО 00348813-001-201', 1, 400, 0, '27.000000');
 
 -- --------------------------------------------------------
 
@@ -153,11 +168,12 @@ CREATE TABLE IF NOT EXISTS `news` (
 --
 
 INSERT INTO `news` (`id`, `title`, `description`, `image_url`, `created_on`, `expires_on`) VALUES
-(1, 'Новость 2', 'Описание новости №2', '1.jpg', '2016-05-01', '2036-01-01'),
+(1, 'Новость 2', 'Описание новости №2', '1.gif', '2016-05-01', '2016-05-01'),
 (2, '421412', 'gsdgsdgsdg 3 233fwef2', '2.jpg', '2016-05-02', '2016-05-25'),
 (3, 'ggsd', 'agasgasf', '3.jpg', '2016-05-03', '2016-05-26'),
-(4, 'jjyjy', 'yjy', '4.jpg', '2016-05-27', '2016-05-25'),
-(5, 'День конституции', 'Мы приняли конституцию - ураа', '5.jpg', '2016-05-27', '2016-06-11');
+(4, 'Открылся новый магазин', 'Новый магазин в замке любви. Скидка на покупку торта в магазине "Замок Любви".', '4.jpg', '2016-05-27', '2016-06-01'),
+(5, 'День конституции', 'Мы приняли конституцию - ураа', '5.jpg', '2016-05-27', '2016-06-11'),
+(6, 'Праздник цветов', 'Мы отмечаем праздник цветов.Присоединяйтесь к нам.Мы печем хлеб в форме тюльпанов и булки в форме роз.', '6.jpg', '2016-05-30', '2016-06-14');
 
 -- --------------------------------------------------------
 
@@ -175,37 +191,15 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `status` int(11) DEFAULT '0',
   `is_birthday` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `orders`
 --
 
 INSERT INTO `orders` (`id`, `date_time`, `phone_number`, `customer_name`, `address`, `self_take`, `status`, `is_birthday`) VALUES
-(1, '2013-12-29 09:57:40', '77756756', 'ппвпв', 'аврварв', 1, 0, 0),
-(2, '2013-12-29 10:04:15', '9898090444', 'Станислав', 'ул. Линейная 19 кв.16', 0, 3, 0),
-(3, '2014-01-07 11:46:14', '89878016666', 'Покупатель', 'Саратов. Долгопрудная 15 а', 0, 3, 0),
-(4, '2014-01-07 18:06:17', '9999996666', 'папа', 'Комсомольская д.15 кв 1', 0, 3, 0),
-(5, '2014-01-07 18:14:17', '879788765', 'тест', 'ул.Акопова, д.18, кв.10', 0, 1, 0),
-(8, '2014-01-25 21:42:11', '0000000000', 'TEST', '', 1, 0, 1),
-(9, '2014-01-25 21:48:44', '0000000000', 'TEST2', '', 1, 0, 1),
-(10, '2016-05-05 00:47:28', '9878558662', 'Пегол', '410512 Саратов ул. 45я', 0, 0, 0),
-(11, '2016-05-05 01:16:41', '8528585655', 'авов', 'впвыпвпывпыв ыпывпвыпыв', 0, 0, 0),
-(12, '2016-05-13 07:04:07', '9061567814', 'Дмитрий', 'Саратов, Октябрьский р-н, ул.Жуковского, 53, кв.82', 0, 2, 1),
-(13, '2016-05-13 07:05:56', '9061767816', 'Александр', 'Саратов, Заводской р-н, ул.Пушкина, 34, кв.84', 0, 0, 1),
-(14, '2016-05-13 11:29:11', '9876543212', 'Юрий', 'Московская, д. 23', 0, 0, 0),
-(18, '0000-00-00 00:00:00', '2312412412', '234324234234', 'fsafsafasf', 0, 0, 0),
-(19, '0000-00-00 00:00:00', '4234324234', 'fafsafasfasf', 'fasfafsafas', 0, 0, 0),
-(20, '0000-00-00 00:00:00', '4214124124', 'fgasgasgsa', 'asgasgsagsagsag', 0, 0, 0),
-(21, '2016-05-25 09:49:29', '2342141241', '214124124124', 'safsafasfasfas', 0, 0, 0),
-(22, '2016-05-25 09:52:16', '4242342342', '3421412412', 'rfasgsagasgas', 0, 0, 0),
-(23, '2016-05-25 09:56:17', '2214124124', 'fasfasfasfasf', 'sfsafasfafasfwrfw', 0, 0, 0),
-(24, '2016-05-25 09:58:27', '9872131231', 'fvsafsafasfasfasf', 'sfasfasfasfasfafasf sdasd', 0, 0, 0),
-(25, '2016-05-25 10:11:25', '9878013234', 'safafsafasf', 'asfasfasfasfafsafa', 0, 0, 0),
-(26, '2016-05-25 10:12:00', '9273241241', 'safasfasfasfas', 'asfsafasfasfasf', 0, 0, 0),
-(27, '2016-05-25 11:16:19', '3242343243', 'fsafsafasfasf', 'fasfasfasf', 0, 0, 0),
-(28, '2016-05-25 15:10:18', '5253523523', 'ы', '', 0, 0, 0),
-(29, '2016-05-26 07:18:42', '4124241242', 'апфыафыаф', 'афыафыафыаф', 0, 0, 0);
+(2, '2016-05-31 02:38:44', '9878054546', 'dsfsdfdff', '', 1, 3, 0),
+(3, '2016-05-31 02:43:34', '9878798798', 'Иван Петрович', '', 1, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -222,77 +216,22 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   PRIMARY KEY (`id`),
   KEY `order_detail_order_fk` (`order_id`),
   KEY `order_detail_portion_fk` (`good_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Дамп данных таблицы `order_details`
 --
 
 INSERT INTO `order_details` (`id`, `order_id`, `good_id`, `amount`, `cost`) VALUES
-(1, 1, '2', 1, '119.000000'),
-(2, 1, '1', 1, '147.000000'),
-(3, 2, '6', 3, '1221.000000'),
-(4, 2, '4', 5, '855.000000'),
-(5, 2, '2', 1, '119.000000'),
-(6, 2, '3', 2, '386.000000'),
-(7, 3, '2', 4, '476.000000'),
-(8, 3, '1', 3, '441.000000'),
-(9, 3, '4', 3, '513.000000'),
-(10, 3, '3', 1, '193.000000'),
-(11, 4, '4', 1, '171.000000'),
-(12, 4, '3', 1, '193.000000'),
-(13, 5, '2', 1, '119.000000'),
-(14, 5, '1', 1, '147.000000'),
-(15, 5, '4', 1, '171.000000'),
-(16, 6, '32', 10, '1700.000000'),
-(17, 7, '33', 10, '1800.000000'),
-(18, 0, '3', 8, '1080.000000'),
-(19, 0, '30', 2, '640.000000'),
-(20, 0, '31', 2, '600.000000'),
-(21, 0, '30', 2, '640.000000'),
-(22, 0, '31', 2, '600.000000'),
-(23, 0, '30', 2, '640.000000'),
-(24, 0, '31', 2, '600.000000'),
-(25, 0, '30', 2, '640.000000'),
-(26, 0, '31', 2, '600.000000'),
-(27, 0, '30', 2, '640.000000'),
-(28, 0, '31', 2, '600.000000'),
-(29, 8, '30', 2, '640.000000'),
-(30, 8, '31', 2, '600.000000'),
-(31, 9, '30', 2, '640.000000'),
-(32, 9, '31', 2, '600.000000'),
-(33, 10, '4', 11, '1980.000000'),
-(34, 11, '6', 12, '540.000000'),
-(35, 11, '30', 7, '2240.000000'),
-(36, 0, '2', 2, '238.000000'),
-(37, 0, '6', 9, '405.000000'),
-(38, 12, '146', 6, '2622.000000'),
-(39, 13, '146', 9, '3933.000000'),
-(40, 13, '147', 7, '2555.000000'),
-(41, 13, '148', 7, '1939.000000'),
-(42, 13, '151', 7, '2625.000000'),
-(43, 14, '156', 14, '2030.000000'),
-(48, 18, 'pirozhnye_estrelli', 5, '0.000000'),
-(47, 18, '', 3, '0.000000'),
-(49, 19, 'pirozhnye_assorti', 3, '0.000000'),
-(50, 20, 'maffin-s-izyumom', 1, '123.000000'),
-(51, 20, 'shtrudel', 1, '356.000000'),
-(52, 21, 'maffin-s-izyumom', 1, '123.000000'),
-(53, 21, 'shtrudel', 1, '356.000000'),
-(54, 22, 'maffin-s-izyumom', 1, '123.000000'),
-(55, 22, 'shtrudel', 1, '356.000000'),
-(56, 23, 'pirozhnye_assorti', 1, '0.000000'),
-(57, 23, 'pirozhnye_estrelli', 1, '0.000000'),
-(58, 24, 'pirozhnye_assorti', 1, '0.000000'),
-(59, 24, 'pirozhnye_estrelli', 1, '0.000000'),
-(60, 25, 'maffin-s-izyumom', 3, '369.000000'),
-(61, 26, 'maffin-s-izyumom', 3, '369.000000'),
-(62, 27, 'pirozhnye_assorti', 1, '0.000000'),
-(63, 27, 'pirozhnye_estrelli', 1, '0.000000'),
-(64, 28, 'shtrudel', 5, '1780.000000'),
-(65, 29, 'pirozhnye_assorti', 2, '0.000000'),
-(66, 29, 'pirozhnye_estrelli', 2, '0.000000'),
-(67, 29, 'pirozhnye_opera', 2, '0.000000');
+(1, 1, 'hleb-iz-muki-pshenichnoy-1-sorta-podovoy', 1, '19.000000'),
+(2, 1, 'hleb-iz-muki-pshenichnoy-1-sorta-formovoy', 1, '19.000000'),
+(3, 2, 'hleb-iz-muki-pshenichnoy-1-sorta-podovoy', 1, '19.000000'),
+(4, 2, 'hleb-iz-muki-pshenichnoy-1-sorta-formovoy', 1, '19.000000'),
+(5, 2, 'hleb-severnyy-zavarnoy-podovyy', 1, '27.000000'),
+(6, 2, 'maffin-s-izyumom', 1, '123.000000'),
+(7, 2, 'shtrudel', 1, '356.000000'),
+(8, 3, 'makaroni-shokoladnye', 2, '312.000000'),
+(9, 3, 'makaroni-assorti-mini', 2, '240.000000');
 
 -- --------------------------------------------------------
 
@@ -423,8 +362,8 @@ CREATE TABLE IF NOT EXISTS `stores` (
 --
 
 INSERT INTO `stores` (`id`, `name`, `address`, `fullname`, `phone`) VALUES
-(1, 'МАГАЗИН 2', 'ул. Буровая д.25 рынок "На Буровой"', '444', '8-909-337-09-05'),
-(2, 'МАГАЗИН 1', 'ул. Буровая д.25 рынок "На Буровой"', '123', '8-909-337-09-05'),
+(1, 'МАГАЗИН 2', 'ул. Буровая д.25 рынок "На Буровой"', '', '8-909-337-09-05'),
+(2, 'МАГАЗИН 1', 'ул. Буровая д.25 рынок "На Буровой"', '', '8-909-337-09-05'),
 (3, 'МАГАЗИН 2', 'проспект Строителей, 14', 'Петрова Галина Анатольевна', '38-05-82');
 
 -- --------------------------------------------------------
@@ -441,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role` varchar(63) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Дамп данных таблицы `users`
@@ -449,12 +388,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`) VALUES
 (1, 'admin', '', '8c3a76f947d5f745b6cb57baab3765a48ab2f0a5c26e77aceacceb5ff138ddf7', 'admin'),
-(2, 'operator', '', '98b0dbcb1648c34538ab711a0a34b2d169748a2986b440cf8c4338550b802364', 'operator'),
-(4, 'oper1', '', NULL, 'operator'),
+(2, 'operator', '', 'd8611e27c8971d6198e59bafa0b43ffe39d1f07e397860fddd86be528a9795db', 'operator'),
+(4, 'oper1', '', '98b0dbcb1648c34538ab711a0a34b2d169748a2986b440cf8c4338550b802364', 'operator'),
 (5, 'oper2', '', NULL, 'operator'),
-(6, 'oper3', '', NULL, 'operator'),
-(13, 'der', '', '95162ebbed2fcff50f017d8750d445490dae9a34ef30f703b52e88e65405556f', 'operator'),
-(14, 'ser', '', '01749ab9c7ddc5e783307ccf381f0cfabdf2a33bea2102fcc3e53fe77034e3ae', 'operator');
+(6, 'oper3', '', 'c695229e0facfb93fdf8ec2b609b9901534121adfcab8f7e441afbac23322c91', 'operator'),
+(15, 'admin_marina', '', '333598a5ad9e518ebdc2c884207b9654642f6975822658729c2dee84fa98a487', 'admin');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

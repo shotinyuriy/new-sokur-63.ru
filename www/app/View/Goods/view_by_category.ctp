@@ -10,7 +10,9 @@
 		<span class='good-name'><?= $category['name']?></span>
 		<div class="category-icon">
             <? if ($category['image_url']) { ?>
-                <div class='menuimg'><img src='../menu-img/<?= $category['image_url']."?time=".time() ?>'/></div>
+                <div class='menuimg'><img src='../menu-img/<?= $category['image_url']."?time=".time() ?>' alt='Нет изображения'/></div>
+            <? } else { ?>
+            	<span class="good-name">Нет изображения</span>
             <? } ?>
         </div>
 	</div>

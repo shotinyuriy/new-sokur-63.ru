@@ -82,11 +82,18 @@ $id = $good['id'];
 </div>
 <? } ?>
 <div class='row'>
-	<div class='col-md-3 col-md-offset-9'>
-		<label>Итого:</label><span class='cart-price'><?= round($total, 2) . " руб." ?></span>
+	<div class='col-md-3 col-md-offset-9 cart-price'>
+		<label>Итого:</label>&nbsp;<span class='cart-price'><?= round($cart['merchandise_cost'], 2) . " руб." ?></span>
 	</div>
 </div>
-<div>
-    <a href="/cart/cancel" class="ajax btn btn-danger"> Отменить заказ </a>
-    <a href="/orders/add" class="ajax btn btn-success" datatarget="content"> Подтвердить </a>
+<div class='text-centered'>
+    <a href="/cart/cancel" class="ajax btn btn-danger" data-toggle='modal' data-target='#view-modal' datatarget='viewer'> Отменить заказ </a>
+    <?php if($cart['merchandise_cost'] >= $freeShippingTreshold) { ?>
+    	<a href="/orders/add" class="ajax btn btn-success" datatarget="content"> Подтвердить </a>
+	<?php } else { ?>
+		<div class='col-xs-12 good-name'>
+			Минимальная сумма заказа <?= round($freeShippingTreshold, 2) . " руб." ?>
+		</div>
+	<?php } ?>
+</div>	
 </div>

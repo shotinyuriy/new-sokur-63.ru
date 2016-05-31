@@ -36,7 +36,7 @@ class GoodsController extends AppController {
 		}
 		$this->Paginator->settings = array(
 			'conditions' => array('Good.category_id' => $categoryId),
-			'limit'=> 2,
+			'limit'=> 12,
 			'order' => 'Good.sort_index',
 			'recursive' => 1
 		);

@@ -657,3 +657,12 @@ a.no-under:active {
 .menuimg > img {
 	max-width: 100%;
 }
+
+div.cart-price {
+	text-align: right;
+}
+
+.error {
+	text-align: center;
+	color: #C9302C;
+}

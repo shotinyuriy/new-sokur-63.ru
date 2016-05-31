@@ -1,7 +1,7 @@
 <?php if(isset($errors)) { ?>
 	 <div class='row'>
 	 	<?php foreach($errors as $error) { ?>
-	 		<div class="col-xs-12">
+	 		<div class="col-xs-12 error">
 	 			<?= $error[0] ?>
 	 		</div>
 	 	<?php } ?>

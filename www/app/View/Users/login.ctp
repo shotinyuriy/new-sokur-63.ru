@@ -1,7 +1,7 @@
 <div class="row">
 	<?php if( isset($errorMessage) ) { ?>
 		<div class="col-xs-12">
-			<div class="well has-error">
+			<div class="error">
 				<?= $errorMessage ?>
 			</div>
 		</div>

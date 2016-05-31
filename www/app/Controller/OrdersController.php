@@ -3,11 +3,11 @@
 class OrdersController extends AppController {
 	public $uses = array('Order', 'Good');
 	public $status_names = array( 
-		array('id' => 1, 'name' => "Принят", 'class' => 'btn-primary'), 
-		array('id' => 2,'name' => "Отменен", 'class' => 'btn-danger'),
-		array('id' => 3,'name' => "Готов", 'class' => 'btn-primary'),
-		array('id' => 4,'name' => "Выполнен(Доставлен)", 'class' => 'btn-success')
-		);
+		array('id' => 0, 'name' => "Принят", 'class' => 'btn-primary'), 
+		array('id' => 1,'name' => "Отменен", 'class' => 'btn-danger'),
+		array('id' => 2,'name' => "Готов", 'class' => 'btn-primary'),
+		array('id' => 3,'name' => "Выполнен(Доставлен)", 'class' => 'btn-success')
+	);
 
 	public function beforeFilter() {
 		parent::beforeFilter();

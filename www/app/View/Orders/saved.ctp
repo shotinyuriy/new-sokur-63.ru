@@ -1,10 +1,24 @@
-<p class="page-name">Номер заказа <?= $order['id'] ?></p>
-<label>Дата и время заказа: </label><span><?= $order['date_time'] ?></span>
-<label>Номер телефона: </label><span>+7<?= $order['phone_number'] ?></span>
-<label>Заказчик: </label><span><?= $order['customer_name'] ?></span>
+<div class='row'>
+	<div class='col-xs-12'>
+		<p class="page-name">Номер заказа <?= $order['id'] ?></p>
+	</div>
+</div>
+<div class='row'>
+	<div class='col-xs-12 col-md-6'>
+		<label>Дата и время заказа: </label>&nbsp;<span><?= $order['date_time'] ?></span>
+	</div>
+	<div class='col-xs-12 col-md-6'>
+		<label>Номер телефона: </label>&nbsp;<span>+7<?= $order['phone_number'] ?></span>
+	</div>
+	<div class='col-xs-12 col-md-6'>
+		<label>Заказчик: </label>&nbsp;<span><?= $order['customer_name'] ?></span>
+	</div>
 <?php if($order['self_take'] == 0) { ?>
-<label>Доставка по адресу: </label><span><?= $order['address'] ?></span>
+	<div class='col-xs-12 col-md-6'>
+		<label>Доставка по адресу: </label>&nbsp;<span><?= $order['address'] ?></span>
+	</div>
 <?php } ?>
+</div>
 <div class="row">
 <div class="table-caption">
 		<div class="row">

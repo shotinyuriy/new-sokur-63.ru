@@ -1,5 +1,13 @@
 <?php
 
+function freeShippingTreshold() {
+	return 500;
+}
+
+function defaultShippingCost() {
+	return 400;
+}
+
 function calculateCartTotal($cart) {
 	$total = 0;
 	foreach ($cart['OrderDetail'] as $orderDetail) {
@@ -7,12 +15,21 @@ function calculateCartTotal($cart) {
 			$total += $orderDetail['cost'];
 		}
 	}
-	return $total;
+	$cart['merchandise_cost'] = $total;
+	if($total < freeShippingTreshold()) {
+		$cart['shipping_cost'] = defaultShippingCost();
+		$total += $cart['shipping_cost']; 		
+	} else {
+		$cart['shipping_cost'] = 0;
+	}
+	$cart['total'] = $total;
+	
+	return $cart;
 }
 
 class CartController extends AppController {
 
-	public $uses = 'Good';
+	public $uses = array('Good', 'Order');
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -32,9 +49,8 @@ class CartController extends AppController {
 	public function total() {
 		if (isset($this -> Session)) {
 			$cart = $this -> initializeCart();
-			$total = calculateCartTotal($cart);
-
-			$this -> set(compact('total'));
+			$cart = calculateCartTotal($cart);
+			$this -> set(compact('cart'));
 		}
 	}
 
@@ -64,8 +80,8 @@ class CartController extends AppController {
 
 				$this -> Session -> write('cart', $cart);
 
-				$total = calculateCartTotal($cart);
-				$this -> set(compact('total'));
+				$cart = calculateCartTotal($cart);
+				$this -> set(compact('cart'));
 				$this -> render('total');
 			}
 		}
@@ -89,6 +105,14 @@ class CartController extends AppController {
 		$this->redirect('/cart');
 	}
 	
+	public function cancel() {
+		if($this->request->is('post')) {
+			$this->Session->delete('cart');
+			$cart = $this->initializeCart();
+			$this->redirect('/cart');
+		}
+	}
+		
 	public function getCartAndAddAmount($amount) {
 		$this->layout = 'ajax';
 		$cart = $this -> initializeCart();
@@ -120,8 +144,9 @@ class CartController extends AppController {
 	public function index() {
 		$cart = $this -> initializeCart();
 		if(count($cart['OrderDetail']) > 0) {
-			$total = calculateCartTotal($cart);
-			$this -> set(compact('cart', 'total'));
+			$cart = calculateCartTotal($cart);
+			$freeShippingTreshold = freeShippingTreshold();
+			$this -> set(compact('cart', 'freeShippingTreshold'));
 		} else {
 			$this->render('empty');
 		}
