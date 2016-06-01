@@ -80,6 +80,18 @@ $id = isset($good['id']) ? $good['id'] : 0;
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+    <button id="close-button" type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
 </div>
 </div>
+<script>
+	$(document).ready(function() {
+		$( '#close-button' ).click( function(event) {
+			$.ajax({
+				url: '/orders?cms=true',
+				success: function( data ) {
+					$('#cms-content').html( data );
+				}
+			})
+		});
+	});
+</script>

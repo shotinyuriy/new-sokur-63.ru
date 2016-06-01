@@ -22,11 +22,7 @@ class GoodsController extends AppController {
 		return $data;
 	}
 	
-	public function index() {
-		
-	}
-	
-	public function viewByCategory() {
+	public function extractCategoryId() {
 		$categoryId = null;
 		if(isset($this->request->params['categoryId'])) {
 			$categoryId = $this->request->params['categoryId'];
@@ -34,6 +30,25 @@ class GoodsController extends AppController {
 		if($categoryId == null) {
 			$categoryId = $this->Session->read('current_category_id');
 		}
+		return $categoryId;
+	}
+	
+	public function extractQuery() {
+		if(isset($this->request->data['query'])) {
+			$query = $this->request->data['query'];
+			$this->Session->write('query', $query);
+		} else {
+			$query = $this->Session->read('query');
+		}
+		return $query;
+	}
+	
+	public function index() {
+		
+	}
+	
+	public function viewByCategory() {
+		$categoryId = $this->extractCategoryId();
 		$this->Paginator->settings = array(
 			'conditions' => array('Good.category_id' => $categoryId),
 			'limit'=> 12,
@@ -91,6 +106,28 @@ LIMIT 0, 12";
 		$good_item_classes = "col-lg-3 col-md-4 col-sm-6 col-xs-12";
 		$this->set(compact('goods', 'good_item_classes'));
 		$this->render('view_by_category');
+	}
+
+	public function search() {
+
+		$query = $this->extractQuery();
+		$this->Paginator->settings = array(
+			'conditions' => array('OR' => array(
+				'Good.name LIKE' => '%'.$query.'%',
+				'Good.description LIKE' => '%'.$query.'%'
+			)),
+			'limit'=> 12,
+			'order' => 'Good.sort_index',
+			'recursive' => 1
+		);
+		$goods = $this->Paginator->paginate('Good');
+		if($goods == null || count($goods) == 0) {
+			$this->render('empty');
+		} else {
+			$good_item_classes = "col-lg-3 col-md-4 col-sm-6 col-xs-12";
+			$this->set(compact('goods', 'good_item_classes'));		
+			$this->render('view_by_category');
+		}
 	}
 
 	public function add() {

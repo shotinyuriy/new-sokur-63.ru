@@ -4,7 +4,7 @@
 		'evalScripts' => true
 	));
 ?>
-<?php if($cms && $role=='admin') { ?>
+<?php if($cms && $role=='admin' && isset($category)) { ?>
 <div class="row">
 	<div class="col-xs-12 col-md-6">
 		<span class='good-name'><?= $category['name']?></span>

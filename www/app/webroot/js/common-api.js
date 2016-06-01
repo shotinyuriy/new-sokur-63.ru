@@ -103,6 +103,7 @@ function ajaxForm(form, callback, failCallback) {
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url);
+	xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
