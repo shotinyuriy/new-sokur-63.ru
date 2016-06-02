@@ -116,6 +116,9 @@ body {
 
 .fill {
 	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-o-border-radius: 50%;
+	-moz-border-radius: 50%;
 	background: rgba(255, 100, 100, 0.5);
 	overflow: visible;
 	position: relative;
@@ -311,6 +314,43 @@ div.news-item:hover, div.news-item:focus {
 
 div.good-item:hover .good-info, div.good-item:focus .good-info {
 	bottom: 0px;
+}
+
+div.good-item .good-view-icon {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100%;
+	text-align: center;
+	background: rgba(200, 200, 200, 0.5);
+	color: #fff;
+	visibility: hidden;
+}
+
+div.good-item:hover .good-view-icon,
+div.good-item:focus .good-view-icon {
+	visibility: visible;
+}
+
+.good-view-icon .fullscreen {
+	display: inline-block;
+	margin-top: 50px;
+	height: 50px;
+	width: 50px;
+	padding: 12px;
+	border-radius: 50%;
+	background: rgba(100, 100, 100, 0.7);
+	
+}
+
+.fullscreen i {
+	transition: transform 0.3s ease-out;
+	font-size: 24px;
+}
+
+.fullscreen:hover i {
+	transform: rotateZ(45deg) scale(1.5);
 }
 
 div.category-item:hover {
@@ -665,4 +705,37 @@ div.cart-price {
 .error {
 	text-align: center;
 	color: #C9302C;
+}
+
+.tocart {
+	position: relative;
+}
+
+.tocart .tocart-animation {
+	display: inline-block;
+	width: 100px;
+	visibility: hidden;
+	transition: visibility 0.1s;
+}
+
+.tocart:active .tocart-animation {
+	visibility: visible;	
+}
+
+.tocart .tocart-animation .cart {
+	transform: translateX(50px) rotateZ(-30deg);
+	transition: transform 0.2s;
+}
+
+.tocart .tocart-animation .good {
+	transition: transform 0.2s, color 0.1s;
+}
+
+.tocart:active .tocart-animation .cart {
+	transform: translateX(50px) rotateZ(0deg);
+}
+
+.tocart:active .tocart-animation .good {
+	transform: translateX(40px);
+	color: rgba(0,0,0,0);
 }

@@ -67,7 +67,12 @@
         <div class="<?= $good_item_classes ?>">
             <div class="good-item">
                 <div class="category-icon">
-                	<a href='/goods/view/<?= $good['id'] ?>' class='ajax' data-toggle='modal' data-target='#view-modal' datatarget='viewer'>
+                	<a href='/goods/view/<?= $good['id'] ?>' class='ajax good-view' data-toggle='modal' data-target='#view-modal' datatarget='viewer'>
+                		<div class="good-view-icon">
+                			<span class='fullscreen'>
+                				<i class='glyphicon glyphicon-fullscreen'></i>
+                			</span>
+                		</div>
                     <? if ($image_url) { ?>
                         <div class='menuimg'><img src='../menu-img/<?= $image_url."?time=".time() ?>'/></div>
                     <? } ?>
@@ -95,7 +100,6 @@
                     	<p class="cart-good-description"><?= round($good['price'], 2) . "р." ?></p>
 					</div>
                     </div>
-                    <!-- <div class="row"> -->
                         <div class="good-control">
                         	<?php if($cms && $role == 'admin') { ?>
                         		<a href='/goods/edit/<?= $good['id'] ?>'
@@ -108,11 +112,14 @@
                                         <input type='hidden' name='good_id' value='<?= $good['id'] ?>'>
                                         <input type='hidden' name='amount' value='1'>
                                         <button type='submit' class="btn btn-buy">Купить</button>
+                                        <div class='tocart-animation'>
+                                        	<i class="cart glyphicon glyphicon-shopping-cart"></i>
+                                        	<i class="good glyphicon glyphicon-unchecked"></i>
+                                        </div>
                                     <? } ?>
                             </form>
                             <?php } ?>
                         </div>
-                    <!-- </div> -->
                 </div>
             </div>
         </div>
