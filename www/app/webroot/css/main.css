@@ -1,11 +1,13 @@
 ﻿@font-face {
 	font-family: Roboto-Light;
 	src: url("../fonts/Roboto-Light.ttf");
+	src: url("../fonts/Roboto-Light.ttf?#iefix") format('truetype');	
 }
 
 @font-face {
 	font-family: Roboto-Bold;
-	src: url("../fonts/Roboto-Bold.ttf");
+	src: url("../fonts/Roboto-Bold");
+	src: url("../fonts/Roboto-Bold?#iefix") format('truetype');
 }
 
 /*.slideDown {*/
@@ -715,27 +717,39 @@ div.cart-price {
 	display: inline-block;
 	width: 100px;
 	visibility: hidden;
-	transition: visibility 0.1s;
 }
 
-.tocart:active .tocart-animation {
-	visibility: visible;	
+.tocart.active .tocart-animation {
+	visibility: visible; 
 }
 
-.tocart .tocart-animation .cart {
-	transform: translateX(50px) rotateZ(-30deg);
-	transition: transform 0.2s;
+.tocart-animation .good {
+	
 }
 
-.tocart .tocart-animation .good {
-	transition: transform 0.2s, color 0.1s;
+.tocart-animation .cart {
+	left: 50px;
 }
 
-.tocart:active .tocart-animation .cart {
-	transform: translateX(50px) rotateZ(0deg);
+.tocart.active .tocart-animation .good {
+	animation-name: to-cart-good;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
 }
 
-.tocart:active .tocart-animation .good {
-	transform: translateX(40px);
-	color: rgba(0,0,0,0);
+.tocart.active .tocart-animation .cart {
+	animation-name: to-cart-cart;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	animation-delay: 0.2s;
+}
+
+@keyframes to-cart-good {
+	from{ transform: translateX(0px) }
+	to{ transform: translateX(40px); color: rgba(0,0,0,0) }
+}
+
+@keyframes to-cart-cart {
+	from{ transform: rotateZ(-30deg) }
+	to{ transform: rotateZ(0deg) }
 }

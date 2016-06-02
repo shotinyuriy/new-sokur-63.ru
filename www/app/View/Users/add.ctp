@@ -23,6 +23,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class='little' for="name">E-mail:</label>
+                <div class='little'>
+                	<input type='email' name='email' class='form-control' value=''>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class='little' for="name">Роль:</label>
                 <div class='little'>
                         <div class="radio">

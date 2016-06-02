@@ -23,14 +23,13 @@ class NewsController extends AppController {
 	
 	public function add() {
 		if($this->request->is('post')) {
+			$id = $this->News->query('SELECT MAX(n.id+1) as id FROM `news` n;');
+			$id = $id[0][0]['id'];
+			$this->request->data['News']['new_id'] = $id;
+			$this->request->data['News']['created_on'] = date('Y-m-d');
 			if(FileUtils::isUploadedFile($_FILES)) {
-				
-				$id = $this->News->query('SELECT MAX(n.id+1) as id FROM `news` n;');
-				$id = $id[0][0]['id'];
 				$image_url = FileUtils::saveFile($id, 'app/webroot/news-img');
 				$this->request->data['News']['image_url'] = $image_url;
-				$this->request->data['News']['new_id'] = $id;
-				$this->request->data['News']['created_on'] = date('Y-m-d');
 			}
 			if($this->News->save($this->request->data)) {
 				$this->layout = 'ajax';

@@ -4,8 +4,8 @@ class Order extends AppModel {
 	
 	 public $validate = array(
         'phone_number' => array(
-		 	'rule' => array('phone', null, 'all'),
-		 	'message' => 'Указите телефон в формате 10 цифр!'
+		 	'rule' => '/\d{10}/i',
+		 	'message' => 'Укажите телефон в формате 10 цифр!'
         ),
         'customer_name' => array(
             'rule' => 'notBlank',
@@ -17,7 +17,7 @@ class Order extends AppModel {
 	    )
     );
 	
-	public function beforeValidate() {
+	public function beforeValidate($options = array()) {
 		if(isset($this->data[$this->alias]['self_take']) && $this->data[$this->alias]['self_take'] == '0') {
 			$this->validator()->add('address', array(
 			'addressRule' => array(

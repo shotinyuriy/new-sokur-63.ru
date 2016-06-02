@@ -14,46 +14,57 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+//$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+//$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
+	<?php echo $this -> Html -> charset(); ?>
+	<title> СОКУР-63 </title>
+	<!-- <?php echo $this -> fetch('title'); ?> -->
 	<?php
-		echo $this->Html->meta('icon');
+	echo $this -> Html -> meta('icon');
 
-		echo $this->Html->css('cake.generic');
+	//echo $this -> Html -> css('cake.generic');
+	echo $this -> Html -> css('bootstrap.min');
+	echo $this -> Html -> css('bootstrap-theme');
+	echo $this -> Html -> css('main');
+	echo $this -> Html -> script('jquery.min');
+	echo $this -> Html -> script('bootstrap.min');
+	echo $this -> Html -> script('common-api');
 
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
+	echo $this -> fetch('meta');
+	echo $this -> fetch('css');
+	echo $this -> fetch('script');
 	?>
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
+	<div id="header">
+	</div>
 
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
+	<div id="content" class="container">
+		<?php //echo $this -> Flash -> render(); ?>
+		<?php echo $this -> fetch('content'); ?>
+	</div>
+	
+	<div id="footer" class="footer container">
+		<div class="row">
+			<div class="col-lg-12 text-centered">
+				<h3>ЗАО "Сокур-63"</h3><span>&copy;&nbsp;Все права защищены.&nbsp;2016</span>
+			</div>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" id="viewer">
+			</div>
+		</div>
+	</div>
+
+	<?php echo $this -> element('sql_dump'); ?>
+	<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
 </body>
 </html>

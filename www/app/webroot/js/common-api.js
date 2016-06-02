@@ -2,7 +2,6 @@ function counter() {
 	$.ajax({
 		url : window.home_href + "core/c-counter.php",
 		success : function(data) {
-			console.log(data);
 		}
 	});
 };
@@ -99,7 +98,6 @@ function addSearchListener() {
 function ajaxForm(form, callback, failCallback) {
 	var formData = new FormData(form[0]);
 	var url = form[0].action;
-	console.log("URL = ", url);
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url);
@@ -127,8 +125,16 @@ function ajaxForm(form, callback, failCallback) {
 				}
 			}
 		}
+		
 	};
 
+	if(form.addClass) {
+		form.addClass("active");
+		setTimeout(function() {
+		if(form.removeClass) {
+			form.removeClass("active");
+		}}, 1000);
+	}
 	xhr.send(formData);
 }
 
@@ -142,8 +148,6 @@ function addAjaxLinkListener() {
 		var modalTarget = $(this).attr("modal-target");
 		var enable = $(this).attr("enable");
 		var deactivate = $(this).attr("deactivate");
-		console.log("dataTarget ", dataTarget);
-		console.log("deactivate ", deactivate);
 		$.ajax({
 			url : url,
 			success : function(data) {
@@ -195,15 +199,7 @@ function readURL(input, target) {
 function addFileChangeListener() {
 	$("input[name='image_url']").unbind('change');
 	$("input[name='image_url']").change(function(e) {
-		//console.log("IMAGE_URL ", $( this ));
 		readURL(this, $(".image_url"));
-
-		/* var image_url = $( this ).val();
-		 console.log( $( ".image_url" ) );
-		 $( ".image_url" ).attr("src", "" );
-		 $( ".image_url" ).attr("height", "100px" );
-		 $( ".image_url" ).attr("alt", "Новое изображение "+image_url );
-		 */
 	});
 };
 
@@ -212,7 +208,6 @@ function addAjaxFormListener() {
 	$("form.ajax").submit(function(event) {
 		event.preventDefault();
 		var dataTarget = "#" + $(this).attr("datatarget");
-		console.log("dataTarget ", dataTarget);
 		ajaxForm($(this), function(data) {
 			$(dataTarget).html(data);
 			addAllListeners();

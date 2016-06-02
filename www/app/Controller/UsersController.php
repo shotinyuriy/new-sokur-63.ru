@@ -10,6 +10,7 @@ class UsersController extends AppController {
 				$this->set(compact('errorMessage'));
 			}
 		}
+		$this->layout = 'error';
 	}
 	
 	public function logout() {

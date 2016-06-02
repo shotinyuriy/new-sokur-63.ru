@@ -20,7 +20,7 @@ $id = $good['id'];
         <? if ($good['image_url']) { ?>
             <div class="cart-good-icon">
                 <img src='../menu-img/<?= $good['image_url'] ?>'
-                     alt='<?= $good['id'] ?>'</img>
+                     alt='<?= $good['id'] ?>' />
             </div>
         <? } ?>
     </div>
@@ -95,5 +95,4 @@ $id = $good['id'];
 			Минимальная сумма заказа <?= round($freeShippingTreshold, 2) . " руб." ?>
 		</div>
 	<?php } ?>
-</div>	
 </div>
