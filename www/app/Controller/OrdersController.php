@@ -28,8 +28,11 @@ class OrdersController extends AppController {
 		$total = 0;
 		foreach($order['OrderDetail'] as $orderDetail) {
 			if(isset($orderDetail['cost'])) {
-				$total += $orderDetail['cost'];
+			} else if(isset($orderDetail['price'])) {
+				$orderDetail['cost'] = 
+					$orderDetail['price'] * $orderDetail['amount']; 
 			}
+			$total += $orderDetail['cost'];
 		}
 		return $total;
 	}
@@ -51,7 +54,16 @@ class OrdersController extends AppController {
 	}
 
 	public function index() {
+		$statusId = -1;
+		$conditions = array();
+		if($this->request->is('post')){
+			$statusId = $this->request->data['status_id'];
+			if($statusId > -1) {
+				$conditions['status'] = $statusId;
+			}
+		}
 		$this->Paginator->settings = array(
+			'conditions' => $conditions,
 			'limit'=> 12,
 			'order' => 'Order.date_time',
 			'recursive' => 2
@@ -66,7 +78,8 @@ class OrdersController extends AppController {
 			$newOrders[] = $order;
 		}
 		$orders = $newOrders;
-		$this->set(compact('orders'));
+		$statuses = $this->status_names;
+		$this->set(compact('orders', 'statuses', 'statusId'));
 	}
 	
 	public function add() {

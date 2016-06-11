@@ -7,6 +7,25 @@
 
 <div class='row'>
 	<div class='col-xs-12'>
+		<form class="ajax form-inline" method='post' datatarget="cms_content" action='/orders/index'>
+			<div class="form-group">
+				<label>Статус</label>
+				<select name='status_id' class='form-control'>
+					<option value='-1'>Любой</option>
+					<?php foreach($statuses as $status) { ?>
+						<option value="<?= $status['id'] ?>" <?= $status['id'] == $statusId ? 'selected' : '' ?> >
+							<?= $status['name'] ?>
+						</option>
+					<?php } ?>
+				</select>
+				<button type='submit' class='btn btn-primary'>Поиск</submit>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class='row'>
+	<div class='col-xs-12'>
 		<ul class='sokur-pagination'>
 			<?php 
 			echo $this->Paginator->prev(
